@@ -67,7 +67,8 @@
                 : icons
                 : kind-icons
                 : source-labels
-                : lisp-filetypes})
+                : lisp-filetypes
+                :pack []})
 
 ;;; =====
 ;;; Setup

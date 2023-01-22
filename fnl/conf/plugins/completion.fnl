@@ -79,7 +79,9 @@
   ;;; =====
   ;;; Setup
   ;;; =====
-  (cmp.setup {:formatting {:fields [:kind :abbr]
+  (cmp.setup {:view {:entries {:name :custom :selection_order :near_cursor}}
+              :formatting {:mode :symbol_text
+                           :fields [:kind :abbr :menu]
                            :format format-item}
               :preselect cmp.PreselectMode.None
               :snippet {:expand (fn [args] (vim.fn.vsnip#anonymous args.body))}

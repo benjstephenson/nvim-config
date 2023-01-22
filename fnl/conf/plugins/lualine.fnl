@@ -69,5 +69,5 @@
                              :lualine_y [:progress]
                              :lualine_z []}}))
 
-(pack "nvim-lualine/lualine.nvim" {:dependencies ["kyazdani42/nvim-web-devicons"]
+(pack "nvim-lualine/lualine.nvim" {:dependencies ["nvim-tree/nvim-web-devicons"]
                                    : config})
