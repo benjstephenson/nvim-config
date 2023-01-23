@@ -1,8 +1,8 @@
 (import-macros {: pack} :themis.pack.lazy)
 
 (fn setup-hydra []
-  (require :conf.plugins.hydra.options)
-  (require :conf.plugins.hydra.telescope))
+  (require :conf.modules.hydra.options)
+  (require :conf.modules.hydra.telescope))
 
 
 [(pack "anuvyklack/hydra.nvim" {:dependencies ["smart-splits.nvim"

@@ -1,7 +1,7 @@
 (import-macros {: pack} :themis.pack.lazy)
 
 (fn lsp-config []
-  (local on-attach (require :conf.lsp.on-attach))
+  (local on-attach (require :conf.modules.lsp.on-attach))
   (local lsp (require :lspconfig))
 
   (local capabilities (let [(ok? cmp) (pcall require "cmp_nvim_lsp")]
@@ -76,7 +76,7 @@
   ;;(lsp.gopls.setup {:on_attach on-attach : capabilities}))
 
 (fn null-config []
-  (local on-attach (require :conf.lsp.on-attach))
+  (local on-attach (require :conf.modules.lsp.on-attach))
   (local null (require :null-ls))
 
   ;;; =======

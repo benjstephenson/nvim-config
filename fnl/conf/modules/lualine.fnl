@@ -65,7 +65,7 @@
                   :sections {:lualine_a [:mode]
                              :lualine_b [:banch :diff :diagnostics]
                              :lualine_c [:filename]
-                             :lualine_x [lsp-status :encoding :fileformat]
+                             :lualine_x [lsp-status :filetype :encoding :fileformat]
                              :lualine_y [:progress]
                              :lualine_z []}}))
 
