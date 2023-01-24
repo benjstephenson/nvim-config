@@ -22,9 +22,16 @@
   ;; Go to references
   (buf-map! [n] "gr" vim.lsp.buf.references)
   ;; Rename symbol under cursor
-  (buf-map! [n] "<leader>rn" vim.lsp.buf.rename)
+  (buf-map! [n] "<leader>cr" vim.lsp.buf.rename {:desc "rename"})
   ;; Apply code actions
-  (buf-map! [n] "<leader>a" vim.lsp.buf.code_action)
+  (buf-map! [n] "<leader>ca" vim.lsp.buf.code_action {:desc "code action"})
+
+  (buf-map! [n] "<leader>ss" "<cmd>Telescope lsp_document_symbols theme=get_ivy<cr>" {:desc "document symbols"})
+  (buf-map! [n] "<leader>sS" "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>" {:desc "workspace symbols"})
+
+  (buf-map! [n] "<leader>dj" vim.diagnostic.goto_next {:desc "next diagnostic"})
+  (buf-map! [n] "<leader>dk" vim.diagnostic.goto_prev {:desc "prev diagnostic"})
+  (buf-map! [n] "<leader>dq" vim.diagnostic.setloclist {:desc "quickfix"})
   ;; Format buffer
   (when (client.supports_method "textDocument/formatting")
     (buf-map! [n] "<leader>f" '(format! bufnr true)))

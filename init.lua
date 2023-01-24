@@ -27,34 +27,11 @@ if not vim.loop.fs_stat(hotpot_path) then
   })
 end
 
--- Bootstrap themis.nvim
---local themis_path = plugins_path .. "/themis.nvim"
---if not vim.loop.fs_stat(themis_path) then
---  vim.notify("Bootstrapping themis.nvim...", vim.log.levels.INFO)
---  vim.fn.system({
---    "git",
---    "clone",
---    "--filter=blob:none",
---    "--single-branch",
---    "https://github.com/datwaft/themis.nvim.git",
---    themis_path,
---  })
---end
-
 -- Add lazy.nvim to rtp
 vim.opt.runtimepath:prepend(lazy_path)
 -- Add hotpot.nvim to rtp
 vim.opt.runtimepath:prepend(hotpot_path)
--- Add themis.nvim to rtp
---vim.opt.runtimepath:prepend(themis_path)
 
--- Generate plugins table
-local plugins = {
-  {
-    "rktjmp/hotpot.nvim",
-    --dependencies = { "datwaft/themis.nvim" },
-  },
-}
 
 -- Configure hotpot.nvim
 require("hotpot").setup({
@@ -68,28 +45,3 @@ require("hotpot").setup({
 
 -- Load configuration
 require("conf")
-
--- Add plugins to table
-local plugins_path = vim.fn.stdpath("config") .. "/fnl/conf/plugins"
-if vim.loop.fs_stat(plugins_path) then
-  for file, type in vim.fs.dir(plugins_path) do
-    if type == "file" then
-      file = file:match("^(.*)%.fnl$")
-      if (file ~= nil) then
-        plugins[#plugins + 1] = require("conf.plugins." .. file)
-      end
-    end
-
-    if type == "directory" then
-      module = plugins_path .. "/" .. file
-      if vim.loop.fs_stat(module .. "/" .. "init.fnl") then
-        plugins[#plugins + 1] = require("conf.plugins." .. file)
-      end
-    end
-  end
-end
--- Add conf.lsp to plugins table
-plugins[#plugins + 1] = require("conf.lsp")
-
--- Configure lazy.nvim
-require("lazy").setup(plugins)

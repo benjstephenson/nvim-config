@@ -181,7 +181,8 @@
 (set! timeoutlen 400)
 
 ;; LocalLeader
-(let! maplocalleader (escape "<space>"))
+(let! maplocalleader (escape ","))
+(let! mapleader (escape "<space>"))
 
 ;; Grep
 (set! grepprg "rg --vimgrep")

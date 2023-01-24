@@ -42,14 +42,18 @@
                                                :width 0.87
                                                :height 0.80
                                                :preview_cutoff 120}
-                               :sorting_strategy "ascending"}})
+                               :sorting_strategy "ascending"}
+                    :extensions {:project {:hidden_files true
+                                           :sync_with_nvim_tree true}}})
+                                           
 
   ;;; ==========
   ;;; Extensions
   ;;; ==========
-  ; (telescope.load_extension "fzf")
-  (telescope.load_extension "smart_history")
-  (telescope.load_extension "notify"))
+  (telescope.load_extension :fzf)
+  (telescope.load_extension :smart_history)
+  (telescope.load_extension :notify)
+  (telescope.load_extension :project))
 
 (fn fern-config []
   ;;; ========
@@ -82,17 +86,18 @@
 
 
 [;; Fuzzy-finding
- (pack "nvim-telescope/telescope.nvim"
-       {:dependencies ["nvim-lua/plenary.nvim"
-                       (pack "nvim-telescope/telescope-fzf-native.nvim"
-                             {:build "make"})
-                       (pack "nvim-telescope/telescope-smart-history.nvim"
-                             {:dependencies "tami5/sqlite.lua"})]
+ (pack :nvim-telescope/telescope.nvim
+       {:dependencies [:nvim-lua/plenary.nvim
+                       (pack :nvim-telescope/telescope-project.nvim)
+                       (pack :nvim-telescope/telescope-fzf-native.nvim
+                             {:build :make})
+                       (pack :nvim-telescope/telescope-smart-history.nvim
+                             {:dependencies :tami5/sqlite.lua})]
         :config telescope-config})
  ;; File-tree
- (pack "lambdalisue/fern.vim"
-       {:dependencies ["lambdalisue/fern-git-status.vim"
-                       "lambdalisue/fern-renderer-nerdfont.vim"
-                       "TheLeoP/fern-renderer-web-devicons.nvim"
-                       "lambdalisue/glyph-palette.vim"]
+ (pack :lambdalisue/fern.vim
+       {:dependencies [:lambdalisue/fern-git-status.vim
+                       :lambdalisue/fern-renderer-nerdfont.vim
+                       :TheLeoP/fern-renderer-web-devicons.nvim
+                       :lambdalisue/glyph-palette.vim]
         :config fern-config})]

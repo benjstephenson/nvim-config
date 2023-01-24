@@ -39,6 +39,7 @@
     (if (= (length names) 0)
       "Server Inactive"
       (table.concat names ", ")))
+
   (-> (icollect [_ client (pairs (vim.lsp.buf_get_clients))]
               (. client :name))
       (render)))
@@ -66,7 +67,7 @@
                              :lualine_b [:banch :diff :diagnostics]
                              :lualine_c [:filename]
                              :lualine_x [lsp-status :filetype :encoding :fileformat]
-                             :lualine_y [:progress]
+                             :lualine_y []
                              :lualine_z []}}))
 
 (pack "nvim-lualine/lualine.nvim" {:dependencies ["nvim-tree/nvim-web-devicons"]

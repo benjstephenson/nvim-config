@@ -19,9 +19,9 @@
 ;;; Quickfix window
 ;;; ===============
 ;; Open or focus the quickfix window
-(map! [n] "<localleader>q" "<cmd>copen<cr>")
+(map! [n] "<localleader>q" "<cmd>copen<cr>" {:desc "open quickfix"})
 ;; Close the quickfix window
-(map! [n] "<localleader>Q" "<cmd>cclose<cr>")
+(map! [n] "<localleader>Q" "<cmd>cclose<cr>" {:desc "close quickfix"})
 
 ;;; =========
 ;;; Tab pages
@@ -88,59 +88,52 @@
 
 
 
-(map! [n] "<leader>;" "<cmd>Alpha<CR>" { :desc "Dashboard"})
-(map! [n] "<leader>h" "<cmd>nohlsearch<CR>" { :desc "No Highlight"})
-(map! [n] "<leader>q" "<cmd>q<cr>" { :desc "Quit"})
-(map! [n] "<leader>x" "<cmd>ToggleTerm<cr>" { :desc "Terminal"})
-(map! [n] "<leader>P" "<cmd>Telescope projects<cr>" { :desc "Projects"})
+(map! [n] "<leader>;" "<cmd>Alpha<CR>" { :desc "dashboard"})
+(map! [n] "<leader>h" "<cmd>nohlsearch<CR>" { :desc "no highlight"})
+(map! [n] "<leader>x" "<cmd>ToggleTerm<cr>" { :desc "terminal"})
+(map! [n] "<leader>P" "<cmd>lua require'telescope'.extensions.project.project{}<cr>" { :desc "projects"})
+
 
 ;; Buffers)
-(map! [n] "<leader>bj" "<cmd>BufferLinePick<cr>" { :desc "Jump"})
-(map! [n] "<leader>bb" "<cmd>Telescope buffers<cr>" { :desc "Find"})
-(map! [n] "<leader>bf" '(vim.lsp.buf.formatting) { :desc "Format"})
-(map! [n] "<leader>bp" "<cmd>BufferLineCyclePrev<cr>" { :desc "Previous"})
-(map! [n] "<leader>bn" "<cmd>BufferLineCycleNext<cr>" { :desc "Next"})
-(map! [n] "<leader>bc" "<cmd>bd<CR>" { :desc "Close Buffer"})
-(map! [n] "<leader>bd" "<cmd>bd!<CR>" { :desc "Force close Buffer"})
-(map! [n] "<leader>bC" "<cmd>BufferCloseAllButCurrent<CR>" { :desc "Close Others"})
-(map! [n] "<leader>bh" "<cmd>BufferLineCloseLeft<cr>" { :desc "Close all to the left"})
-(map! [n] "<leader>bl" "<cmd>BufferLineCloseRight<cr>" { :desc "Close all to the right"})
-(map! [n] "<leader>bw" "<cmd>w!<CR>" { :desc "Save"})
-
-;; Packer)
-(map! [n] "<leader>pc" "<cmd>PackerCompile<cr>" { :desc "Compile"})
-(map! [n] "<leader>pi" "<cmd>PackerInstall<cr>" { :desc "Install"})
-(map! [n] "<leader>ps" "<cmd>PackerSync<cr>" { :desc "Sync"})
-(map! [n] "<leader>pS" "<cmd>PackerStatus<cr>" { :desc "Status"})
-(map! [n] "<leader>pu" "<cmd>PackerUpdate<cr>" { :desc "Update"})
+(map! [n] "<leader>bj" "<cmd>BufferLinePick<cr>" { :desc "jump"})
+(map! [n] "<leader>bb" "<cmd>Telescope buffers<cr>" { :desc "find"})
+(map! [n] "<leader>bf" '(vim.lsp.buf.formatting) { :desc "format"})
+(map! [n] "<leader>bp" "<cmd>BufferLineCyclePrev<cr>" { :desc "previous"})
+(map! [n] "<leader>bn" "<cmd>BufferLineCycleNext<cr>" { :desc "next"})
+(map! [n] "<leader>bc" "<cmd>bd<CR>" { :desc "close buffer"})
+(map! [n] "<leader>bd" "<cmd>bd!<CR>" { :desc "force close buffer"})
+(map! [n] "<leader>bC" "<cmd>BufferCloseAllButCurrent<CR>" { :desc "close others"})
+(map! [n] "<leader>bh" "<cmd>BufferLineCloseLeft<cr>" { :desc "close all to the left"})
+(map! [n] "<leader>bl" "<cmd>BufferLineCloseRight<cr>" { :desc "close all to the right"})
+(map! [n] "<leader>bw" "<cmd>w!<CR>" { :desc "save"})
 
 
 ;; Files)
-(map! [n] "<leader>ff" "<cmd>Telescope find_files<cr>" { :desc "Find"})
-(map! [n] "<leader>fr" "<cmd>Telescope oldfiles<cr>" { :desc "Recent files"})
-(map! [n] "<leader>ft" "<cmd>NeoTreeFloatToggle<cr>" { :desc "Toggle popup file tree"})
-(map! [n] "<leader>fT" "<cmd>NeoTreeShowToggle<cr>" { :desc "Toggle file tree"})
+(map! [n] "<leader>ff" "<cmd>Telescope find_files<cr>" { :desc "find"})
+(map! [n] "<leader>fr" "<cmd>Telescope oldfiles<cr>" { :desc "recent files"})
+(map! [n] "<leader>ft" "<cmd>NeoTreeFloatToggle<cr>" { :desc "toggle popup file tree"})
+(map! [n] "<leader>fT" "<cmd>NeoTreeShowToggle<cr>" { :desc "toggle file tree"})
 
 
 ;; Search)
-(map! [n] "<leader>sc" "<cmd>Telescope colorscheme<cr>" { :desc "Colorscheme"})
-(map! [n] "<leader>sb" "<cmd>Telescope current_buffer_fuzzy_find theme=get_ivy<cr>" { :desc "Search in buffer"})
-(map! [n] "<leader>sh" "<cmd>Telescope help_tags<cr>" { :desc "Find Help"})
-(map! [n] "<leader>sM" "<cmd>Telescope man_pages<cr>" { :desc "Man Pages"})
-(map! [n] "<leader>sr" "<cmd>Telescope oldfiles<cr>" { :desc "Open Recent File"})
-(map! [n] "<leader>sR" "<cmd>Telescope registers<cr>" { :desc "Registers"})
-(map! [n] "<leader>st" "<cmd>Telescope live_grep<cr>" { :desc "Text"})
-(map! [n] "<leader>sk" "<cmd>Telescope keymaps<cr>" { :desc "Keymaps"})
-(map! [n] "<leader>sC" "<cmd>Telescope commands<cr>" { :desc "Commands"})
-(map! [n] "<leader>sp" #( (. (require :telescope.builtin ) :colorscheme { :enable_preview true })) { :desc "Colorscheme with Preview"})
+(map! [n] "<leader>sc" "<cmd>Telescope colorscheme<cr>" { :desc "colourscheme"})
+(map! [n] "<leader>sb" "<cmd>Telescope current_buffer_fuzzy_find theme=get_ivy<cr>" { :desc "search in buffer"})
+(map! [n] "<leader>sh" "<cmd>Telescope help_tags<cr>" { :desc "find Help"})
+(map! [n] "<leader>sM" "<cmd>Telescope man_pages<cr>" { :desc "man Pages"})
+(map! [n] "<leader>sr" "<cmd>Telescope oldfiles<cr>" { :desc "open Recent File"})
+(map! [n] "<leader>sR" "<cmd>Telescope registers<cr>" { :desc "registers"})
+(map! [n] "<leader>st" "<cmd>Telescope live_grep<cr>" { :desc "text"})
+(map! [n] "<leader>sk" "<cmd>Telescope keymaps<cr>" { :desc "keymaps"})
+(map! [n] "<leader>sC" "<cmd>Telescope commands<cr>" { :desc "commands"})
+(map! [n] "<leader>sp" #( (. (require :telescope.builtin) :colorscheme {:enable_preview true})) {:desc "colorscheme with preview"})
 
 
 ;; Git
-(map! [n] "<leader>gC" "<cmd>Telescope git_bcommits<cr>" { :desc "Checkout commit(for current file)"})
-(map! [n] "<leader>gb" "<cmd>Telescope git_branches<cr>" { :desc "Checkout branch"})
-(map! [n] "<leader>gc" "<cmd>Telescope git_commits<cr>" { :desc "Checkout commit"})
-(map! [n] "<leader>gd" "<cmd>Gitsigns diffthis HEAD<cr>" { :desc "Git Diff"})
+(map! [n] "<leader>gC" "<cmd>Telescope git_bcommits<cr>" { :desc "checkout commit(for current file)"})
+(map! [n] "<leader>gb" "<cmd>Telescope git_branches<cr>" { :desc "checkout branch"})
+(map! [n] "<leader>gc" "<cmd>Telescope git_commits<cr>" { :desc "checkout commit"})
+(map! [n] "<leader>gd" "<cmd>Gitsigns diffthis HEAD<cr>" { :desc "git diff"})
 (map! [n] "<leader>gg" "<cmd>lua require 'user.lazygit'.lazygit_toggle()<cr>" { :desc "LazyGit"})
-(map! [n] "<leader>gn" "<cmd>Neogit<cr>" { :desc "Neogit"})
-(map! [n] "<leader>gl" "<cmd>lua require 'gitsigns'.blame_line()<cr>" { :desc "Blame"})
-(map! [n] "<leader>go" "<cmd>Telescope git_status<cr>" { :desc "Open changed file"})
+(map! [n] "<leader>gn" "<cmd>Neogit<cr>" { :desc "neogit"})
+(map! [n] "<leader>gl" "<cmd>lua require 'gitsigns'.blame_line()<cr>" { :desc "blame"})
+(map! [n] "<leader>go" "<cmd>Telescope git_status<cr>" { :desc "open changed file"})

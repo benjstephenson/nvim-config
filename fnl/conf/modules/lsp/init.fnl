@@ -3,26 +3,28 @@
 (fn lsp-config []
   (local on-attach (require :conf.modules.lsp.on-attach))
   (local lsp (require :lspconfig))
-
-  (local capabilities (let [(ok? cmp) (pcall require "cmp_nvim_lsp")]
-                        (if ok? (cmp.default_capabilities)
-                          (vim.lsp.protocol.make_client_capabilities))))
-  (set capabilities.textDocument.foldingRange {:dynamicRegistration false
-                                               :lineFoldingOnly true})
-
+  (local capabilities
+         (let [(ok? cmp) (pcall require :cmp_nvim_lsp)]
+           (if ok? (cmp.default_capabilities)
+               (vim.lsp.protocol.make_client_capabilities))))
+  (set capabilities.textDocument.foldingRange
+       {:dynamicRegistration false :lineFoldingOnly true})
   ;;; ====================
   ;;; Client configuration
   ;;; ====================
   ;; Lua
   (let [neodev (require :neodev)]
     (neodev.setup {})
-    (lsp.sumneko_lua.setup {:on_attach on-attach : capabilities
+    (lsp.sumneko_lua.setup {:on_attach on-attach
+                            : capabilities
                             :settings {:Lua {:format {:defaultConfig {:indent_style :space
                                                                       :indent_size :2}}
                                              :workspace {:preloadFileSize 500}}}}))
   ;; Json
-  (lsp.jsonls.setup {:on_attach on-attach : capabilities
-                     :settings {:json {:schemas (let [{: json} (require :schemastore)] (json.schemas))}}})
+  (lsp.jsonls.setup {:on_attach on-attach
+                     : capabilities
+                     :settings {:json {:schemas (let [{: json} (require :schemastore)]
+                                                  (json.schemas))}}})
   ;; Docker
   (lsp.dockerls.setup {:on_attach on-attach : capabilities})
   ;; Nix
@@ -33,23 +35,25 @@
   ;;(lsp.clangd.setup {:on_attach on-attach : capabilities})
   ;; CMake
   ;;(lsp.cmake.setup {:on_attach on-attach : capabilities})
-
   (lsp.omnisharp.setup {:on_attach on-attach : capabilities})
-
   ;; Python
   (lsp.pyright.setup {:on_attach on-attach : capabilities})
   ;; Rust
-  (lsp.rust_analyzer.setup {:on_attach on-attach : capabilities
+  (lsp.rust_analyzer.setup {:on_attach on-attach
+                            : capabilities
                             :settings {:rust-analyzer {:checkOnSave {:allFeatures true
-                                                                     :overrideCommand [:cargo :clippy
-                                                                                       :--workspace :--message-format=json
-                                                                                       :--all-targets :--all-features]}}}})
+                                                                     :overrideCommand [:cargo
+                                                                                       :clippy
+                                                                                       :--workspace
+                                                                                       :--message-format=json
+                                                                                       :--all-targets
+                                                                                       :--all-features]}}}})
   ;; Typescript
   (let [typescript (require :typescript)]
-    (typescript.setup {:server {:on_attach on-attach : capabilities
-                                :root_dir (lsp.util.root_pattern "package.json")}}))
-  ; (lsp.denols.setup {:on_attach on-attach : capabilities
-  ;                    :root_dir (lsp.util.root_pattern "deno.json" "deno.jsonc")})
+    (typescript.setup {:server {:on_attach on-attach
+                                : capabilities
+                                :root_dir (lsp.util.root_pattern :package.json)}}))
+  ; (lsp.denols.setup {:on_attach on-attach : capabilities ;                    :root_dir (lsp.util.root_pattern "deno.json" "deno.jsonc")})
   ;; ESLint
   (lsp.eslint.setup {:on_attach on-attach : capabilities})
   ;; CSS
@@ -72,52 +76,55 @@
   (lsp.clojure_lsp.setup {:on_attach on-attach : capabilities})
   ;; VimL
   (lsp.vimls.setup {:on_attach on-attach : capabilities}))
-  ;; Go
-  ;;(lsp.gopls.setup {:on_attach on-attach : capabilities}))
+
+;; Go
+;;(lsp.gopls.setup {:on_attach on-attach : capabilities}))
 
 (fn null-config []
   (local on-attach (require :conf.modules.lsp.on-attach))
   (local null (require :null-ls))
-
   ;;; =======
   ;;; Sources
   ;;; =======
   (local sources
-    (let [{: formatting
-           : diagnostics
-           : hover
-           : completion
-           :code_actions actions} null.builtins
-          typescript-actions (require :typescript.extensions.null-ls.code-actions)]
-      [;formatting.stylua
-       (formatting.prettierd.with {:condition (fn [utils]
-                                                (not (utils.root_has_file ["deno.json" "deno.jsonc"])))})
-       formatting.markdownlint
-       formatting.black
-       formatting.isort
-       (diagnostics.pylint.with {:prefer_local ".venv/bin"})
-       (diagnostics.mypy.with {:prefer_local ".venv/bin"})
-       (typescript-actions.with {:condition (fn [utils]
-                                              (not (utils.root_has_file ["deno.json" "deno.jsonc"])))})]))
-
+         (let [{: formatting
+                : diagnostics
+                : hover
+                : completion
+                :code_actions actions} null.builtins
+               typescript-actions (require :typescript.extensions.null-ls.code-actions)]
+           [;formatting.stylua
+            (formatting.prettierd.with {:condition (fn [utils]
+                                                     (not (utils.root_has_file [:deno.json
+                                                                                :deno.jsonc])))})
+            formatting.markdownlint
+            formatting.black
+            formatting.isort
+            formatting.fnlfmt
+            (diagnostics.pylint.with {:prefer_local :.venv/bin})
+            (diagnostics.mypy.with {:prefer_local :.venv/bin})
+            (typescript-actions.with {:condition (fn [utils]
+                                                   (not (utils.root_has_file [:deno.json
+                                                                              :deno.jsonc])))})]))
   ;;; =====
   ;;; Setup
   ;;; =====
-  (null.setup {:sources sources
-               :on_attach on-attach}))
+  (null.setup {: sources :on_attach on-attach}))
 
 [;; Configuration
- (pack "neovim/nvim-lspconfig" {:config lsp-config
-                                :dependencies ["folke/neodev.nvim"
-                                               "williamboman/mason-lspconfig.nvim"
-                                               (pack "j-hui/fidget.nvim" {:config true})
-                                               (pack "narutoxy/dim.lua" {:config true})
-                                               "jose-elias-alvarez/typescript.nvim"
-                                               "b0o/schemastore.nvim"]})
+ (pack :neovim/nvim-lspconfig
+       {:config lsp-config
+        :dependencies [:folke/neodev.nvim
+                       :williamboman/mason-lspconfig.nvim
+                       (pack :j-hui/fidget.nvim {:config true})
+                       (pack :narutoxy/dim.lua {:config true})
+                       :jose-elias-alvarez/typescript.nvim
+                       :b0o/schemastore.nvim]})
  ;; Installation
- (pack "williamboman/mason.nvim" {:config true}) 
- (pack "williamboman/mason-lspconfig.nvim" {:config {:automatic_installation true}
-                                            :dependencies ["williamboman/mason.nvim"]})
+ (pack :williamboman/mason.nvim {:config true})
+ (pack :williamboman/mason-lspconfig.nvim
+       {:config {:automatic_installation true}
+        :dependencies [:williamboman/mason.nvim]})
  ;; Non-LSP integration
- (pack "jose-elias-alvarez/null-ls.nvim" {:config null-config
-                                          :dependencies ["nvim-lua/plenary.nvim"]})]
+ (pack :jose-elias-alvarez/null-ls.nvim
+       {:config null-config :dependencies [:nvim-lua/plenary.nvim]})]

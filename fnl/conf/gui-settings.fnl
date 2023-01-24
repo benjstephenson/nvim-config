@@ -6,7 +6,7 @@
 ;;; Configuration
 ;;; =============
 ;; Font
-(set! guifont ["Victor Mono:h13"])
+;;(set! guifont ["Victor Mono:h13"])
 ;; Hide mouse when typing
 (let! neovide_hide_mouse_when_typing true)
 
