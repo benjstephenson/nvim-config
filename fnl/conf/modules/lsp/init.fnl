@@ -15,11 +15,11 @@
   ;; Lua
   (let [neodev (require :neodev)]
     (neodev.setup {})
-    (lsp.sumneko_lua.setup {:on_attach on-attach
-                            : capabilities
-                            :settings {:Lua {:format {:defaultConfig {:indent_style :space
-                                                                      :indent_size :2}}
-                                             :workspace {:preloadFileSize 500}}}}))
+    (lsp.lua_ls.setup {:on_attach on-attach
+                       : capabilities
+                       :settings {:Lua {:format {:defaultConfig {:indent_style :space
+                                                                 :indent_size :2}}
+                                        :workspace {:preloadFileSize 500}}}}))
   ;; Json
   (lsp.jsonls.setup {:on_attach on-attach
                      : capabilities
@@ -53,7 +53,8 @@
     (typescript.setup {:server {:on_attach on-attach
                                 : capabilities
                                 :root_dir (lsp.util.root_pattern :package.json)}}))
-  ; (lsp.denols.setup {:on_attach on-attach : capabilities ;                    :root_dir (lsp.util.root_pattern "deno.json" "deno.jsonc")})
+  ;; (lsp.denols.setup {:on_attach on-attach : capabilities 
+  ;;                    :root_dir (lsp.util.root_pattern "deno.json" "deno.jsonc")))
   ;; ESLint
   (lsp.eslint.setup {:on_attach on-attach : capabilities})
   ;; CSS
@@ -101,6 +102,7 @@
             formatting.black
             formatting.isort
             formatting.fnlfmt
+            actions.gitsigns
             (diagnostics.pylint.with {:prefer_local :.venv/bin})
             (diagnostics.mypy.with {:prefer_local :.venv/bin})
             (typescript-actions.with {:condition (fn [utils]

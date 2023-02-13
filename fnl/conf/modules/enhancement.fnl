@@ -43,7 +43,8 @@
     ((. whichkey :register) {:<leader>d {:name :+diagnostic}})
     ((. whichkey :register) {:<leader>f {:name :+files}})
     ((. whichkey :register) {:<leader>g {:name :+git}})
-    ((. whichkey :register) {:<leader>s {:name :+search}})))
+    ((. whichkey :register) {:<leader>s {:name :+search}})
+    ((. whichkey :register) {:<leader>t {:name :+toggles}})))
 
 [;; Keybind discoverability
  (pack :folke/which-key.nvim {:config #(whichkey-setup)})

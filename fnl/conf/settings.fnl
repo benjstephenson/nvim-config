@@ -1,15 +1,15 @@
 (import-macros {: let!} :themis.var)
 (import-macros {: set!} :themis.opt)
 
-(fn executable? [...] (= 1 (vim.fn.executable ...)))
+(fn executable? [...]
+  (= 1 (vim.fn.executable ...)))
 
 (fn escape [combination]
   (vim.api.nvim_replace_termcodes combination true true true))
 
 ;; Disable some viml plugins
 
-(let [default_plugins [
-                       :2html_plugin
+(let [default_plugins [:2html_plugin
                        :getscript
                        :getscriptPlugin
                        :gzip
@@ -27,21 +27,18 @@
                        :vimballPlugin
                        :zip
                        :zipPlugin]]
-  
-
   (each [_ name (pairs default_plugins)]
     (let [plugin (.. :loaded name)]
       (let! plugin 1))))
-
-
 
 ;;; =========================
 ;;; Environment configuration
 ;;; =========================
 ; Define python binary
-(let! python3_host_prog (if (executable? "python") (vim.fn.exepath "python")
-                          (executable? "python3") (vim.fn.exepath "python3")
-                          nil))
+(let! python3_host_prog (if (executable? :python) (vim.fn.exepath :python)
+                            (executable? :python3) (vim.fn.exepath :python3)
+                            nil))
+
 ; Disable some providers
 (let! loaded_ruby_provider 0)
 (let! loaded_perl_provider 0)
@@ -80,10 +77,10 @@
 (set! spell)
 (set! spelllang [:en :es])
 (set! spelloptions [:camel :noplainbuffer])
-(let [config-folder (vim.fn.stdpath "config")
-      spell-folder (.. config-folder "/spell")]
-  (set! spellfile+ (.. spell-folder "/en.utf-8.add"))
-  (set! spellfile+ (.. spell-folder "/es.utf-8.add")))
+(let [config-folder (vim.fn.stdpath :config)
+      spell-folder (.. config-folder :/spell)]
+  (set! spellfile+ (.. spell-folder :/en.utf-8.add))
+  (set! spellfile+ (.. spell-folder :/es.utf-8.add)))
 
 ;; Undo persistence
 (set! undofile)
@@ -122,9 +119,7 @@
 ; Show whitespace characters
 (set! list)
 ; Define characters to show
-(set! listchars {:trail "·"
-                 :tab "→ "
-                 :nbsp "·"})
+(set! listchars {:trail "·" :tab "→ " :nbsp "·"})
 
 ;; Sign column
 ; Always show sign column
@@ -134,13 +129,14 @@
 ; Enable folding
 (set! foldenable)
 ; Display column for folds
-(set! foldcolumn "1")
+(set! foldcolumn :1)
 ; Fold column characters
 (set! fillchars {:eob " "
                  :fold " "
                  :foldopen ""
                  :foldsep " "
                  :foldclose ""})
+
 ; Start with everything unfolded
 (set! foldlevelstart 99)
 
@@ -152,7 +148,7 @@
 (set! shortmess+ :c)
 
 ;; Command-mode completion
-(set! wildcharm (string.byte (escape "<tab>")))
+(set! wildcharm (string.byte (escape :<tab>)))
 (set! wildignorecase)
 
 ;; Support fuzzy finding
@@ -175,14 +171,14 @@
 (set! diffopt+ "linematch:60")
 
 ;; Lazy redraw
-(set! lazyredraw)
+; (set! lazyredraw)
 
 ;; Timeout for mappings
 (set! timeoutlen 400)
 
 ;; LocalLeader
 (let! maplocalleader (escape ","))
-(let! mapleader (escape "<space>"))
+(let! mapleader (escape :<space>))
 
 ;; Grep
 (set! grepprg "rg --vimgrep")
@@ -198,6 +194,6 @@
   (local (bufnr winid) (open_floating_preview ...))
   ;; Set window-local options
   (vim.api.nvim_win_set_option winid :breakindentopt "")
-  (vim.api.nvim_win_set_option winid :showbreak "NONE")
+  (vim.api.nvim_win_set_option winid :showbreak :NONE)
   ;; Return the result of the original function
   (values bufnr winid))
