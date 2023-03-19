@@ -75,7 +75,7 @@
 
 ;; Spell-checking configuration
 (set! spell)
-(set! spelllang [:en :es])
+(set! spelllang [:en])
 (set! spelloptions [:camel :noplainbuffer])
 (let [config-folder (vim.fn.stdpath :config)
       spell-folder (.. config-folder :/spell)]

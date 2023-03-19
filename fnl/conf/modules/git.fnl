@@ -5,11 +5,13 @@
   (import-macros {: set!} :themis.opt)
   (local gs (require :gitsigns))
   ;; Navigation
-  (map! [n] "]c" `(if (set! diff?) "]c"
+  (map! [n] "]c" `(if (set! diff?)
+                      "]c"
                       (do
                         (vim.schedule #(gs.next_hunk))
                         :<Ignore>)) {:expr true})
-  (map! [n] "[c" `(if (set! diff?) "[c"
+  (map! [n] "[c" `(if (set! diff?)
+                      "[c"
                       (do
                         (vim.schedule #(gs.prev_hunk))
                         :<Ignore>)) {:expr true})
@@ -29,7 +31,8 @@
   ;; Text object
   (map! [ox] :ih ":<C-U>Gitsigns select_hunk<cr>"))
 
-[(pack :lewis6991/gitsigns.nvim {:config {:on_attach git-signs-on-attach}})
+[(pack :TimUntersberger/neogit {:dependencies [:nvim-lua/plenary.nvim]})
+ (pack :lewis6991/gitsigns.nvim {:config {:on_attach git-signs-on-attach}})
  (pack :f-person/git-blame.nvim)
- (pack :lambdalisue/gin.vim {:dependencies [:vim-denops/denops.vim]})
+ ; (pack :lambdalisue/gin.vim {:dependencies [:vim-denops/denops.vim]})
  (pack :akinsho/git-conflict.nvim {:config {:disable_diagnostics true}})]

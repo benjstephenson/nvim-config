@@ -10,7 +10,7 @@
            _k_: keymaps     _;_: commands history  
            _O_: options     _?_: search history
   ^
-  _<Esc>_         _<Enter>_: NvimTree
+  _<Esc>_         _<Enter>_: File browser
     ")
   (Hydra {:name :+file
           :hint telescope-hint
@@ -18,7 +18,7 @@
                    :invoke_on_body true
                    :hint {:position :middle :border :solid}}
           :mode :n
-          :body :<leader>tt
+          :body ";t"
           :heads [[:f
                    (fn []
                      (vim.cmd.Telescope :find_files))]
@@ -65,6 +65,6 @@
                    {:desc "execute command"}]
                   [:<Enter>
                    (fn []
-                     (vim.cmd :NvimTreeToggle))
-                   {:exit true :desc :NvimTree}]
+                     (vim.cmd.Telescope :file_browser))
+                   {:exit true :desc "File Browser"}]
                   [:<Esc> nil {:exit true :nowait true}]]}))

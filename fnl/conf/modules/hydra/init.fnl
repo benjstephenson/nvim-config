@@ -5,9 +5,6 @@
   (require :conf.modules.hydra.options)
   (require :conf.modules.hydra.telescope))
 
-;;(map! [n] :<leader>to options.activate {:desc "editor options"})
-;;(map! [n] :<leader>F telescope.activate {:desc :telescope})))
-
 [(pack :anuvyklack/hydra.nvim
        {:dependencies [:smart-splits.nvim
                        :gitsigns.nvim

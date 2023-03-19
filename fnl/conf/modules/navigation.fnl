@@ -92,10 +92,11 @@
                              {:build :make})
                        (pack :nvim-telescope/telescope-smart-history.nvim
                              {:dependencies :tami5/sqlite.lua})]
-        :config telescope-config})
- ;; File-tree
- (pack :lambdalisue/fern.vim {:dependencies [:lambdalisue/fern-git-status.vim
-                                             :lambdalisue/fern-renderer-nerdfont.vim
-                                             :TheLeoP/fern-renderer-web-devicons.nvim
-                                             :lambdalisue/glyph-palette.vim]
-                              :config fern-config})]
+        :config telescope-config})]
+
+;; File-tree
+; (pack :lambdalisue/fern.vim {:dependencies [:lambdalisue/fern-git-status.vim
+;                                             :lambdalisue/fern-renderer-nerdfont.vim
+;                                             :TheLeoP/fern-renderer-web-devicons.nvim
+;                                             :lambdalisue/glyph-palette.vim]
+;                              :config fern-config})]
