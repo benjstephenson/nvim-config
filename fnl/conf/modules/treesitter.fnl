@@ -20,7 +20,9 @@
                      :playground {:enable true}
                      :query_linter {:enable true
                                     :use_virtual_text true
-                                    :lint_events [:BufWrite :CursorHold]}}))
+                                    :lint_events [:BufWrite :CursorHold]}
+                     :swap {:enable true
+                            :swap_next {:<leader>a "@parameter.inner"}}}))
 
 (pack :nvim-treesitter/nvim-treesitter
       {:build ":TSUpdate"
@@ -28,6 +30,5 @@
                       ; "yioneko/nvim-yati"
                       :nvim-treesitter/nvim-treesitter-refactor
                       :nvim-treesitter/playground
-                      :nvim-treesitter/nvim-treesitter-textobjects
-                      {:config true}]
+                      :nvim-treesitter/nvim-treesitter-textobjects]
        : config})

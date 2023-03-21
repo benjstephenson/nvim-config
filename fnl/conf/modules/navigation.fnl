@@ -1,5 +1,8 @@
 (import-macros {: pack} :themis.pack.lazy)
 
+(fn telescope-file-browser-config []
+  {:theme :ivy :hijack_netrw true})
+
 (fn telescope-config []
   (import-macros {: map!} :themis.keybind)
   (local telescope (require :telescope))
@@ -33,8 +36,7 @@
                                                :height 0.8
                                                :preview_cutoff 120}
                                :sorting_strategy :ascending}
-                    :extensions {:file_browser {:theme :ivy
-                                                :hijack_netrw false}
+                    :extensions {:file_browser (telescope-file-browser-config)
                                  :project {:hidden_files true
                                            :sync_with_nvim_tree true}
                                  :ui-select [themes.get_dropdown]}})
