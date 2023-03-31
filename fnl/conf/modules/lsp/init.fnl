@@ -70,7 +70,11 @@
   ;;(lsp.clangd.setup {:on_attach on-attach : capabilities})
   ;; CMake
   ;;(lsp.cmake.setup {:on_attach on-attach : capabilities})
-  (lsp.omnisharp.setup {:on_attach on-attach : capabilities})
+  (lsp.omnisharp.setup {:on_attach on-attach
+                        : capabilities
+                        :enable_editorconfig_support true
+                        :organise_imports_on_format true
+                        :enable_import_completion true})
   ;; Python
 
   (fn set-path [client]

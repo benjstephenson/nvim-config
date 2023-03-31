@@ -1,0 +1,12 @@
+* Refactoring Workshop
+  - 60 mins
+  - combination of slides and hands-on exercises from GH
+  - must work in-person and remote
+
+** Topics to cover
+  - functions; big ones, small ones
+  - functions as pipelines
+  - composition
+  - currying for function reuse
+
+
