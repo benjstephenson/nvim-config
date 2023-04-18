@@ -30,15 +30,15 @@
 ;;; Tab pages
 ;;; =========
 ;; Create a new tab page
-(map! [n] :<C-t>c :<cmd>tabnew<cr>)
+(map! [n] :<leader>tc :<cmd>tabnew<cr>)
 ;; List tabs
-(map! [n] :<C-t>w :<cmd>tabs<cr>)
+(map! [n] :<leader>tw :<cmd>tabs<cr>)
 ;; Navigate to the next tab page
-(map! [n] :<C-t>n :<cmd>tabNext<cr>)
+(map! [n] :<leader>tn :<cmd>tabNext<cr>)
 ;; Navigate to the previous tab page
-(map! [n] :<C-t>p :<cmd>tabprevious<cr>)
+(map! [n] :<leader>tp :<cmd>tabprevious<cr>)
 ;; Kill current tab page
-(map! [n] :<C-t>& :<cmd>tabclose<cr>)
+(map! [n] :<leader>t& :<cmd>tabclose<cr>)
 
 ;;; ========
 ;;; Wildmenu
@@ -110,40 +110,7 @@
 
 (map! [n] :<leader>bw :<cmd>w!<CR> {:desc :save})
 
-;; Files)
-; (map! [n] :<leader>ff "<cmd>Telescope find_files<cr>" {:desc :find})
-; (map! [n] :<leader>fr "<cmd>Telescope oldfiles<cr>" {:desc "recent files"})
-; (map! [n] :<leader>ft :<cmd>NeoTreeFloatToggle<cr>
-;       {:desc "toggle popup file tree"})
-;
-;(map! [n] :<leader>fT :<cmd>NeoTreeShowToggle<cr> {:desc "toggle file tree"})
-
-;; Search)
-(map! [n] :<leader>sc "<cmd>Telescope colorscheme<cr>" {:desc :colourscheme})
-(map! [n] :<leader>sb
-      "<cmd>Telescope current_buffer_fuzzy_find theme=get_ivy<cr>"
-      {:desc "search in buffer"})
-
-(map! [n] :<leader>sh "<cmd>Telescope help_tags<cr>" {:desc "find Help"})
-(map! [n] :<leader>sM "<cmd>Telescope man_pages<cr>" {:desc "man Pages"})
-(map! [n] :<leader>sr "<cmd>Telescope oldfiles<cr>" {:desc "open Recent File"})
-(map! [n] :<leader>sR "<cmd>Telescope registers<cr>" {:desc :registers})
-(map! [n] :<leader>st "<cmd>Telescope live_grep<cr>" {:desc :text})
-(map! [n] :<leader>sk "<cmd>Telescope keymaps<cr>" {:desc :keymaps})
-(map! [n] :<leader>sC "<cmd>Telescope commands<cr>" {:desc :commands})
-(map! [n] :<leader>sp "<cmd>Telescope colorscheme enable_preview=true<cr>"
-      {:desc "colorscheme with preview"})
-
 ;; Git
-(map! [n] :<leader>gC "<cmd>Telescope git_bcommits<cr>"
-      {:desc "checkout commit(for current file)"})
-
-(map! [n] :<leader>gb "<cmd>Telescope git_branches<cr>"
-      {:desc "checkout branch"})
-
-(map! [n] :<leader>gc "<cmd>Telescope git_commits<cr>"
-      {:desc "checkout commit"})
-
 (map! [n] :<leader>gd "<cmd>Gitsigns diffthis HEAD<cr>" {:desc "git diff"})
 (map! [n] :<leader>gg "<cmd>lua require 'user.lazygit'.lazygit_toggle()<cr>"
       {:desc :LazyGit})
@@ -151,6 +118,3 @@
 (map! [n] :<leader>gn :<cmd>Neogit<cr> {:desc :neogit})
 (map! [n] :<leader>gl "<cmd>lua require 'gitsigns'.blame_line()<cr>"
       {:desc :blame})
-
-(map! [n] :<leader>go "<cmd>Telescope git_status<cr>"
-      {:desc "open changed file"})

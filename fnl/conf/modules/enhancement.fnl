@@ -40,11 +40,13 @@
                           :align :center})
     ((. whichkey :register) {:<leader>b {:name :+buffers}})
     ((. whichkey :register) {:<leader>c {:name :+code}})
+    ((. whichkey :register) {:<leader>ct {:name :+test}})
     ((. whichkey :register) {:<leader>d {:name :+diagnostic}})
     ((. whichkey :register) {:<leader>f {:name :+files}})
     ((. whichkey :register) {:<leader>g {:name :+git}})
-    ((. whichkey :register) {:<leader>s {:name :+search}})
-    ((. whichkey :register) {:<leader>t {:name :+toggles}})))
+    ((. whichkey :register) {:<leader>s {:name :+search}})))
+
+; ((. whichkey :register) {:<leader>o {:name :options}})))
 
 [;; Keybind discoverability
  (pack :folke/which-key.nvim {:config #(whichkey-setup)})
@@ -53,7 +55,7 @@
  ;; Sorting
  (pack :sQVe/sort.nvim {:config true})
  ;; Sync spell files
- :micarmst/vim-spellsync
+ ; :micarmst/vim-spellsync
  ;; Wildmenu
  (pack :gelguy/wilder.nvim {:config wilder-setup
                             :dependencies [:romgrk/fzy-lua-native]

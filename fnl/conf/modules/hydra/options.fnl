@@ -14,6 +14,7 @@
     _n_ %{nu} number
     _r_ %{rnu} relative number
     _b_ Toggle Background
+    _d_ Toggle deleted lines
     ^
          ^^^^              _<Esc>_
     ")
@@ -23,8 +24,13 @@
                    :invoke_on_body true
                    :hint {:border :solid :position :middle}}
           :mode :n
-          :body :<leader>to
-          :heads [[:b
+          :body :<leader>o
+          :heads [[:d
+                   (fn []
+                     (local gs (require :gitsigns))
+                     (gs.toggle_deleted))
+                   {:desc "Deleted lines"}]
+                  [:b
                    (fn []
                      (if (= vim.o.background :dark)
                          (set! background :light)

@@ -4,6 +4,8 @@
   (local treesitter (require :nvim-treesitter.configs))
   (treesitter.setup {:ensure_installed [:c_sharp
                                         :haskell
+                                        :http
+                                        :json
                                         :jsonc
                                         :lua
                                         :python
@@ -53,8 +55,8 @@
                                                   "[[" "@class.outer"}
                             :goto_previous_end {"[M" "@function.outer"
                                                 "[]" "@class.outer"}
-                            :goto_next {"]d" "@conditional.outer"}
-                            :goto_previous {"[d" "@conditional.outer"}}}))
+                            :goto_next {"]i" "@conditional.outer"}
+                            :goto_previous {"[i" "@conditional.outer"}}}))
 
 (pack :nvim-treesitter/nvim-treesitter
       {:build ":TSUpdate"

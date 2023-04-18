@@ -16,14 +16,14 @@
 
 (fn config []
   (local lualine (require :lualine))
-  (lualine.setup {:options {:globalstatus false
+  (lualine.setup {:options {:globalstatus true
                             :theme :auto
                             :icons_enabled true
                             :component_separators {:left " " :right " "}
                             ;;:component_separators { :left "" :right ""}
                             :section_separators {:left "" :right ""}
                             :always_divide_middle true
-                            :disabled_filetypes {:winbar [:qf]}}
+                            :disabled_filetypes {:winbar [:qf :neotest-summary]}}
                   :winbar {:lualine_a [:progress]
                            :lualine_b [:location]
                            :lualine_c [get-navic-loc]}

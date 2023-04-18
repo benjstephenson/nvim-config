@@ -61,43 +61,34 @@
     (map! [n] :<leader>bb builtin.buffers {:desc :buffers})
     (map! [n] :<leader>sh builtin.help_tags {:desc "help tags"})
     (map! [n] :<leader>fq builtin.quickfix)
-    (map! [n] :<leader>fk builtin.loclist)))
+    (map! [n] :<leader>fk builtin.loclist)
+    (map! [n] :<leader>sc builtin.colorscheme {:desc :colourscheme})
+    (map! [n] :<leader>sb
+          #(builtin.current_buffer_fuzzy_find {:theme :get_ivy})
+          {:desc "search in buffer"})
+    (map! [n] :<leader>sh builtin.help_tags {:desc "find Help"})
+    (map! [n] :<leader>sM builtin.man_pages {:desc "man Pages"})
+    (map! [n] :<leader>sr builtin.oldfiles {:desc "open Recent File"})
+    (map! [n] :<leader>sR builtin.registers {:desc :registers})
+    (map! [n] :<leader>st builtin.live_grep {:desc :text})
+    (map! [n] :<leader>sk builtin.keymaps {:desc :keymaps})
+    (map! [n] :<leader>sC builtin.commands {:desc :commands})
+    (map! [n] :<leader>sp #(builtin.colorscheme {:enable_preview true})
+          {:desc "colorscheme with preview"})
+    ;; Git
+    (map! [n] :<leader>gC builtin.git_bcommits
+          {:desc "checkout commit(for current file)"})
+    (map! [n] :<leader>gb builtin.git_branches {:desc "checkout branch"})
+    (map! [n] :<leader>gc builtin.git_commits {:desc "checkout commit"})
+    (map! [n] :<leader>go builtin.git_status {:desc "open changed file"})))
 
-(fn fern-config []
-  ;;; ========
-  ;;; Keybinds
-  ;;; ========
-  (import-macros {: map!} :themis.keybind)
-  (map! [n] :<C-n> "<cmd>Fern . -reveal=% -drawer -toggle<cr>")
-  ;;; =============
-  ;;; Configuration
-  ;;; =============
-  (import-macros {: let!} :themis.var)
-  (local fr-web-icons (require :fr-web-icons))
-  (let! fern#renderer :nvim-web-devicons)
-  (let! glyph_palette#palette (fr-web-icons.palette))
-  ;;; ======
-  ;;; Events
-  ;;; ======
-  (import-macros {: augroup! : clear! : autocmd!} :themis.event)
-  (augroup! add-colors-to-fern-buffer (clear!)
-            (autocmd! FileType fern `(vim.fn.glyph_palette#apply))))
-
-[;; Fuzzy-finding
- (pack :nvim-telescope/telescope.nvim
-       {:dependencies [:nvim-lua/plenary.nvim
-                       (pack :nvim-telescope/telescope-ui-select.nvim)
-                       (pack :nvim-telescope/telescope-file-browser.nvim)
-                       (pack :nvim-telescope/telescope-project.nvim)
-                       (pack :nvim-telescope/telescope-fzf-native.nvim
-                             {:build :make})
-                       (pack :nvim-telescope/telescope-smart-history.nvim
-                             {:dependencies :tami5/sqlite.lua})]
-        :config telescope-config})]
-
-;; File-tree
-; (pack :lambdalisue/fern.vim {:dependencies [:lambdalisue/fern-git-status.vim
-;                                             :lambdalisue/fern-renderer-nerdfont.vim
-;                                             :TheLeoP/fern-renderer-web-devicons.nvim
-;                                             :lambdalisue/glyph-palette.vim]
-;                              :config fern-config})]
+(pack :nvim-telescope/telescope.nvim
+      {:dependencies [:nvim-lua/plenary.nvim
+                      (pack :nvim-telescope/telescope-ui-select.nvim)
+                      (pack :nvim-telescope/telescope-file-browser.nvim)
+                      (pack :nvim-telescope/telescope-project.nvim)
+                      (pack :nvim-telescope/telescope-fzf-native.nvim
+                            {:build :make})
+                      (pack :nvim-telescope/telescope-smart-history.nvim
+                            {:dependencies :tami5/sqlite.lua})]
+       :config telescope-config})

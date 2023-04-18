@@ -175,6 +175,7 @@
         :dependencies [:williamboman/mason.nvim]})
  (pack :HallerPatrick/py_lsp.nvim
        {:config true
+        :ft [:python :py]
         :setup {:host_python (vim.fn.exepath :python3)
                 :default_venv_name :.venv}})
  ;; Non-LSP integration

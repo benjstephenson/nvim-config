@@ -5,13 +5,13 @@
  ;; Better notifications
  (pack :rcarriga/nvim-notify {:config #(set vim.notify (require :notify))})
  ;; Preview substitution
- (pack :markonm/traces.vim
-       {:config #(do
-                   (import-macros {: let!} :themis.var)
-                   (let! traces_abolish_integration 1))})
+ ; (pack :markonm/traces.vim
+ ;       {:config #(do
+ ;                   (import-macros {: let!} :themis.var)
+ ;                   (let! traces_abolish_integration 1))})
  ;; Highlight color-codes
- (pack :NvChad/nvim-colorizer.lua
-       {:config {:user_default_options {:mode :virtualtext :names false}}})
+ ; (pack :NvChad/nvim-colorizer.lua
+ ;       {:config {:user_default_options {:mode :virtualtext :names false}}})
  ;; Indent lines
  (pack :lukas-reineke/indent-blankline.nvim
        {:config {:char "▏"
