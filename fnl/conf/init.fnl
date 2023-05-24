@@ -23,12 +23,13 @@
     (icollect [_ name (ipairs modules)]
       (require (.. :conf/modules/ name))))
 
-  (let [plugin-spec [(pack :rktjmp/hotpot.nvim)]]
+  (let [plugin-spec [(pack :rktjmp/hotpot.nvim)]
+        lazy (require :lazy)]
     (do
       ;;(table.insert plugin-spec (require :conf.lsp))
       (table.insert plugin-spec (require-modules (build-require-list)))
       (tset _G.conf :pack (vim.tbl_flatten plugin-spec))
-      ((. (require :lazy) :setup) plugin-spec))))
+      (lazy.setup plugin-spec))))
 
 (load-plugins!)
 

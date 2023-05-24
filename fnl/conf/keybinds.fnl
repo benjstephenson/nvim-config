@@ -90,9 +90,6 @@
 (map! [n] "<leader>;" :<cmd>Alpha<CR> {:desc :dashboard})
 (map! [n] :<leader>h :<cmd>nohlsearch<CR> {:desc "no highlight"})
 (map! [n] :<leader>x :<cmd>ToggleTerm<cr> {:desc :terminal})
-(map! [n] :<leader>P
-      "<cmd>lua require'telescope'.extensions.project.project{}<cr>"
-      {:desc :projects})
 
 ;; Buffers)
 (map! [n] :<leader>bj :<cmd>BufferLinePick<cr> {:desc :jump})

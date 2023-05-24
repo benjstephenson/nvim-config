@@ -47,12 +47,13 @@
   (telescope.load_extension :file_browser)
   (telescope.load_extension :smart_history)
   (telescope.load_extension :notify)
-  (telescope.load_extension :project)
+  (telescope.load_extension :projects)
   (local extensions (. (require :telescope) :extensions))
   ;;; ========
   ;;; Mappings
   ;;; ========
   (do
+    (map! [n] :<leader>P extensions.projects.projects {:desc :projects})
     (map! [n] :<leader>fb extensions.file_browser.file_browser {:desc :browser})
     (map! [n] :<leader>ff builtin.find_files {:desc :find})
     (map! [n] :<leader>fF #(builtin.find_files {:hidden true})
@@ -82,13 +83,14 @@
     (map! [n] :<leader>gc builtin.git_commits {:desc "checkout commit"})
     (map! [n] :<leader>go builtin.git_status {:desc "open changed file"})))
 
-(pack :nvim-telescope/telescope.nvim
-      {:dependencies [:nvim-lua/plenary.nvim
-                      (pack :nvim-telescope/telescope-ui-select.nvim)
-                      (pack :nvim-telescope/telescope-file-browser.nvim)
-                      (pack :nvim-telescope/telescope-project.nvim)
-                      (pack :nvim-telescope/telescope-fzf-native.nvim
-                            {:build :make})
-                      (pack :nvim-telescope/telescope-smart-history.nvim
-                            {:dependencies :tami5/sqlite.lua})]
-       :config telescope-config})
+[(pack :ahmedkhalf/project.nvim {:main :project_nvim :config true})
+ (pack :nvim-telescope/telescope.nvim
+       {:tag :0.1.1
+        :dependencies [:nvim-lua/plenary.nvim
+                       (pack :nvim-telescope/telescope-ui-select.nvim)
+                       (pack :nvim-telescope/telescope-file-browser.nvim)
+                       (pack :nvim-telescope/telescope-fzf-native.nvim
+                             {:build :make})
+                       (pack :nvim-telescope/telescope-smart-history.nvim
+                             {:dependencies :tami5/sqlite.lua})]
+        :config telescope-config})]

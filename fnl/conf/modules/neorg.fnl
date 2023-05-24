@@ -2,6 +2,6 @@
 
 (pack :vhyrro/neorg
       {:config {:load {:core.defaults {}
-                       :core.norg.concealer {}
-                       :core.norg.completion {:config {:engine :nvim-cmp}}
-                       :core.norg.dirman {:config {:workspaces {:work :/Users/bste/ghq/github.com/benjstephenson/notes.neorg}}}}}})
+                       :core.concealer {}
+                       :core.completion {:config {:engine :nvim-cmp}}
+                       :core.dirman {:config {:workspaces {:work :/Users/bste/ghq/github.com/benjstephenson/notes.neorg}}}}}})

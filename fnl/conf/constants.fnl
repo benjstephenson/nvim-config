@@ -1,16 +1,12 @@
-(import-macros {: augroup!
-                : clear!
-                : autocmd!} :themis.event)
+(import-macros {: augroup! : clear! : autocmd!} :themis.event)
 
 ;;; =========
 ;;; Constants
 ;;; =========
 
 (local databases-folder (vim.fn.expand "~/.local/share/nvim/databases"))
-(local icons {:error ""
-              :warn ""
-              :info ""
-              :hint ""})
+(local icons {:error "" :warn "" :info "" :hint ""})
+
 (local kind-icons {:Namespace ""
                    :Text " "
                    :Method " "
@@ -55,13 +51,16 @@
                       :nvim_lua "[Lua]"
                       :latex_symbols "[LaTeX]"})
 
-(local lisp-filetypes [:fennel
-                       :clojure
-                       :lisp
-                       :racket
-                       :scheme
-                       :janet
-                       :hy])
+(local lisp-filetypes [:fennel :clojure :lisp :racket :scheme :janet :hy])
+
+(local border [["🭽" :FloatBorder]
+               ["▔" :FloatBorder]
+               ["🭾" :FloatBorder]
+               ["▕" :FloatBorder]
+               ["🭿" :FloatBorder]
+               ["▁" :FloatBorder]
+               ["🭼" :FloatBorder]
+               ["▏" :FloatBorder]])
 
 (tset _G :conf {: databases-folder
                 : icons
@@ -75,7 +74,5 @@
 ;;; =====
 
 ;; Create folders if non-existent
-(augroup! create-folders-if-non-existent
-  (clear!)
-  (autocmd! VimEnter * '(vim.fn.mkdir databases-folder :p)
-            {:once true}))
+(augroup! create-folders-if-non-existent (clear!)
+          (autocmd! VimEnter * `(vim.fn.mkdir databases-folder :p) {:once true}))

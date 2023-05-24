@@ -103,21 +103,23 @@
   ;; ESLint
   (lsp.eslint.setup {:on_attach on-attach : capabilities})
   ;; CSS
-  (lsp.cssls.setup {:on_attach on-attach : capabilities})
+  ;; (lsp.cssls.setup {:on_attach on-attach : capabilities})
   ;; HTML
-  (lsp.html.setup {:on_attach on-attach : capabilities})
+  ;; (lsp.html.setup {:on_attach on-attach : capabilities})
   ;; Emmet
-  (lsp.emmet_ls.setup {:on_attach on-attach : capabilities})
+  ;; (lsp.emmet_ls.setup {:on_attach on-attach : capabilities})
   ;; Vue
   ;;(lsp.volar.setup {:on_attach on-attach : capabilities})
   ;; Svelte
   ;;(lsp.svelte.setup {:on_attach on-attach : capabilities})
   ;; Yaml
-  (lsp.yamlls.setup {:on_attach on-attach : capabilities})
+  (lsp.yamlls.setup {:on_attach on-attach
+                     : capabilities
+                     :settings {:yaml {:keyOrdering false}}})
   ;; Toml
   (lsp.taplo.setup {:on_attach on-attach : capabilities})
   ;; XML
-  (lsp.lemminx.setup {:on_attach on-attach : capabilities})
+  ;; (lsp.lemminx.setup {:on_attach on-attach : capabilities})
   ;; Clojure
   (lsp.clojure_lsp.setup {:on_attach on-attach : capabilities})
   ;; VimL
@@ -164,7 +166,6 @@
         :dependencies [:folke/neodev.nvim
                        :williamboman/mason-lspconfig.nvim
                        (pack :j-hui/fidget.nvim {:config true})
-                       (pack :narutoxy/dim.lua {:config true})
                        :jose-elias-alvarez/typescript.nvim
                        :b0o/schemastore.nvim
                        :SmiteshP/nvim-navic]})
@@ -180,4 +181,5 @@
                 :default_venv_name :.venv}})
  ;; Non-LSP integration
  (pack :jose-elias-alvarez/null-ls.nvim
-       {:config null-config :dependencies [:nvim-lua/plenary.nvim]})]
+       {:config null-config :dependencies [:nvim-lua/plenary.nvim]})
+ (require :conf.modules.lsp.scala)]

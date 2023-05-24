@@ -12,6 +12,7 @@
   ;;; Keybinds
   ;;; ========
   (import-macros {: buf-map!} :themis.keybind)
+  (local builtin (require :telescope.builtin))
   ;; Show documentation
   (buf-map! [n] :K vim.lsp.buf.hover)
   ;; Go to definition
@@ -19,23 +20,34 @@
   ;; Go to declaration
   (buf-map! [n] :gD vim.lsp.buf.declaration)
   ;; Go to implementation
-  (buf-map! [n] :gi vim.lsp.buf.implementation)
+  (buf-map! [n] :gi #(builtin.lsp_implementations {:theme :get_ivy})
+            {:desc "Goto implementations"})
+  ;; Go to type
+  (buf-map! [n] :gt #(builtin.lsp_type_definitions {:theme :get_ivy})
+            {:desc "Goto type"})
   ;; Go to references
-  (buf-map! [n] :gr vim.lsp.buf.references)
+  (buf-map! [n] :gr #(builtin.lsp_references {:theme :get_ivy})
+            {:desc "Goto references"})
   ;; Rename symbol under cursor
   (buf-map! [n] :<leader>cr vim.lsp.buf.rename {:desc :rename})
   ;; Apply code actions
   (buf-map! [n] :<leader>ca vim.lsp.buf.code_action {:desc "code action"})
-  (buf-map! [n] :<leader>ss
-            "<cmd>Telescope lsp_document_symbols theme=get_ivy<cr>"
+  (buf-map! [n] :<leader>cc #(builtin.lsp_incoming_calls {:theme :get_ivy})
+            {:desc "Incoming calls"})
+  (buf-map! [n] :<leader>cC #(builtin.lsp_outgoing_calls {:theme :get_ivy})
+            {:desc "Outgoing calls"})
+  (buf-map! [n] :<leader>cs #(builtin.lsp_document_symbols {:theme :get_ivy})
             {:desc "document symbols"})
-  (buf-map! [n] :<leader>sS
-            "<cmd>Telescope lsp_dynamic_workspace_symbols theme=get_ivy<cr>"
+  (buf-map! [n] :<leader>cS
+            #(builtin.lsp_dynamic_workspace_symbols {:theme :get_ivy})
             {:desc "workspace symbols"})
+  ;; Diagnostics
   (buf-map! [n] :<leader>dj vim.diagnostic.goto_next {:desc "next diagnostic"})
   (buf-map! [n] :<leader>dk vim.diagnostic.goto_prev {:desc "prev diagnostic"})
   (buf-map! [n] :<leader>dq vim.diagnostic.setloclist {:desc :quickfix})
-  ;; Format buffer ; (when (client.supports_method "textDocument/formatting") ;   (buf-map! [n] "<leader>f" '(format! bufnr true)))
+  ;; Format buffer 
+  (when (client.supports_method :textDocument/formatting)
+    (buf-map! [n] :<leader>cf `(format! bufnr true)))
   (let [(ok? navic) (pcall require :nvim-navic)]
     (if ok?
         (if client.server_capabilities.documentSymbolProvider
