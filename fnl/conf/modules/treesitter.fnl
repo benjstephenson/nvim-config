@@ -1,5 +1,13 @@
 (import-macros {: pack} :themis.pack.lazy)
 
+(fn register-keys []
+  (let [(ok? which-key) (pcall require :which-key)]
+    (if ok?
+        (do
+          (which-key.register {:<localleader>p {:name :peek}})
+          (which-key.register {:<localleader>r {:name :rename}})
+          (which-key.register {:<localleader>s {:name :swap}})))))
+
 (fn config []
   (local treesitter (require :nvim-treesitter.configs))
   (treesitter.setup {:ensure_installed [:c_sharp
@@ -63,7 +71,8 @@
                                                       :as "@scope"}}}
                      :query_linter {:enable true
                                     :use_virtual_text true
-                                    :lint_events [:BufWrite :CursorHold]}}))
+                                    :lint_events [:BufWrite :CursorHold]}})
+  (register-keys))
 
 (pack :nvim-treesitter/nvim-treesitter
       {:build ":TSUpdate"

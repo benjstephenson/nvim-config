@@ -31,12 +31,9 @@
                   :sections {:lualine_a [:mode]
                              :lualine_b [:branch :diff :diagnostics]
                              :lualine_c [:filename :searchcount]
-                             :lualine_x [lsp-status
-                                         :filetype
-                                         :encoding
-                                         :fileformat]
-                             :lualine_y []
-                             :lualine_z []}}))
+                             :lualine_x [lsp-status]
+                             :lualine_y [:filetype]
+                             :lualine_z [:encoding :fileformat]}}))
 
 (pack :nvim-lualine/lualine.nvim {:dependencies [:nvim-tree/nvim-web-devicons]
                                   : config})

@@ -46,16 +46,8 @@
     ((. whichkey :register) {:<leader>g {:name :+git}})
     ((. whichkey :register) {:<leader>s {:name :+search}})))
 
-; ((. whichkey :register) {:<leader>o {:name :options}})))
-
 [;; Keybind discoverability
  (pack :folke/which-key.nvim {:config #(whichkey-setup)})
- ;; Create directories when necessary
- :jghauser/mkdir.nvim
- ;; Sorting
- (pack :sQVe/sort.nvim {:config true})
- ;; Sync spell files
- ; :micarmst/vim-spellsync
  ;; Wildmenu
  (pack :gelguy/wilder.nvim {:config wilder-setup
                             :dependencies [:romgrk/fzy-lua-native]

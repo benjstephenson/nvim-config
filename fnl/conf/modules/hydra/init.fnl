@@ -15,5 +15,5 @@
                        :szw/vim-maximizer
                        :TimUntersberger/neogit
                        :lewis6991/gitsigns.nvim
-                       :anuvyklack/windows.nvim]
+                       (pack :anuvyklack/windows.nvim {:config true})]
         :config setup-hydra})]

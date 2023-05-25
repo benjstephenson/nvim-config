@@ -2,7 +2,8 @@
 
 [;; Comment
  (pack :echasnovski/mini.comment
-       {:config #((. (require :mini.comment) :setup))})
+       {:config #((. (require :mini.comment) :setup) {:hooks {:pre #(. (require :ts_context_commentstring.internal)
+                                                                       :update_commentstring)}})})
  ;; Surround
  (pack :echasnovski/mini.surround
        {:config #((. (require :mini.surround) :setup))})

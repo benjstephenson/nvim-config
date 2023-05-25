@@ -32,7 +32,6 @@
   (map! [ox] :ih ":<C-U>Gitsigns select_hunk<cr>"))
 
 [(pack :TimUntersberger/neogit {:dependencies [:nvim-lua/plenary.nvim]})
- (pack :lewis6991/gitsigns.nvim {:config {:on_attach git-signs-on-attach}})
+ (pack :lewis6991/gitsigns.nvim {:opts {:on_attach git-signs-on-attach}})
  (pack :f-person/git-blame.nvim)
- ; (pack :lambdalisue/gin.vim {:dependencies [:vim-denops/denops.vim]})
- (pack :akinsho/git-conflict.nvim {:config {:disable_diagnostics true}})]
+ (pack :akinsho/git-conflict.nvim {:opts {:disable_diagnostics true}})]
