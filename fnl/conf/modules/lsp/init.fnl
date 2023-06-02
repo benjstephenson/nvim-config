@@ -1,24 +1,6 @@
 (import-macros {: pack} :themis.pack.lazy)
 (import-macros {: nil?} :themis.lib.types)
 
-; local function get_python_path(workspace)
-;   -- Use activated virtualenv.
-;   if vim.env.VIRTUAL_ENV then
-;     return path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
-;   end
-;
-;   -- Find and use virtualenv from pipenv in workspace directory.
-;   local match = vim.fn.glob(path.join(workspace, 'Pipfile'))
-;   if match ~= '' then
-;      local venv = vim.fn.trim(vim.fn.system('poetry --directory ' .. workspace .. ' env info -p'))
-;      return path.join(venv, 'bin', 'python'))
-;   end
-;
-;   -- Fallback to system Python.
-;   return vim.fn.exepath('python3') or vim.fn.exepath('python') or 'python'
-; end
-;
-
 (fn lsp-config []
   (local on-attach (require :conf.modules.lsp.on-attach))
   (local lsp (require :lspconfig))
@@ -119,6 +101,7 @@
  (pack :j-hui/fidget.nvim
        {:opts {:text {:spinner :dots_pulse :completed :Done}
                :window {:border :rounded}}})
+ (pack :ray-x/lsp_signature.nvim {:opts {:max_width 120}})
  ;; Installation
  (pack :williamboman/mason.nvim {:config true})
  (pack :williamboman/mason-lspconfig.nvim

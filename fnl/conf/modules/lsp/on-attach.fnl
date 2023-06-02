@@ -7,10 +7,10 @@
                        :filter #(not (contains? [:jsonls :tsserver] $.name))
                        :async ?async?}))
 
-(fn on-attach [client bufnr]
-  ;;; ========
-  ;;; Keybinds
-  ;;; ========
+;;; ========
+;;; Keybinds
+;;; ========
+(fn key-binds [client bufnr]
   (import-macros {: buf-map!} :themis.keybind)
   (local builtin (require :telescope.builtin))
   ;; Show documentation
@@ -47,7 +47,10 @@
   (buf-map! [n] :<leader>dq vim.diagnostic.setloclist {:desc :quickfix})
   ;; Format buffer 
   (when (client.supports_method :textDocument/formatting)
-    (buf-map! [n] :<leader>cf `(format! bufnr true)))
+    (buf-map! [n] :<leader>cf `(format! bufnr true))))
+
+(fn on-attach [client bufnr]
+  (key-binds client bufnr)
   (let [(ok? navic) (pcall require :nvim-navic)]
     (if ok?
         (if client.server_capabilities.documentSymbolProvider

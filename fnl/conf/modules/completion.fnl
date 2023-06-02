@@ -42,10 +42,11 @@
   ;;; =======
   (local sources
          [[{:name :nvim_lsp}
-           {:name :nvim_lsp_signature_help}
+           ; {:name :nvim_lsp_signature_help}
            {:name :vsnip}
            {:name :path}
-           {:name :git}]
+           {:name :git}
+           {:name :conjure}]
           [{:name :buffer :option {:keyword_pattern "\\k\\+"}}
            {:name :spell
             :option {:enable_in_context #(let [context (require :cmp.config.context)]
@@ -86,7 +87,8 @@
               :snippet {:expand (fn [args] (vim.fn.vsnip#anonymous args.body))}
               :mapping (cmp.mapping.preset.insert mappings)
               :sources (cmp.config.sources (unpack sources))
-              :sorting {: comparators}})
+              :sorting {: comparators}
+              :experimental {:ghost_text true}})
   (let [cmp-git (require :cmp_git)]
     (cmp-git.setup)))
 
@@ -100,7 +102,8 @@
                                          :lukas-reineke/cmp-under-comparator
                                          (pack :petertriho/cmp-git
                                                {:dependencies [:nvim-lua/plenary.nvim]})
-                                         :f3fora/cmp-spell]
+                                         :f3fora/cmp-spell
+                                         :PaterJason/cmp-conjure]
                           : config})
  ;; Snippets
  (pack :hrsh7th/vim-vsnip {:dependencies [:rafamadriz/friendly-snippets]})]
