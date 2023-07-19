@@ -1,9 +1,6 @@
 (import-macros {: tbl? : nil?} :themis.lib.types)
 (import-macros {: pack} :themis.pack.lazy)
 
-(require :conf.constants)
-(require :conf.settings)
-
 (fn load-plugins! []
   (local plugins-path (.. (vim.fn.stdpath :config) :/fnl/conf/modules))
 
@@ -31,6 +28,8 @@
       (tset _G.conf :pack (vim.tbl_flatten plugin-spec))
       (lazy.setup plugin-spec))))
 
+(require :conf.constants)
+(require :conf.settings)
 (load-plugins!)
 
 (when vim.g.neovide
@@ -39,3 +38,4 @@
 (require :conf.keybinds)
 (require :conf.events)
 (require :conf.diagnostics)
+(require :conf/after)

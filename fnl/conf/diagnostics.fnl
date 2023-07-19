@@ -13,10 +13,13 @@
 ;;; =====
 (vim.fn.sign_define :DiagnosticSignError
                     {:text conf.icons.error :texthl :DiagnosticSignError})
+
 (vim.fn.sign_define :DiagnosticSignWarn
                     {:text conf.icons.warn :texthl :DiagnosticSignWarn})
+
 (vim.fn.sign_define :DiagnosticSignInfo
                     {:text conf.icons.info :texthl :DiagnosticSignInfo})
+
 (vim.fn.sign_define :DiagnosticSignHint
                     {:text conf.icons.hint :texthl :DiagnosticSignHint})
 
@@ -26,7 +29,7 @@
 (import-macros {: map!} :themis.keybind)
 
 ;; Show line diagnostics
-(map! [n] :<leader>d vim.diagnostic.open_float)
+(map! [n] :<localleader>d vim.diagnostic.open_float)
 ;; Go to diagnostic
 (map! [n] "[d" vim.diagnostic.goto_prev)
 (map! [n] "]d" vim.diagnostic.goto_next)
