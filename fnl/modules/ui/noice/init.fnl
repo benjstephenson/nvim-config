@@ -1,7 +1,7 @@
 (import-macros {: lazy} :macros)
 
 (lazy :folke/noice.nvim
-      {:dependencies [:MunifTanjim/nui.nvim]
+      {:dependencies [:MunifTanjim/nui.nvim :rcarriga/nvim-notify]
        :config (fn []
                  (let [noice (require :noice)]
                    (noice.setup {:health {:checker false}

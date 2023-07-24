@@ -38,8 +38,8 @@
                                  :preview_cutoff 120
                                  :vertical {:mirror false}
                                  :width 0.87} true}
-                    :pickers {:oldfiles {:prompt_title "Recent files"}}
-                    :extensions {:ui-select [themes.get_dropdown]}})
+                    :pickers {:oldfiles {:prompt_title "Recent files"}}})
+  ;:extensions {:ui-select [themes.get_dropdown]}})
   (telescope.load_extension :ui-select)
   (telescope.load_extension :file_browser)
   (telescope.load_extension :smart_history) ;  (telescope.load_extension :notify)
