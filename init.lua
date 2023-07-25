@@ -96,18 +96,22 @@ local plugins = {
   },
 }
 
+_G.pack = {}
 for k, v in pairs(bootstrap.modules) do
   for _, v2 in ipairs(v) do
-    local mod_path = "modules" .. "." .. k .. "." .. v2
+    local module = k .. "." .. v2
+    local mod_path = "modules" .. "." .. module
     local ok, spec = pcall(require, mod_path)
     if ok then
+      _G.pack[module] = true
       plugins[#plugins + 1] = spec
     else
+      _G.pack[module] = false
       print("Failed to load module " .. mod_path .. " : " .. spec)
     end
   end
 end
-
+print(vim.inspect(_G.pack))
 require("lazy").setup(plugins)
 
 -- Load configuration

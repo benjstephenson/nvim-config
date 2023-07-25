@@ -51,7 +51,7 @@
          :settings {:python {:analysis {:autoImportCompletions true
                                         :useLibraryCodeForTypes true
                                         :disableOrganizeImports false}}}})
-  (tset lsp-servers :tsserver {})
+  ;(tset lsp-servers :tsserver {})
   (tset lsp-servers :yamlls
         {:settings {:yaml {:schemaStore {:enable false
                                          :url "https://www.schemastore.org/api/json/catalog.json"}

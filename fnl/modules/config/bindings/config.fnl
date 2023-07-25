@@ -11,13 +11,6 @@
 
 ;; easier command line mode + 
 (map! [n] ";" ":" {:desc :vim-ex})
-;;; z
-
-;;; g
-
-;;; <leader>
-
-;; RET jump to bookmark
 
 ;; * LSP symbols in project (telescope)
 
@@ -25,8 +18,6 @@
 (map! [n] "<leader>," "<cmd>Telescope buffers<CR>" {:desc "Switch buffer"})
 
 (map! [n] "<leader>;" :<cmd>ConjureEval<CR> {:desc "Eval expression"})
-
-;; u Universl argument
 
 (map! [n] :<leader>x :<cmd>Scratch<CR> {:desc "New scratch buffer"})
 
@@ -40,15 +31,14 @@
 
 (map! [n] "<leader>'" "<cmd>Telescope resume<CR>" {:desc "Resume last search"})
 
-(map! [n] :<leader>. "<cmd>Telescope find_files<CR>" {:desc "Find file"})
+(map! [n] :<leader>. "<cmd>Telescope find_files hidden=true<CR>"
+      {:desc "Find all files"})
 
 (map! [n] :<leader>/ "<cmd>Telescope live_grep<CR>" {:desc "Search project"})
 
 (map! [n] "<leader>:" "<cmd>Telescope commands<CR>" {:desc :M-x})
 
 (map! [n] :<leader>< "<cmd>Telescope buffers<CR>" {:desc "Switch Buffer"})
-
-;; <leader>character
 
 ;;; TAB +workspace
 

@@ -26,8 +26,6 @@
                      ,(unpack body)))
      ,fn-name))
 
-(tset _G :pack [])
-
 (lambda fn? [x]
   "Checks if `x` is a function definition.
   Cannot check if a symbol is a function in compile time."
@@ -415,6 +413,11 @@
                     _ (values k v)))]
     (doto options (tset 1 identifier))))
 
+(lambda if-loaded! [mod value]
+  (assert-compile (str? mod) "expected string for module name" mod)
+  (if (. _G.pack mod)
+      `,value))
+
 (lambda map! [[modes] lhs rhs ?options]
   "Add a new mapping using the vim.keymap.set API.
 
@@ -582,4 +585,5 @@
  : autocmd!
  : augroup!
  : clear!
- : lazy}
+ : lazy
+ : if-loaded!}

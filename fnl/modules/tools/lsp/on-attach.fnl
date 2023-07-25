@@ -12,6 +12,8 @@
   (buf-map! [n] :gd goto-definition! {:desc "goto definition"})
   (buf-map! [n] :gt goto-type-definition! {:desc "goto type definition"})
   (buf-map! [n] :gr goto-references! {:desc "goto references"})
+  (when (client.supports_method :textDocument/inlayHint)
+    (vim.lsp.inlay_hint bufnr true))
   ;; Enable lsp formatting if available 
   (when (client.supports_method :textDocument/formatting)
     (augroup! format-before-saving (clear! {:buffer bufnr})
