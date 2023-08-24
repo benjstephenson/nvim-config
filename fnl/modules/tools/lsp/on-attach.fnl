@@ -1,5 +1,7 @@
 (import-macros {: autocmd! : augroup! : clear! : buf-map!} :macros)
 
+(fn create-attach [])
+
 (fn on-attach [client bufnr]
   ;; Keybindings
   (local {:hover open-doc-float!

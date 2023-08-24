@@ -5,8 +5,8 @@
                 :config [:bindings :whichkey]
                 :diagnostics [:null-ls :trouble]
                 :editor [:folding :hotpot :parinfer]
-                :lang [:lisp :markdown :plantuml :typescript]
-                :tools [:lsp :mason :git :treesitter :http]
+                :lang [:lisp :markdown :plantuml :typescript :scala :haskell]
+                :tools [:lsp :mason :git :treesitter :test :http :silicon]
                 :ui [:colourscheme
                      :dashboard
                      :gutter
@@ -18,31 +18,31 @@
 
 (fn disable-vim-plugins []
   (local default-plugins [:2html_plugin
+                          :bugreport
+                          :compiler
+                          :ftplugin
                           :getscript
                           :getscriptPlugin
                           :gzip
                           :logipat
+                          :matchit
                           :netrw
+                          :netrwFileHandlers
                           :netrwPlugin
                           :netrwSettings
-                          :netrwFileHandlers
-                          :matchit
-                          :tar
-                          :tarPlugin
+                          :optwin
+                          :rplugin
                           :rrhelper
                           :spellfile_plugin
+                          :synmenu
+                          :syntax
+                          :tar
+                          :tarPlugin
+                          :tutor
                           :vimball
                           :vimballPlugin
                           :zip
-                          :zipPlugin
-                          :tutor
-                          :rplugin
-                          :syntax
-                          :synmenu
-                          :optwin
-                          :compiler
-                          :bugreport
-                          :ftplugin])
+                          :zipPlugin])
   (local default-providers [:node :perl :ruby])
   (each [_ plugin (pairs default-plugins)] (tset vim.g (.. :loaded_ plugin) 1))
   (each [_ provider (ipairs default-providers)]

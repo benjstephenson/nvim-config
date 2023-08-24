@@ -14,7 +14,6 @@
                              :haskell
                              :http
                              :java
-                             :javascript
                              :json
                              :kotlin
                              :latex
@@ -27,7 +26,6 @@
                              :regex
                              :rust
                              :scala
-                             :typescript
                              :toml
                              :vim
                              :vimdoc])

@@ -86,6 +86,7 @@ require("hotpot").setup({
   },
 })
 
+_G.pack = {}
 local bootstrap = require("bootstrap")
 
 bootstrap["pre-setup"]()
@@ -96,7 +97,6 @@ local plugins = {
   },
 }
 
-_G.pack = {}
 for k, v in pairs(bootstrap.modules) do
   for _, v2 in ipairs(v) do
     local module = k .. "." .. v2
@@ -111,7 +111,6 @@ for k, v in pairs(bootstrap.modules) do
     end
   end
 end
-print(vim.inspect(_G.pack))
 require("lazy").setup(plugins)
 
 -- Load configuration

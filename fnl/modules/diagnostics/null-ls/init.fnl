@@ -34,7 +34,7 @@
   ;;Formatting
   (table.insert null-ls-sources null-ls.builtins.formatting.fnlfmt)
   (table.insert null-ls-sources null-ls.builtins.formatting.clang_format)
-  (table.insert null-ls-sources null-ls.builtins.formatting.zprint)
+  ;(table.insert null-ls-sources null-ls.builtins.formatting.zprint)
   (table.insert null-ls-sources null-ls.builtins.formatting.google_java_format)
   (table.insert null-ls-sources null-ls.builtins.formatting.ktlint)
   (table.insert null-ls-sources null-ls.builtins.formatting.stylua)

@@ -38,7 +38,7 @@
                    {:description "Packer config"
                     :fileMatch [:packer.json]
                     :url "https://json.schemastore.org/packer"}]})
-  (tset lsp-servers :kotlin_langage_server {})
+  ;(tset lsp-servers :kotlin_langage_server {})
   (tset lsp-servers :texlab {})
   (tset lsp-servers :lua_ls
         {:settings {:Lua {:diagnostics {:globals [:vim]}
