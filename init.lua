@@ -111,6 +111,7 @@ for k, v in pairs(bootstrap.modules) do
     end
   end
 end
+
 require("lazy").setup(plugins)
 
 -- Load configuration

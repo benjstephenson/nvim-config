@@ -6,7 +6,7 @@
                 :diagnostics [:null-ls :trouble]
                 :editor [:folding :hotpot :parinfer]
                 :lang [:lisp :markdown :plantuml :typescript :scala :haskell]
-                :tools [:lsp :mason :git :treesitter :test :http :silicon]
+                :tools [:lsp :mason :git :treesitter :test :http ]
                 :ui [:colourscheme
                      :dashboard
                      :gutter

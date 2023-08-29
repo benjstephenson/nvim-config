@@ -7,7 +7,7 @@
 ;(local {: contains?} (require :core.lib.seq))
 ;(local {: deep-merge} (require :core.lib.table))
 
-(local on-attach (require :modules.tools.lsp.on-attach))
+;(local on-attach (require :modules.tools.lsp.on-attach))
 
 (set vim.lsp.handlers.textDocument/signatureHelp
      (vim.lsp.with vim.lsp.handlers.signature_help {:border :solid}))
@@ -19,7 +19,7 @@
 (local capabilities (default-capabilities))
 
 ;;; Setup servers
-(local defaults {:on_attach on-attach
+(local defaults {;:on_attach on-attach
                  : capabilities
                  :flags {:debounce_text_changes 150}})
 
@@ -62,7 +62,7 @@
 
 (fn lsp-config []
   (local lsp (require :lspconfig))
-  (local util (require :lspconfig.util))
+  ;;(local util (require :lspconfig.util))
   (local server-list (build-server-list lsp))
   (let [servers server-list]
     (each [server server-config (pairs server-list)]

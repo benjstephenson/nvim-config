@@ -1,4 +1,5 @@
-(import-macros {: lazy : map!} :macros)
+(import-macros {: lazy : map! : set! : augroup! : autocmd! : clear!} :macros)
+(local on-attach (require :modules.tools.lsp.on-attach))
 
 (fn config []
   (let [ht (require :haskell-tools)]
@@ -7,6 +8,8 @@
                                                   vim.lsp.codelens.run
                                                   {:desc "Run code lens"}))}
                          :tools {:hover {:border _G.shared.border}}})))
+
+(augroup! haskell-ft (clear!) (autocmd! [Filetype] [haskell cabal] `(config)))
 
 (lazy :MrcJkb/haskell-tools.nvim
       {:dependencies [:nvim-lua/plenary.nvim :nvim-lua/telescope.nvim]

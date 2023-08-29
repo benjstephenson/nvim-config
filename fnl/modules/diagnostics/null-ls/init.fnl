@@ -53,10 +53,10 @@
   null-ls-sources)
 
 (fn null-setup []
-  (local on-attach (require :modules.tools.lsp.on-attach))
+  ;(local on-attach (require :modules.tools.lsp.on-attach))
   (local null (require :null-ls))
   (null.setup {:sources (build-sources null)
-               :on_attach on-attach
+   ;            :on_attach on-attach
                :debug true
                ;; #{m}: message
                ;; #{s}: source name (defaults to null-ls if not specified)

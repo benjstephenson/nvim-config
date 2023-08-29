@@ -1,5 +1,5 @@
 (import-macros {: lazy : map!} :macros)
-(local on-attach (require :modules.tools.lsp.on-attach))
+;(local on-attach (require :modules.tools.lsp.on-attach))
 (local {: default-capabilities} (require :modules.tools.lsp.capabilities))
 
 (fn set-keymaps! []
@@ -21,7 +21,7 @@
                             :includeInlayPropertyDeclarationTypeHints true
                             :includeInlayFunctionLikeReturnTypeHints true
                             :includeInlayEnumMemberValueHints true}]
-    (typescript.setup {:server {:on_attach on-attach
+    (typescript.setup {:server {;:on_attach on-attach
                                 :capabilities (default-capabilities)
                                 :settings {:typescript {:inlayHints inlay-hints-config}
                                            :javascript {:inlayHints inlay-hints-config}}}}))
