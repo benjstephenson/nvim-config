@@ -21,6 +21,7 @@
                              :lua
                              :markdown
                              :markdown_inline
+                             :php
                              :python
                              :query
                              :racket
@@ -91,10 +92,8 @@
        ;      :TSDisable
        ;      :TSModuleInfo]
        ;:depends [(lazy :nvim-treesitter/playground {:cmd :TSPlayground})
-       :depends [(lazy :HiPhish/nvim-ts-rainbow2 {:lazy true})
-                 (lazy :JoosepAlviste/nvim-ts-context-commentstring
-                       {:lazy true})
-                 (lazy :nvim-treesitter/nvim-treesitter-refactor {:lay true})
-                 (lazy :nvim-treesitter/nvim-treesitter-textobjects
-                       {:lazy true})]
+       :depends [(lazy :HiPhish/nvim-ts-rainbow2)
+                 (lazy :JoosepAlviste/nvim-ts-context-commentstring)
+                 (lazy :nvim-treesitter/nvim-treesitter-refactor)
+                 (lazy :nvim-treesitter/nvim-treesitter-textobjects)]
        :config configure-treesitter})

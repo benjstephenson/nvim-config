@@ -2,8 +2,8 @@
 
 (vim.diagnostic.config {:underline {:severity {:min vim.diagnostic.severity.INFO}}
                         :signs {:severity {:min vim.diagnostic.severity.HINT}}
-                        :virtual_text false
-                        :float {:show_header false :source true}
+                        :virtual_text true
+                        :float {:show_header true :source true}
                         :update_in_insert false
                         :severity_sort true})
 
@@ -24,7 +24,7 @@
                      :texthl :DiagnosticSignHint})
 
 ;; Show line diagnostics
-(map! [n] :<localleader>d vim.diagnostic.open_float)
+(map! [n] :<localleader>d vim.diagnostic.open_float {:desc "diagnostic float"})
 ;; Go to diagnostic
 (map! [n] "[d" vim.diagnostic.goto_prev)
 (map! [n] "]d" vim.diagnostic.goto_next)
@@ -56,7 +56,7 @@
   ;(local on-attach (require :modules.tools.lsp.on-attach))
   (local null (require :null-ls))
   (null.setup {:sources (build-sources null)
-   ;            :on_attach on-attach
+               ;            :on_attach on-attach
                :debug true
                ;; #{m}: message
                ;; #{s}: source name (defaults to null-ls if not specified)

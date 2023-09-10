@@ -1,13 +1,5 @@
 (import-macros {: lazy : buf-map! : autocmd! : augroup! : clear!} :macros)
 (local {: default-capabilities} (require :modules.tools.lsp.capabilities))
-;(import-macros {: buf-map!} :core..keybind)
-;(import-macros {: autocmd! : augroup! : clear!} :core.event)
-
-;(local {: nil?} (require :core.lib.types))
-;(local {: contains?} (require :core.lib.seq))
-;(local {: deep-merge} (require :core.lib.table))
-
-;(local on-attach (require :modules.tools.lsp.on-attach))
 
 (set vim.lsp.handlers.textDocument/signatureHelp
      (vim.lsp.with vim.lsp.handlers.signature_help {:border :solid}))
@@ -51,7 +43,7 @@
          :settings {:python {:analysis {:autoImportCompletions true
                                         :useLibraryCodeForTypes true
                                         :disableOrganizeImports false}}}})
-  ;(tset lsp-servers :tsserver {})
+  (tset lsp-servers :intelephense {})
   (tset lsp-servers :yamlls
         {:settings {:yaml {:schemaStore {:enable false
                                          :url "https://www.schemastore.org/api/json/catalog.json"}

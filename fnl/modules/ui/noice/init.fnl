@@ -4,7 +4,7 @@
       {:dependencies [:MunifTanjim/nui.nvim :rcarriga/nvim-notify]
        :config (fn []
                  (let [noice (require :noice)]
-                   (noice.setup {:health {:checker false}
+                   (noice.setup {:health {:checker true}
                                  :cmdline {:format {:cmdline {:pattern "^:"
                                                               :icon " "
                                                               :lang :vim}

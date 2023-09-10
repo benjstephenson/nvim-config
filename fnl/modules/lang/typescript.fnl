@@ -21,11 +21,10 @@
                             :includeInlayPropertyDeclarationTypeHints true
                             :includeInlayFunctionLikeReturnTypeHints true
                             :includeInlayEnumMemberValueHints true}]
-    (typescript.setup {:server {;:on_attach on-attach
+    (typescript.setup {:server {:on_attach set-keymaps!
                                 :capabilities (default-capabilities)
                                 :settings {:typescript {:inlayHints inlay-hints-config}
-                                           :javascript {:inlayHints inlay-hints-config}}}}))
-  (set-keymaps!))
+                                           :javascript {:inlayHints inlay-hints-config}}}})))
 
 (lazy :jose-elias-alvarez/typescript.nvim
       {:ft [:typescript :javascript] :config typescript-setup})

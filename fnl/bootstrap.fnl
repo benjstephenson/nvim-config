@@ -4,9 +4,9 @@
 (local modules {:completion [:cmp :telescope]
                 :config [:bindings :whichkey]
                 :diagnostics [:null-ls :trouble]
-                :editor [:folding :hotpot :parinfer]
+                :editor [:comment :folding :hotpot :parinfer]
                 :lang [:lisp :markdown :plantuml :typescript :scala :haskell]
-                :tools [:lsp :mason :git :treesitter :test :http ]
+                :tools [:lsp :mason :git :treesitter :test :http]
                 :ui [:colourscheme
                      :dashboard
                      :gutter

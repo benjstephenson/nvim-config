@@ -42,8 +42,7 @@
   ;;; =======
   (local sources
          [[{:name :nvim_lsp}
-           ; {:name :nvim_lsp_signature_help}
-           {:name :vsnip}
+           {:name :nvim_lsp_signature_help}
            {:name :path}
            {:name :git}
            {:name :conjure}]
@@ -68,49 +67,47 @@
   ;;; =========
   ;;; Aesthetic
   ;;; =========
- (local source-labels {:buffer "[Buffer]"
-                       :nvim_lsp "[LSP]"
-                       :luasnip "[LuaSnip]"
-                       :nvim_lua "[Lua]"
-                       :latex_symbols "[LaTeX]"})
+  (local source-labels {:buffer "[Buffer]"
+                        :nvim_lsp "[LSP]"
+                        :luasnip "[LuaSnip]"
+                        :nvim_lua "[Lua]"
+                        :latex_symbols "[LaTeX]"})
 
-
- (fn format-item [entry item] ; Define kind icons
-   (let [icon (. _G.shared.kind-icons item.kind)]
-     (set item.kind (.. (or icon "") " " item.kind)) ; Define menu labels
-     (set item.menu (or (. source-labels entry.source.name) "")) ; Return the item
-     item))
+  (fn format-item [entry item] ; Define kind icons
+    (let [icon (. _G.shared.kind-icons item.kind)]
+      (set item.kind (.. (or icon "") " " item.kind)) ; Define menu labels
+      (set item.menu (or (. source-labels entry.source.name) "")) ; Return the item
+      item))
 
   ;;; =====
   ;;; Setup
   ;;; =====
- (cmp.setup {:view {:entries {:name :custom :selection_order :near_cursor}}
-             :formatting {:mode :symbol_text
-                          :fields [:kind :abbr :menu]
-                          :format format-item}
-             :window {:documentation (cmp.config.window.bordered)}
-             :preselect cmp.PreselectMode.Item
-             :snippet {:expand (fn [args] (vim.fn.vsnip#anonymous args.body))}
-             :mapping (cmp.mapping.preset.insert mappings)
-             :sources (cmp.config.sources (unpack sources))
-             :sorting {: comparators}
-             :experimental {:ghost_text true}})
- (let [cmp-git (require :cmp_git)]
-   (cmp-git.setup)))
+  (cmp.setup {:view {:entries {:name :custom :selection_order :near_cursor}}
+              :formatting {:mode :symbol_text
+                           :fields [:kind :abbr :menu]
+                           :format format-item}
+              :window {:documentation (cmp.config.window.bordered)}
+              :preselect cmp.PreselectMode.Item
+              :snippet {:expand (fn [args] (vim.fn.vsnip#anonymous args.body))}
+              :mapping (cmp.mapping.preset.insert mappings)
+              :sources (cmp.config.sources (unpack sources))
+              :sorting {: comparators}
+              :experimental {:ghost_text true}})
+  (let [cmp-git (require :cmp_git)]
+    (cmp-git.setup)))
 
 [;; Autocomplete
  (lazy :hrsh7th/nvim-cmp {:dependencies [:hrsh7th/cmp-nvim-lsp
                                          :hrsh7th/cmp-nvim-lsp-signature-help
                                          :hrsh7th/cmp-buffer
                                          :hrsh7th/cmp-path
-                                         (lazy :hrsh7th/cmp-vsnip
-                                               {:dependencies [:hrsh7th/vim-vsnip]})
                                          :lukas-reineke/cmp-under-comparator
                                          (lazy :petertriho/cmp-git
                                                {:dependencies [:nvim-lua/plenary.nvim]})
                                          :f3fora/cmp-spell
-                                         (lazy :PaterJason/cmp-conjure {:dependencies [:Olical/conjure]})]
+                                         (lazy :PaterJason/cmp-conjure
+                                               {:dependencies [:Olical/conjure]})]
+                          : config})]
 
-                          : config})
- ;; Snippets
- (lazy :hrsh7th/vim-vsnip {:dependencies [:rafamadriz/friendly-snippets]})]
+;; Snippets
+;(lazy :hrsh7th/vim-vsnip {:dependencies [:rafamadriz/friendly-snippets]})]
