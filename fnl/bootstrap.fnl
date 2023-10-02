@@ -5,14 +5,20 @@
                 :config [:bindings :whichkey]
                 :diagnostics [:null-ls :trouble]
                 :editor [:comment :folding :hotpot :parinfer]
-                :lang [:lisp :markdown :plantuml :typescript :scala :haskell]
+                :lang [:csharp
+                       :lisp
+                       :markdown
+                       :plantuml
+                       :typescript
+                       :scala
+                       :haskell]
                 :tools [:lsp :mason :git :treesitter :test :http]
                 :ui [:colourscheme
-                     :dashboard
+                     ;:dashboard
                      :gutter
                      :indent-guides
                      :line
-                     :noice
+                     ;:noice
                      :tabs
                      :quickfix]})
 

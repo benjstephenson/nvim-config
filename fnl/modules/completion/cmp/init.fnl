@@ -20,28 +20,23 @@
                    ;; Completion
                    :<C-Space> (cmp.mapping.complete)
                    :<C-e> (cmp.mapping.abort)
-                   :<CR> (cmp.mapping.confirm {:select true})
+                   :<CR> (cmp.mapping.confirm)
+                   ; {:select true})
                    :<Tab> (cmp.mapping (fn [fallback]
                                          (if (cmp.visible)
                                              (cmp.select_next_item)
-                                             (= (vim.fn.vsnip#available 1) 1)
-                                             (feedkey "<Plug>(vsnip-expand-or-jump)"
-                                                      "")
                                              (fallback)))
                                        [:i :s])
                    :<S-Tab> (cmp.mapping (fn [fallback]
                                            (if (cmp.visible)
                                                (cmp.select_prev_item)
-                                               (= (vim.fn.vsnip#jumpable -1) 1)
-                                               (feedkey "<Plug>(vsnip-jump-prev)"
-                                                        "")
                                                (fallback)))
                                          [:i :s])})
   ;;; =======
   ;;; Sources
   ;;; =======
   (local sources
-         [[{:name :nvim_lsp}
+         [[{:name :nvim_lsp :keyword_lenth 3}
            {:name :nvim_lsp_signature_help}
            {:name :path}
            {:name :git}
@@ -82,13 +77,15 @@
   ;;; =====
   ;;; Setup
   ;;; =====
-  (cmp.setup {:view {:entries {:name :custom :selection_order :near_cursor}}
+  (cmp.setup {:completion {:keyword_length 3}
+              :view {:entries {:name :custom :selection_order :near_cursor}}
               :formatting {:mode :symbol_text
                            :fields [:kind :abbr :menu]
-                           :format format-item}
+                           :format format-item
+                           :maxwidth 80}
               :window {:documentation (cmp.config.window.bordered)}
-              :preselect cmp.PreselectMode.Item
-              :snippet {:expand (fn [args] (vim.fn.vsnip#anonymous args.body))}
+              :preselect cmp.PreselectMode.None
+              ;:snippet {:expand (fn [args] (vim.fn.vsnip#anonymous args.body))}
               :mapping (cmp.mapping.preset.insert mappings)
               :sources (cmp.config.sources (unpack sources))
               :sorting {: comparators}

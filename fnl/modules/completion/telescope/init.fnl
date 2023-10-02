@@ -34,9 +34,8 @@
                                :dynamic_preview_title :layout_config}
                     :pickers {:oldfiles {:prompt_title "Recent files"}}})
   (telescope.load_extension :ui-select)
-  (telescope.load_extension :file_browser)
-  (telescope.load_extension :smart_history)
-  (telescope.load_extension :notify)
+  (telescope.load_extension :file_browser) ; (telescope.load_extension :smart_history)
+  ;(telescope.load_extension :notify)
   ;(telescope.load_extension :projects)
   (local extensions (. (require :telescope) :extensions))
   (register-keymaps!))
@@ -48,11 +47,12 @@
                       (lazy :nvim-telescope/telescope-ui-select.nvim
                             {:lazy true})
                       (lazy :nvim-telescope/telescope-file-browser.nvim
-                            {:lazy true})
-                      (lazy :nvim-telescope/telescope-media-files.nvim
-                            {:lazy true})
-                      (lazy :nvim-telescope/telescope-project.nvim)
-                      (lazy :nvim-telescope/telescope-smart-history.nvim
-                            {:dependencies :tami5/sqlite.lua})
-                      (lazy :LukasPietzschmann/telescope-tabs {:lazy true})
-                      (lazy :jvgrootveld/telescope-zoxide {:lazy true})]})
+                            {:lazy true})]})
+
+; (lazy :nvim-telescope/telescope-media-files.nvim
+;       {:lazy true})
+; (lazy :nvim-telescope/telescope-project.nvim)
+; (lazy :nvim-telescope/telescope-smart-history.nvim
+;       {:dependencies :tami5/sqlite.lua})
+; (lazy :LukasPietzschmann/telescope-tabs {:lazy true})
+; (lazy :jvgrootveld/telescope-zoxide {:lazy true})]})

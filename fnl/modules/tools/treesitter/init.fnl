@@ -1,11 +1,9 @@
 (import-macros {: lazy} :macros)
 
 (local treesitter-filetypes [:bash
-                             :c
                              :c_sharp
                              :clojure
                              :commonlisp
-                             :cpp
                              :fennel
                              :fish
                              :git_rebase
@@ -13,18 +11,15 @@
                              :gitcommit
                              :haskell
                              :http
-                             :java
                              :javascript
                              :json
                              :kotlin
-                             :latex
                              :lua
                              :markdown
                              :markdown_inline
                              :php
                              :python
                              :query
-                             :racket
                              :regex
                              :rust
                              :scala
@@ -81,19 +76,7 @@
 
 (lazy :nvim-treesitter/nvim-treesitter
       {:build ":TSUpdate"
-       :event :UIEnter
-       ;:cmd [:TSInstall
-       ;      :TSUpdate
-       ;      :TSInstallSync
-       ;      :TSUpdateSync
-       ;      :TSBufEnable
-       ;      :TSBufDisable
-       ;      :TSEnable
-       ;      :TSDisable
-       ;      :TSModuleInfo]
-       ;:depends [(lazy :nvim-treesitter/playground {:cmd :TSPlayground})
-       :depends [(lazy :HiPhish/nvim-ts-rainbow2)
-                 (lazy :JoosepAlviste/nvim-ts-context-commentstring)
+       :depends [(lazy :JoosepAlviste/nvim-ts-context-commentstring)
                  (lazy :nvim-treesitter/nvim-treesitter-refactor)
                  (lazy :nvim-treesitter/nvim-treesitter-textobjects)]
        :config configure-treesitter})

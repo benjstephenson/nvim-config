@@ -202,9 +202,6 @@
 
 (map! [n] :<leader>fC "<cmd>%y+<CR>" {:desc "Copy file contents"})
 (map! [n] :<leader>fC "<cmd>%y+<CR>" {:desc "Copy file contents"})
-
-;; d Find Directory
-
 (map! [n] :<leader>fD :<cmd>bw<CR> {:desc "Delete this file"})
 (map! [n] :<leader>ff "<cmd>r! echo %<CR>" {:desc "Current file name"})
 (map! [n] :<leader>fF "<cmd>r! echo %:p<CR>" {:desc "Current file path"})
@@ -214,6 +211,8 @@
 (map! [n] :<leader>fp :<cmd>R!echo<CR> {:desc "Vi ex path"})
 (map! [n] :<leader>fr "<C-R><C-O> " {:desc "From register"})
 (map! [n] :<leader>fy "<C-R><C-O>+ " {:desc "From clipboard"})
+(map! [n] :<leader>fb "<cmd>Telescope file_browser theme=get_ivy<CR>"
+      {:desc "File browser"})
 
 ;(map! [n] :<leader>fy "<cmd>let @+ = expand('%')<CR>"
 ;      {:desc "Yank replative path"})

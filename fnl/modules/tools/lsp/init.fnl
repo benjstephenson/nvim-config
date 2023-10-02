@@ -30,7 +30,6 @@
                    {:description "Packer config"
                     :fileMatch [:packer.json]
                     :url "https://json.schemastore.org/packer"}]})
-  ;(tset lsp-servers :kotlin_langage_server {})
   (tset lsp-servers :texlab {})
   (tset lsp-servers :lua_ls
         {:settings {:Lua {:diagnostics {:globals [:vim]}
@@ -54,7 +53,6 @@
 
 (fn lsp-config []
   (local lsp (require :lspconfig))
-  ;;(local util (require :lspconfig.util))
   (local server-list (build-server-list lsp))
   (let [servers server-list]
     (each [server server-config (pairs server-list)]
@@ -63,7 +61,7 @@
 ;; Configuration
 (lazy :neovim/nvim-lspconfig
       {:config lsp-config
-       :dependencies [:folke/neodev.nvim
+       :dependencies [(lazy :folke/neodev.nvim
+                            {:opts {:library {:plugins [:neotest] :types true}}})
                       :williamboman/mason-lspconfig.nvim
-                      ;:jose-elias-alvarez/typescript.nvim
                       :SmiteshP/nvim-navic]})

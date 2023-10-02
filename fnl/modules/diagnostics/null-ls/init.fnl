@@ -1,34 +1,4 @@
 (import-macros {: lazy : map! : if-loaded!} :macros)
-
-(vim.diagnostic.config {:underline {:severity {:min vim.diagnostic.severity.INFO}}
-                        :signs {:severity {:min vim.diagnostic.severity.HINT}}
-                        :virtual_text true
-                        :float {:show_header true :source true}
-                        :update_in_insert false
-                        :severity_sort true})
-
-(vim.fn.sign_define :DiagnosticSignError
-                    {:text _G.shared.diagnostic-icons.error
-                     :texthl :DiagnosticSignError})
-
-(vim.fn.sign_define :DiagnosticSignWarn
-                    {:text _G.shared.diagnostic-icons.warn
-                     :texthl :DiagnosticSignWarn})
-
-(vim.fn.sign_define :DiagnosticSignInfo
-                    {:text _G.shared.diagnostic-icons.info
-                     :texthl :DiagnosticSignInfo})
-
-(vim.fn.sign_define :DiagnosticSignHint
-                    {:text _G.shared.diagnostic-icons.hint
-                     :texthl :DiagnosticSignHint})
-
-;; Show line diagnostics
-(map! [n] :<localleader>d vim.diagnostic.open_float {:desc "diagnostic float"})
-;; Go to diagnostic
-(map! [n] "[d" vim.diagnostic.goto_prev)
-(map! [n] "]d" vim.diagnostic.goto_next)
-
 (fn build-sources [null-ls]
   (local null-ls-sources {})
   ;;Formatting
@@ -54,6 +24,30 @@
 
 (fn null-setup []
   ;(local on-attach (require :modules.tools.lsp.on-attach))
+  (vim.diagnostic.config {:underline {:severity {:min vim.diagnostic.severity.INFO}}
+                          :signs {:severity {:min vim.diagnostic.severity.HINT}}
+                          :virtual_text true
+                          :float {:show_header true :source true}
+                          :update_in_insert false
+                          :severity_sort true})
+  (vim.fn.sign_define :DiagnosticSignError
+                      {:text _G.shared.diagnostic-icons.error
+                       :texthl :DiagnosticSignError})
+  (vim.fn.sign_define :DiagnosticSignWarn
+                      {:text _G.shared.diagnostic-icons.warn
+                       :texthl :DiagnosticSignWarn})
+  (vim.fn.sign_define :DiagnosticSignInfo
+                      {:text _G.shared.diagnostic-icons.info
+                       :texthl :DiagnosticSignInfo})
+  (vim.fn.sign_define :DiagnosticSignHint
+                      {:text _G.shared.diagnostic-icons.hint
+                       :texthl :DiagnosticSignHint})
+  ;; Show line diagnostics
+  (map! [n] :<localleader>d vim.diagnostic.open_float
+        {:desc "diagnostic float"})
+  ;; Go to diagnostic
+  (map! [n] "[d" vim.diagnostic.goto_prev)
+  (map! [n] "]d" vim.diagnostic.goto_next)
   (local null (require :null-ls))
   (null.setup {:sources (build-sources null)
                ;            :on_attach on-attach
