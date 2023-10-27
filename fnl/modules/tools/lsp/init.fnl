@@ -29,7 +29,7 @@
                     :url "https://json.schemastore.org/package"}
                    {:description "Packer config"
                     :fileMatch [:packer.json]
-                    :url "https://json.schemastore.org/packer"}]})
+                    :url "https://json.schemastore.org/packer"}]}) ; (tset lsp-servers :eslint {}) ; (tset lsp-servers :tailwindcss {}) ; (tset lsp-servers :denols {})
   (tset lsp-servers :texlab {})
   (tset lsp-servers :lua_ls
         {:settings {:Lua {:diagnostics {:globals [:vim]}

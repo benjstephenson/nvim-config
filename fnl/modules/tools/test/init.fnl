@@ -13,8 +13,9 @@
 (fn config []
   (local neotest (require :neotest))
   (local neotest-vitest (require :neotest-vitest))
+  (local neotest-jest (require :neotest-jest))
   (keymaps)
-  ((. neotest :setup) {:adapters [neotest-vitest]}))
+  ((. neotest :setup) {:adapters [neotest-vitest neotest-jest]}))
 
 (lazy :nvim-neotest/neotest
       {: config
@@ -22,7 +23,7 @@
                       :antoinemadec/FixCursorHold.nvim
                       ; :Issafalcon/neotest-dotnet
                       ; :stevanmilic/neotest-scala
-                      ; :nvim-neotest/neotest-jest
+                      :nvim-neotest/neotest-jest
                       :adrigzr/neotest-mocha
                       :mrcjkb/neotest-haskell
                       :marilari88/neotest-vitest]})

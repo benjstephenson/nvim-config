@@ -23,7 +23,7 @@
                                                           :icon ""
                                                           :lang :lua}
                                                     :help {:pattern "^:%s*h%s+"
-                                                           :icon ""}
+                                                           :icon "󰋖 "}
                                                     :input {}}
                                            :opts {:win_options {:winhighlight {:Normal :NormalFloat
                                                                                :FloatBorder :FloatBorder}}}}
@@ -36,6 +36,6 @@
                                                          :size {:width "98%"}}}
                                  :presets {:long_message_to_split true
                                            :lsp_doc_border true}
-                                 :popupmenu {:backend :cmp}
+                                 ; :popupmenu {:backend :cmp}
                                  :format {}})
                    (require :modules.ui.noice.config)))})

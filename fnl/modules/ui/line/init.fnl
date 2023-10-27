@@ -24,15 +24,18 @@
                             :section_separators {:left "" :right ""}
                             :always_divide_middle true
                             :disabled_filetypes {:winbar [:qf :neotest-summary]}}
-                  :winbar {:lualine_a [:progress]
-                           :lualine_b [:location]
-                           :lualine_c [get-navic-loc]}
-                  :inactive_winbar {:lualine_a [] :lualine_b [] :lualine_c []}
+                  ; :winbar {:lualine_a [:progress]
+                  ;          :lualine_b [:location]
+                  ;          :lualine_c [get-navic-loc]}
+                  ; :inactive_winbar {:lualine_a [] :lualine_b [] :lualine_c []}
                   :sections {:lualine_a [:mode]
                              :lualine_b [:branch :diff :diagnostics]
-                             :lualine_c [:filename :searchcount]
+                             :lualine_c [:filename get-navic-loc :searchcount]
                              :lualine_x [lsp-status]
-                             :lualine_y [:filetype]
+                             :lualine_y [:progress
+                                         :location
+                                         :filetype
+                                         :diagnostics]
                              :lualine_z [:encoding :fileformat]}}))
 
 (lazy :nvim-lualine/lualine.nvim {:dependencies [:nvim-tree/nvim-web-devicons]

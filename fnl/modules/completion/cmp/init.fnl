@@ -82,7 +82,7 @@
               :formatting {:mode :symbol_text
                            :fields [:kind :abbr :menu]
                            :format format-item
-                           :maxwidth 80}
+                           :maxwidth 120}
               :window {:documentation (cmp.config.window.bordered)}
               :preselect cmp.PreselectMode.None
               ;:snippet {:expand (fn [args] (vim.fn.vsnip#anonymous args.body))}

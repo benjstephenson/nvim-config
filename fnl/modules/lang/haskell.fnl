@@ -2,6 +2,7 @@
 (local on-attach (require :modules.tools.lsp.on-attach))
 
 (fn config []
+  (print "loading haskell")
   (set vim.g.haskell_tools
        {:hls {:on_attach (fn [client bufnr ht]
                            (let [telescope-themes (require :telescope.themes)]
@@ -17,10 +18,10 @@
                                    {:desc "quit REPL"})))}
         :tools {:hover {:border _G.shared.border}}}))
 
-;(augroup! haskell-ft (clear!) (autocmd! [Filetype] [haskell cabal] `(config)))
+(augroup! haskell-ft (clear!) (autocmd! [Filetype] [haskell cabal] config))
 
 (lazy :MrcJkb/haskell-tools.nvim
       {:dependencies [:nvim-lua/plenary.nvim :nvim-lua/telescope.nvim]
-       : config
-       :branch :2.x.x
-       :ft [:haskell]})
+       ;: config
+       :version :^2
+       :ft [:haskell :lhaskell :cabal :cabalproject]})
