@@ -569,6 +569,11 @@
      (fd#:close)
      (string.sub d# 1 (- (length d#) 1))))
 
+(lambda vlua [x]
+  "Return a symbol mapped to `v:lua.%s()` where `%s` is the symbol."
+  (assert-compile (sym? x) "expected symbol for x" x)
+  (string.format "v:lua.%s()" (->str x)))
+
 {: expr->str
  : extend-fn
  : vlua
@@ -586,4 +591,5 @@
  : augroup!
  : clear!
  : lazy
- : if-loaded!}
+ : if-loaded!
+ : vlua}
