@@ -20,13 +20,9 @@
 (lazy :nvim-neotest/neotest
       {: config
        :dependencies [:mfussenegger/nvim-dap
-                      :antoinemadec/FixCursorHold.nvim
                       ; :Issafalcon/neotest-dotnet
                       ; :stevanmilic/neotest-scala
                       :nvim-neotest/neotest-jest
                       :adrigzr/neotest-mocha
                       :mrcjkb/neotest-haskell
                       :marilari88/neotest-vitest]})
-
-; (lazy :nvim-neotest/neotest-vim-test
-;       {:dependencies [:vim-test/vim-test]})]})

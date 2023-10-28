@@ -42,14 +42,15 @@
 
 (fn get-filename []
   (var filename (or (and (= (vim.fn.expand "%") "") "") (vim.fn.expand "%:t")))
-  (set filename (.. " " filename " "))
+  (set filename (.. " " filename))
   (.. "%#Normal#" filename "%#NormalNC#"))
 
 (fn get-git-status []
   (let [branch (or vim.b.gitsigns_status_dict {:head ""})
         is-head-empty (not= branch.head "")]
     (or (and is-head-empty
-             (string.format (.. "(" _G.shared.kind-icons.Branch " • #%s)")
+             (string.format (.. " %%#Normal#(" _G.shared.kind-icons.Branch
+                                " • #%s)")
                             (or branch.head ""))) "")))
 
 (fn get-lsp-diagnostic []
@@ -76,6 +77,11 @@
          client.name)
        (render)
        (.. "%#Normal#")))
+
+; (fn get-navic-loc []
+;   (let [(ok? navic) (pcall require :nvim-navic)]
+;     (if ok?
+;         (navic.get_location) "")))
 
 (fn get-scroll-pos []
   (let [cur (vim.fn.line ".")
@@ -110,8 +116,10 @@
                                            (. (vim.api.nvim_get_mode) :mode)))
                          :upper)
                       file-name
-                      (get-git-status)
                       (get-bufnr)
+                      (get-git-status)
+                      ; (get-navic-loc)
+                      ; right-align the rest
                       "%="
                       (get-lsp-diagnostic)
                       (lsp-status)

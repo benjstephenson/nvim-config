@@ -20,14 +20,13 @@
                                                  (var s "")
                                                  (each [kind count (pairs diagnostics-dict)]
                                                    (set s
-                                                        (string.format "%s %s %d"
+                                                        (string.format "%s %s%d"
                                                                        s
                                                                        (. _G.shared.diagnostic-icons
                                                                           kind)
                                                                        count)))
-                                                 ;(. shared.icons kind) count)))
                                                  s)
-                        :show_buffer_close_icons true
+                        :show_buffer_close_icons false
                         :show_close_icon false
                         :persist_buffer_sort true
                         :separator_style ["│" "│"]

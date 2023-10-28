@@ -63,5 +63,6 @@
       {:config lsp-config
        :dependencies [(lazy :folke/neodev.nvim
                             {:opts {:library {:plugins [:neotest] :types true}}})
-                      :williamboman/mason-lspconfig.nvim
-                      :SmiteshP/nvim-navic]})
+                      :williamboman/mason-lspconfig.nvim]})
+
+; :SmiteshP/nvim-navic]})

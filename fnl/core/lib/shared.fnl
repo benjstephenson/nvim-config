@@ -2,7 +2,7 @@
 
 (local databases-folder (.. (vim.fn.stdpath :data) :/databases))
 
-(local diagnostic-icons {:error " "
+(local diagnostic-icons {:error " "
                          :warn " "
                          :info " "
                          :hint "󰌶 "
