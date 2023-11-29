@@ -37,6 +37,7 @@
                                       :maxPreload 100000}}}})
   (tset lsp-servers :marksman {})
   (tset lsp-servers :rnix {})
+  (tset lsp-servers :rust_analyzer {})
   (tset lsp-servers :pyright
         {:root_dir (lsp.util.root_pattern [:.flake8])
          :settings {:python {:analysis {:autoImportCompletions true

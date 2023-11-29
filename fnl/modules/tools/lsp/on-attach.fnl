@@ -9,9 +9,12 @@
                         (local {:hover open-doc-float!
                                 :declaration goto-declaration!
                                 :definition goto-definition!
+                                :signature_help signature-help!
                                 :type_definition goto-type-definition!
                                 :references goto-references!}
                                vim.lsp.buf)
+                        (buf-map! [n] :<C-k> signature-help!
+                                  {:desc "doc under cursor"})
                         (buf-map! [n] :K open-doc-float!
                                   {:desc "doc under cursor"})
                         (buf-map! [n] :gD goto-declaration!
@@ -22,9 +25,9 @@
                                   {:desc "goto type definition"})
                         (buf-map! [n] :gr goto-references!
                                   {:desc "goto references"})
-                        ;;(when (client.supports_method :textDocument/inlayHint)
-                        ;;  (vim.lsp.inlay_hint bufnr true))
-                        ;; Enable lsp formatting if available 
+                        (when (client.supports_method :textDocument/inlayHint)
+                          (vim.lsp.inlay_hint.enable bufnr true))
+                        ;;Enable lsp formatting if available
                         (when (client.supports_method :textDocument/formatting)
                           (augroup! format-before-saving
                                     (clear! {:buffer bufnr})

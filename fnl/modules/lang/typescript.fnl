@@ -16,7 +16,7 @@
         inlay-hints-config {:includeInlayParameterNameHints :all
                             :includeInlayParameterNameHintsWhenArgumentMatchesName false
                             :includeInlayFunctionParameterTypeHints true
-                            :includeInlayVariableTypeHints true
+                            :includeInlayVariableTypeHints false
                             :includeInlayVariableTypeHintsWhenTypeMatchesName false
                             :includeInlayPropertyDeclarationTypeHints true
                             :includeInlayFunctionLikeReturnTypeHints true
@@ -27,4 +27,4 @@
                                            :javascript {:inlayHints inlay-hints-config}}}})))
 
 (lazy :jose-elias-alvarez/typescript.nvim
-      {:ft [:typescript :javascript] :config typescript-setup})
+      {:ft [:typescript :typescriptreact :javascript] :config typescript-setup})

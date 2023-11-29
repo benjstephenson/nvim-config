@@ -9,12 +9,13 @@
                        :lisp
                        :markdown
                        :plantuml
+                       :rust
                        :typescript
                        :scala
                        :haskell]
                 :tools [:lsp :mason :git :treesitter :test :http]
                 :ui [:colourscheme
-                     :dashboard
+                     ; :dashboard
                      :gutter
                      :indent-guides
                      :line

@@ -1,4 +1,6 @@
-(import-macros {: lazy} :macros)
+(import-macros {: lazy : map!} :macros)
+
+(map! [n] :<leader>gg :<cmd>Neogit<cr> {:desc :Neogit})
 
 [(lazy :TimUntersberger/neogit
        {:config true
