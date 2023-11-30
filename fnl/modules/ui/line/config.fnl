@@ -1,4 +1,5 @@
 (import-macros {: set! : vlua : autocmd!} :macros)
+(local fun (require :core.lib.fun))
 
 (local modes {:n :RW
               :no :RO
@@ -69,12 +70,17 @@
                  (or (. result :warnings) 0) (or (. result :errors) 0)))
 
 (fn lsp-status []
+  (fn filter-null-ls [iter]
+    (icollect [_ v (ipairs iter)]
+      (if (not= v :null-ls) v)))
+
   (fn render [names]
     (if (= (length names) 0) " Server Inactive "
-        (.. " " (table.concat names ", ") " ")))
+        (.. "  " (table.concat names ", ") " ")))
 
   (->> (icollect [_ client (pairs (vim.lsp.buf_get_clients))]
          client.name)
+       (filter-null-ls) ; (fun.filter #(not= $1 :null-ls))
        (render)
        (.. "%#Normal#")))
 

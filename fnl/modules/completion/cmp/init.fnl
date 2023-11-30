@@ -85,7 +85,7 @@
                            :maxwidth 120}
               :window {:documentation (cmp.config.window.bordered)}
               :preselect cmp.PreselectMode.None
-              ;:snippet {:expand (fn [args] (vim.fn.vsnip#anonymous args.body))}
+              :snippet {:expand (fn [args] (vim.fn.vsnip#anonymous args.body))}
               :mapping (cmp.mapping.preset.insert mappings)
               :sources (cmp.config.sources (unpack sources))
               :sorting {: comparators}
@@ -104,7 +104,6 @@
                                          :f3fora/cmp-spell
                                          (lazy :PaterJason/cmp-conjure
                                                {:dependencies [:Olical/conjure]})]
-                          : config})]
-
-;; Snippets
-;(lazy :hrsh7th/vim-vsnip {:dependencies [:rafamadriz/friendly-snippets]})]
+                          : config})
+ ;; Snippets
+ (lazy :hrsh7th/vim-vsnip {:dependencies [:rafamadriz/friendly-snippets]})]

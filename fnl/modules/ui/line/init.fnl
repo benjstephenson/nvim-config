@@ -1,7 +1,7 @@
 (import-macros {: lazy} :macros)
 (require :modules.ui.line.config)
 
-{}
+(lazy :b0o/incline.nvim {:opts {:hide {:only_win true}}})
 ; (fn lsp-status []
 ;   (fn render [names]
 ;     (if (= (length names) 0) "Server Inactive"
