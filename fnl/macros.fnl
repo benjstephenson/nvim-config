@@ -2,29 +2,15 @@
 
 (local {: nil?
         : str?
-        : bool?
-        : num?
         : ->str
         : begins-with?
-        : all
+        : all?
         : crypt
-        : car} (require :core.lib))
+        : car} (require :lib))
 
 (lambda expr->str [expr]
   `(-> (macrodebug ,expr nil (string.gsub "{}" "[]")
                    (string.gsub "_%d+_auto" "#"))))
-
-(lambda extend-fn [fn-name args & body]
-  (assert-compile (sym? fn-name) "expected symbol for fn-name" fn-name)
-  (assert-compile (sequence? args) "expected list for args" args)
-  (assert-compile (> (length body) 0) "expected at least one statement" body)
-  (table.insert body `(values (unpack result#)))
-  `(let [old# ,fn-name]
-     (set ,fn-name (fn [...]
-                     (local result# [(old# ...)])
-                     (local [,(unpack args)] result#)
-                     ,(unpack body)))
-     ,fn-name))
 
 (lambda fn? [x]
   "Checks if `x` is a function definition.
@@ -298,10 +284,10 @@
                                 :group \"custom\"
                                 :desc \"This is a description\"})
   ```"
-  (assert-compile (or (sym? event) (and (table? event) (all #(sym? $) event))
+  (assert-compile (or (sym? event) (and (table? event) (all? #(sym? $) event))
                       "expected symbol or list of symbols for event" event))
   (assert-compile (or (sym? pattern)
-                      (and (table? pattern) (all #(sym? $) pattern))
+                      (and (table? pattern) (all? #(sym? $) pattern))
                       "expected symbol or list of symbols for pattern" pattern))
   (assert-compile (or (str? command) (sym? command) (fn? command)
                       (quoted? command))
@@ -361,8 +347,8 @@
   ```"
   (assert-compile (or (str? name) (sym? name))
                   "expected string or symbol for name" name)
-  (assert-compile (all #(and (list? $)
-                             (or (= `clear! (car $)) (= `autocmd! (car $))))
+  (assert-compile (all? #(and (list? $)
+                              (or (= `clear! (car $)) (= `autocmd! (car $))))
                        [...])
                   "expected autocmd exprs for body" ...)
   (expand-exprs (let [name (->str name)]
@@ -541,44 +527,14 @@
     [name value] (let-global! name value)
     _ (error "expected let! to have at least two arguments: name value")))
 
-(lambda verify-dependencies! [dependencies]
-  "Uses the vim.notify API to print a warning for every dependecy that is no
-   available and then executes an early return from the module."
-  `(let [dependencies# ,dependencies
-         info# (debug.getinfo 1 :S)
-         module-name# info#.source
-         module-name# (module-name#:match "@(.*)")
-         not-available# (icollect [_# dependency# (ipairs dependencies#)]
-                          (when (not (pcall require dependency#))
-                            dependency#))]
-     (when (> (length not-available#) 0)
-       (each [_# dependency# (ipairs not-available#)]
-         (vim.notify (string.format "Could not load '%s' as '%s' is not available."
-                                    module-name# dependency#)
-                     vim.log.levels.WARN))
-       (lua "return nil"))))
-
-(lambda sh [...]
-  "simple macro to run shell commands inside fennel"
-  `(let [str# ,(accumulate [str# "" _ v# (ipairs [...])]
-                 (if (in-scope? v#) `(.. ,str# " " ,v#)
-                     (or (list? v#) (sym? v#)) (.. str# " " (tostring v#))
-                     (= (type v#) :string) (.. str# " " (string.format "%q" v#))))
-         fd# (io.popen str#)
-         d# (fd#:read :*a)]
-     (fd#:close)
-     (string.sub d# 1 (- (length d#) 1))))
-
 (lambda vlua [x]
   "Return a symbol mapped to `v:lua.%s()` where `%s` is the symbol."
   (assert-compile (sym? x) "expected symbol for x" x)
   (string.format "v:lua.%s()" (->str x)))
 
 {: expr->str
- : extend-fn
  : vlua
  : colorscheme
- : sh
  : custom-set-face!
  : set!
  : local-set!

@@ -1,42 +1,5 @@
 local plugins_path = vim.fn.stdpath("data") .. "/lazy"
 
---local default_plugins = {
---  "2html_plugin",
---  "getscript",
---  "getscriptPlugin",
---  "gzip",
---  "logipat",
---  "netrw",
---  "netrwPlugin",
---  "netrwSettings",
---  "netrwFileHandlers",
---  "matchit",
---  "tar",
---  "tarPlugin",
---  "rrhelper",
---  "spellfile_plugin",
---  "vimball",
---  "vimballPlugin",
---  "zip",
---  "zipPlugin",
---  "tutor",
---  "rplugin",
---  "syntax",
---  "synmenu",
---  "optwin",
---  "compiler",
---  "bugreport",
---  "ftplugin",
---}
---
---local default_providers = { "node", "perl", "ruby" }
---for _, plugin in pairs(default_plugins) do
---  vim.g[("loaded_" .. plugin)] = 1
---end
---for _, provider in ipairs(default_providers) do
---  vim.g[("loaded_" .. provider .. "_provider")] = 0
---end
-
 -- Bootstrap lazy.nvim
 local lazy_path = plugins_path .. "/lazy.nvim"
 if not vim.loop.fs_stat(lazy_path) then
@@ -50,6 +13,7 @@ if not vim.loop.fs_stat(lazy_path) then
     lazy_path,
   })
 end
+
 -- Bootstrap hotpot.nvim
 local hotpot_path = plugins_path .. "/hotpot.nvim"
 if not vim.loop.fs_stat(hotpot_path) then
@@ -86,33 +50,16 @@ require("hotpot").setup({
   },
 })
 
-_G.pack = {}
-local bootstrap = require("bootstrap")
 
-bootstrap["pre-setup"]()
-local plugins = {
-  {
-    "rktjmp/hotpot.nvim",
-    dependencies = { "datwaft/themis.nvim" },
-  },
-}
+local plugins = {}
 
-for k, v in pairs(bootstrap.modules) do
-  for _, v2 in ipairs(v) do
-    local module = k .. "." .. v2
-    local mod_path = "modules" .. "." .. module
-    local ok, spec = pcall(require, mod_path)
-    if ok then
-      _G.pack[module] = true
-      plugins[#plugins + 1] = spec
-    else
-      _G.pack[module] = false
-      print("Failed to load module " .. mod_path .. " : " .. spec)
-    end
+local plugins_folder = vim.fn.stdpath("config") .. "/fnl/plugins"
+if vim.loop.fs_stat(plugins_folder) then
+  for file in vim.fs.dir(plugins_folder) do
+    file = file:match("^(.*)%.fnl$") or file
+    table.insert(plugins, require("plugins." .. file))
   end
 end
 
 require("lazy").setup(plugins)
-
--- Load configuration
-bootstrap["post-setup"]()
+require("startup")

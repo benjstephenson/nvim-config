@@ -1,6 +1,5 @@
 (import-macros {: set! : local-set! : buf-map! : augroup! : clear! : autocmd!}
                :macros)
-(require :modules.tools.lsp.on-attach)
 
 (fn bufexists? [...] (= (vim.fn.bufexists ...) 1))
 

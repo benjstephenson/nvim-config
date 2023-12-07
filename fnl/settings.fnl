@@ -99,6 +99,7 @@
                  :foldclose ""})
 
 ; Start with everything unfolded
+(set! foldlevel 99)
 (set! foldlevelstart 99)
 
 ;;; ========================

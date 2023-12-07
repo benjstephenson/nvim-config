@@ -1,117 +1,265 @@
-(import-macros {: map!} :core.keybind)
+(import-macros {: map! : buf-map! : augroup! : autocmd! : clear! : let!}
+               :macros)
 
-(local {: getbufinfo : getbufvar} vim.fn)
+;(import-macros {: augroup! : autocmd! : clear!} :core.event)
+;(import-macros {: let!} :core.var)
 
-(local {: format} string)
-(fn wildmenumode? [...]
-  (= (vim.fn.wildmenumode ...) 1))
+;; Set leader to space by default
 
-(fn empty? [xs]
-  (= 0 (length xs)))
+(let! mapleader " ")
+(let! maplocalleader ",")
 
-;;; =============
-;;; Miscellaneous
-;;; =============
-;; Disable highlight on escape
-(map! [n] :<esc> :<esc><cmd>noh<cr>)
-;; Make `/` and `?` search inside selection
-(map! [x] "/" "<esc>/\\%V")
-(map! [x] "?" "<esc>?\\%V")
+;; easier command line mode + 
+(map! [n] ";" ":" {:desc :vim-ex})
 
-;;; ===============
-;;; Quickfix window
-;;; ===============
-;; Open or focus the quickfix window
-(map! [n] :<localleader>q :<cmd>copen<cr> {:desc "open quickfix"})
-;; Close the quickfix window
-(map! [n] :<localleader>Q :<cmd>cclose<cr> {:desc "close quickfix"})
 
-;;; =========
-;;; Tab pages
-;;; =========
-;; Create a new tab page
-(map! [n] :<leader>tc :<cmd>tabnew<cr>)
-;; List tabs
-(map! [n] :<leader>tw :<cmd>tabs<cr>)
-;; Navigate to the next tab page
-(map! [n] :<leader>tn :<cmd>tabNext<cr>)
-;; Navigate to the previous tab page
-(map! [n] :<leader>tp :<cmd>tabprevious<cr>)
-;; Kill current tab page
-(map! [n] :<leader>t& :<cmd>tabclose<cr>)
+(map! [v] :J ":m '>+1<CR>gv=gv")
+(map! [v] :K ":m '<-2<CR>gv=gv")
 
-;;; ========
-;;; Wildmenu
-;;; ========
-;; Close the wildmenu
-(map! [c] :<space> `(if (wildmenumode?) :<C-y> :<space>) {:expr true})
 
-;;; ========
-;;; Movement
-;;; ========
-;; Move words with <A-Right> and <A-Left>
-(map! [nvo] :<A-Left> :b)
-(map! [nvo] :<A-Right> :e)
-(map! [i] :<A-Left> :<C-o>b)
-(map! [i] :<A-Right> :<C-o>e<Right>)
-(map! [c] :<A-Left> :<S-Left>)
-(map! [c] :<A-Right> :<S-Right>)
-;; Move to the beginning
-(map! [nvo] :<C-h> "^")
-(map! [nvo] :<C-left> "^")
-(map! [i] :<C-h> :<C-o>^)
-(map! [i] :<C-left> :<C-o>^)
-(map! [c] :<C-h> :<home>)
-(map! [c] :<C-left> :<home>)
-;; Move to the end
-(map! [nvo] :<C-l> "$")
-(map! [nvo] :<C-right> "$")
-(map! [i] :<C-l> :<C-o>$)
-(map! [i] :<C-right> :<C-o>$)
-(map! [c] :<C-l> :<end>)
-(map! [c] :<C-right> :<end>)
+(map! [n] "<leader>`" "<cmd>e#<CR>" {:desc "Switch to last buffer"})
+(map! [n] "<leader>," "<cmd>Telescope buffers<CR>" {:desc "Switch buffer"})
 
-;;; ============
-;;; Text objects
-;;; ============
-;; Line object
-; Inner line
-(map! [xo] :il ":<C-u>normal! g_v^<cr>" {:silent true})
+(map! [n] "<leader>;" :<cmd>ConjureEval<CR> {:desc "Eval expression"})
 
-; Around line
-(map! [xo] :al ":<C-u>normal! $v0<cr>" {:silent true})
+(map! [n] :<leader>x :<cmd>Scratch<CR> {:desc "New scratch buffer"})
 
-;; Document object
-; Inner document
-(map! [x] :id ":<C-u>normal! G$Vgg0<cr>" {:silent true})
+(map! [n] :<leader><space> "<cmd>Telescope find_files<CR>"
+      {:desc "Find file in project"})
 
-(map! [o] :id ":<C-u>normal! GVgg<cr>" {:silent true})
+(map! [n] "<leader>'" "<cmd>Telescope resume<CR>" {:desc "Resume last search"})
 
-(map! [n] "<leader>;" :<cmd>Alpha<CR> {:desc :dashboard})
-(map! [n] :<leader>h :<cmd>nohlsearch<CR> {:desc "no highlight"})
-(map! [n] :<leader>x :<cmd>ToggleTerm<cr> {:desc :terminal})
+(map! [n] :<leader>. "<cmd>Telescope find_files hidden=true<CR>"
+      {:desc "Find all files"})
 
-;; Buffers)
-(map! [n] :<leader>bj :<cmd>BufferLinePick<cr> {:desc :jump})
-(map! [n] :<leader>bf #(vim.lsp.buf.format) {:desc :format})
-(map! [n] :<leader>bp :<cmd>BufferLineCyclePrev<cr> {:desc :previous})
-(map! [n] :<leader>bn :<cmd>BufferLineCycleNext<cr> {:desc :next})
-(map! [n] :<leader>bc :<cmd>bd<CR> {:desc "close buffer"})
-(map! [n] :<leader>bd :<cmd>bd!<CR> {:desc "force close buffer"})
-(map! [n] :<leader>bC :<cmd>BufferCloseAllButCurrent<CR> {:desc "close others"})
-(map! [n] :<leader>bh :<cmd>BufferLineCloseLeft<cr>
-      {:desc "close all to the left"})
+(map! [n] :<leader>/ "<cmd>Telescope live_grep<CR>" {:desc "Search project"})
 
-(map! [n] :<leader>bl :<cmd>BufferLineCloseRight<cr>
-      {:desc "close all to the right"})
+(map! [n] "<leader>:" "<cmd>Telescope commands<CR>" {:desc :M-x})
 
-(map! [n] :<leader>bw :<cmd>w!<CR> {:desc :save})
+(map! [n] :<leader>< "<cmd>Telescope buffers<CR>" {:desc "Switch Buffer"})
 
-;; Git
-(map! [n] :<leader>gd "<cmd>Gitsigns diffthis HEAD<cr>" {:desc "git diff"})
-(map! [n] :<leader>gg "<cmd>lua require 'user.lazygit'.lazygit_toggle()<cr>"
-      {:desc :LazyGit})
+;;; TAB +workspace
 
-(map! [n] :<leader>gn :<cmd>Neogit<cr> {:desc :neogit})
-(map! [n] :<leader>gl "<cmd>lua require 'gitsigns'.blame_line()<cr>"
-      {:desc :blame})
+(map! [n] :<leader><tab><tab> "<cmd>set showtabline=2<CR>"
+      {:desc "Display tab bar"})
+
+(map! [n] :<leader><tab>. "<cmd>Telescope telescope-tabs list_tabs<CR>"
+      {:desc "Switch tab"})
+
+(map! [n] :<leader><tab>0 :<cmd>tablast<CR> {:desc "Switch to final tab"})
+(map! [n] :<leader><tab>1 :<cmd>tabn1<CR> {:desc "Switch to 1st tab"})
+(map! [n] :<leader><tab>2 :<cmd>tabn2<CR> {:desc "Switch to 2st tab"})
+(map! [n] :<leader><tab>3 :<cmd>tabn3<CR> {:desc "Switch to 3st tab"})
+(map! [n] :<leader><tab>4 :<cmd>tabn4<CR> {:desc "Switch to 4st tab"})
+(map! [n] :<leader><tab>5 :<cmd>tabn5<CR> {:desc "Switch to 5st tab"})
+(map! [n] :<leader><tab>6 :<cmd>tabn6<CR> {:desc "Switch to 6st tab"})
+(map! [n] :<leader><tab>7 :<cmd>tabn7<CR> {:desc "Switch to 7st tab"})
+(map! [n] :<leader><tab>8 :<cmd>tabn8<CR> {:desc "Switch to 8st tab"})
+(map! [n] :<leader><tab>9 :<cmd>tabn9<CR> {:desc "Switch to 9st tab"})
+(map! [n] :<leader><tab>9 :<cmd>tabn9<CR> {:desc "Switch to 9st tab"})
+(map! [n] "<leader><tab>[" :<cmd>tabn<CR> {:desc "Previous tab"})
+(map! [n] "<leader><tab>]" :<cmd>tabp<CR> {:desc "Next tab"})
+(map! [n] "<leader><tab>]" :<cmd>tabp<CR> {:desc "Next tab"})
+(map! [n] "<leader><tab>`" "<cmd>tabn#<CR>" {:desc "Switch to last tab"})
+(map! [n] :<leader><tab>d :<cmd>tabclose<CR> {:desc "Delete this tab"})
+
+(map! [n] :<leader><tab>l
+      "<cmd>:lua require'telescope'.extensions.project.project{}<CR>"
+      {:desc "List projects"})
+
+(map! [n] :<leader><tab>n :<cmd>tabnew<CR> {:desc "New tab"})
+
+(map! [n] :<leader><tab>x :<cmd>tabclose<CR> {:desc "Delete this tab"})
+
+;;; a +actions
+
+;;; b +buffer
+
+;; - Toggle narrowing
+
+(map! [n] "<leader>b[" :<cmd>bprevious<CR> {:desc "Previous buffer"})
+(map! [n] :<leader>bl "<cmd>e#<CR>" {:desc "Switch to last buffer"})
+(map! [n] :<leader>bp :<cmd>bprevious<CR> {:desc "Previous buffer"})
+(map! [n] "<leader>b]" :<cmd>bnext<CR> {:desc "Next buffer"})
+(map! [n] :<leader>bn :<cmd>bnext<CR> {:desc "Next buffer"})
+
+(map! [n] :<leader>bb "<cmd>Telescope buffers<CR>" {:desc "Switch buffer"})
+
+(map! [n] :<leader>bB "<cmd>Telescope telescope-tabs list_tabs<CR>"
+      {:desc "Switch tab"})
+
+;; c Clone buffer
+
+(map! [n] :<leader>bd :<cmd>bw<CR> {:desc "Delete buffer"})
+(map! [n] :<leader>bz :<cmd>bw<CR> {:desc "Bury buffer"})
+
+;; i ibuffer
+;; I ibuffer workspace
+
+(map! [n] :<leader>bk :<cmd>bd<CR> {:desc "Kill buffer"})
+(map! [n] :<leader>bK "<cmd>%bd<CR>" {:desc "Kill all buffers"})
+
+;; m Set bookmark
+;; M Delete bookmark 
+
+(map! [n] :<leader>bK :<cmd>enew<CR> {:desc "New empty buffer"})
+(map! [n] :<leader>bO "<cmd>%bd|e#<CR>" {:desc "Kill other buffers"})
+(map! [n] :<leader>br :<cmd>u0<CR> {:desc "Revert buffer"})
+
+;; R Rename buffer
+
+(map! [n] :<leader>bs :<cmd>w<CR> {:desc "Save buffer"})
+(map! [n] :<leader>bS :<cmd>wa<CR> {:desc "Save all buffers"})
+(map! [n] :<leader>bu
+      "<cmd>com -bar W exe 'w !sudo tee >/dev/null %:p:S' | setl nomod<CR>"
+      {:desc "Save buffer as root"})
+
+(map! [n] :<leader>bx :<cmd>Scratch<CR> {:desc "New scratch buffer"})
+
+(map! [n] :<leader>bX "<cmd>buffer *scratch*<CR>"
+      {:desc "Switch to scratch buffer"})
+
+(map! [n] :<leader>by "<cmd>%y+<CR>" {:desc "Yank buffer"})
+
+;;; c +code
+
+(map! [n] :<leader>ca `(vim.lsp.buf.code_action) {:desc "LSP Code actions"})
+
+(map! [n] :<leader>cd `(vim.lsp.buf.definition)
+      {:desc "LSP Jump to definition"})
+
+(map! [n] :<leader>cD `(vim.lsp.buf.references)
+      {:desc "LSP Jump to references"})
+
+(map! [n] :<leader>ce :<cmd>ConjureEvalBuf<CR> {:desc "Evaluate buffer"})
+
+(map! [v] :<leader>ce :<cmd>ConjureEval<CR> {:desc "Evaluate region"})
+
+(map! [n] :<leader>cE :<cmd>ConjureEvalReplaceForm<CR>
+      {:desc "Evaluate & replace form"})
+
+(map! [n] :<leader>cf `(vim.lsp.buf.format {:async true})
+      {:desc "Format buffer"})
+
+(map! [v] :<leader>cf `(vim.lsp.buf.range_formatting)
+      {:desc "LSP Format region"})
+
+;; i LSP Find implementations (telescope)
+;; D LSP Jump to references (telescope)
+;; j LSP Jump to symbol in file (telescope)
+;; J LSP Jump to symbol in workspace (telescope)
+
+(map! [n] :<leader>ck `(vim.lsp.buf.hover) {:desc "LSP View documentation"})
+
+;; l +lsp
+(map! [n] :<leader>ck
+      `(vim.lsp.buf.code_action {:source {:organizeImports true}})
+      {:desc "LSP Organize Imports"})
+
+(map! [n] :<leader>cr vim.lsp.buf.rename {:desc "LSP Rename"})
+
+(map! [n] :<leader>cw "<cmd>%s/\\s\\+$//e<CR>"
+      {:desc "Delete trailing whitespace"})
+
+(map! [n] :<leader>cW "<cmd>v/\\_s*\\S/d<CR>"
+      {:desc "Delete trailing newlines"})
+
+(map! [n] :<leader>cc :<cmd>make<CR> {:desc "Compile with quickfix list"})
+
+(map! [n] :<leader>cC :<cmd>lmake<CR {:desc "Compile with location list"})
+
+(map! [n] :<leader>cq :<cmd>copen<cr> {:desc "Open quickfix list"})
+
+(map! [n] :<leader>cQ :<cmd>cclose<cr> {:desc "Close quickfix list"})
+
+(augroup! quickfix-mappings (clear!)
+          (autocmd! FileType qf
+                    #(buf-map! [n] :<leader>cq :<cmd>cclose<cr>
+                               {:desc "Close quickfix list"}))
+          (autocmd! FileType qf
+                    #(buf-map! [n] :dd
+                               #(let [current-item (vim.fn.line ".")
+                                      current-list (vim.fn.getqflist)
+                                      new-list (doto current-list
+                                                 (table.remove current-item))]
+                                  (vim.fn.setqflist new-list :r)))))
+
+;; x Local diagnostics (telescope)
+(map! [n] :<localleader>d vim.diagnostic.open_float
+      {:desc "diagnostic float"})
+(map! [n] "[d" vim.diagnostic.goto_prev)
+(map! [n] "]d" vim.diagnostic.goto_next)
+;; x Project diagnostics (telescope)
+
+;;; -- f +file (hydra)
+
+(map! [n] :<leader>fc "<cmd>e .editorconfig<CR>"
+      {:desc "Open project editorconfig"})
+
+(map! [n] :<leader>fC "<cmd>%y+<CR>" {:desc "Copy file contents"})
+(map! [n] :<leader>fC "<cmd>%y+<CR>" {:desc "Copy file contents"})
+(map! [n] :<leader>fD :<cmd>bw<CR> {:desc "Delete this file"})
+(map! [n] :<leader>ff "<cmd>r! echo %<CR>" {:desc "Current file name"})
+(map! [n] :<leader>fF "<cmd>r! echo %:p<CR>" {:desc "Current file path"})
+(map! [n] :<leader>fl ":grep " {:desc "Locate file (rg)"})
+(map! [n] :<leader>fs :<cmd>w<CR> {:desc "Save file"})
+(map! [n] :<leader>fS ":w " {:desc "Save file as"})
+(map! [n] :<leader>fp :<cmd>R!echo<CR> {:desc "Vi ex path"})
+(map! [n] :<leader>fr "<C-R><C-O> " {:desc "From register"})
+(map! [n] :<leader>fy "<C-R><C-O>+ " {:desc "From clipboard"})
+(map! [n] :<leader>fb "<cmd>Telescope file_browser theme=get_ivy<CR>"
+      {:desc "File browser"})
+
+;(map! [n] :<leader>fy "<cmd>let @+ = expand('%')<CR>"
+;      {:desc "Yank replative path"})
+
+(map! [n] :<leader>fY "<cmd>let @+ = expand('%:p')<CR>"
+      {:desc "Yank full path"})
+
+;;; -- g +git (hydra)
+
+;;; h +help 
+
+(map! [n] :<leader>h<CR> :<cmd>help<CR> {:desc "Vim Help"})
+(map! [n] "<leader>h'" :<cmd>ascii<CR> {:desc "Descibe Char (ascii)"})
+(map! [n] :<leader>h? "<cmd>help help<CR>" {:desc "Help for help"})
+(map! [n] :<leader>hb "<cmd>Telescope keymaps<CR>" {:desc "List keymaps"})
+
+(map! [n] :<leader>hc "<cmd>help encoding-values<CR>" {:desc "List encodings"})
+(map! [n] :<leader>hd "<cmd>help diagnostic.txt<CR>"
+      {:desc "Help for diagnostics"})
+
+(map! [n] :<leader>he "<cmd>:messages<CR>" {:desc "View message history"})
+
+(map! [n] :<leader>hF :<cmd>hi<CR> {:desc "List highlights/faces"})
+(map! [n] :<leader>hi ":help " {:desc "Help for _"})
+(map! [n] :<leader>hI "<cmd>help x-input-method<CR>"
+      {:desc "Help for X11 input methods"})
+
+(map! [n] :<leader>hl :<cmd>hist<CR> {:desc "List command history"})
+
+(map! [n] :<leader>ht "<cmd>Telescope colorscheme enable_preview=true<CR>"
+      {:desc "Load theme"})
+
+
+
+;; o +open
+(map! [n] :<leader>ob "<cmd>!open '%'<CR>" {:desc "Open in browser"})
+
+(map! [n] :<leader>od "<cmd>lua require('dapui').toggle()CR>"
+      {:desc "Toggle debugger ui"})
+
+(map! [n] :<leader>od ":Devcontainer" {:desc "Docker commands"})
+
+(when (= (vim.fn.has :mac) 1)
+  (map! [n] :<leader>oo "<cmd>!open %:p:h<CR>" {:desc "Reveal file in finder"})
+  (map! [n] :<leader>oO "<cmd>!open .<CR>" {:desc "Reveal project in finder"}))
+
+(map! [n] :<leader>od :<cmd>Devcontainer {:desc "Docker commands"})
+
+(map! [n] :<leader>or :<cmd>ConjureLogToggle<CR> {:desc "Conjure log split"})
+
+(map! [n] :<leader>ot :<cmd>ToggleTerm<CR> {:desc "Open term split"})
+
+(map! [n] :<leader>oT :<cmd>term<CR> {:desc "Open term buffer"})
+
