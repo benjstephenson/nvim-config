@@ -23,6 +23,6 @@
                       ; :Issafalcon/neotest-dotnet
                       ; :stevanmilic/neotest-scala
                       :nvim-neotest/neotest-jest
-                      :adrigzr/neotest-mocha
+                      ; :adrigzr/neotest-mocha
                       :mrcjkb/neotest-haskell
                       :marilari88/neotest-vitest]})

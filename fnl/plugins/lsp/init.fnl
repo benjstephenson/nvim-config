@@ -64,11 +64,8 @@
 
 ;; Configuration
 [(lazy :williamboman/mason.nvim {:build ":MasonUpdate" :config true})
- (lazy :williamboman/mason-lspconfig.nvim
-       {:opts {:automatic_installation true}
-        :dependencies [:williamboman/mason.nvim]})
+ ; (lazy :williamboman/mason-lspconfig.nvim {:opts {:automatic_installation true}} :dependencies [:williamboman/mason.nvim])
  (lazy :neovim/nvim-lspconfig
        {:config lsp-config
         :dependencies [(lazy :folke/neodev.nvim
-                             {:opts {:library {:plugins [:neotest] :types true}}})
-                       :williamboman/mason-lspconfig.nvim]})]
+                             {:opts {:library {:plugins [:neotest] :types true}}})]})]

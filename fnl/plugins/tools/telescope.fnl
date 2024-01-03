@@ -1,4 +1,4 @@
-(import-macros { : map!} :macros)
+(import-macros {: lazy : map! } :macros)
 
 (fn register-keymaps! []
   (let [{:lsp_implementations open-impl-float!
@@ -41,4 +41,14 @@
   ; (local extensions (. (require :telescope) :extensions))
   (register-keymaps!))
 
-(telescope-setup)
+
+
+(lazy :nvim-lua/telescope.nvim
+      {:config telescope-setup
+       :dependencies [(lazy :nvim-telescope/telescope-fzf-native.nvim
+                           {:lazy true :run :make})
+                      (lazy :nvim-telescope/telescope-ui-select.nvim
+                            {:lazy true})
+                      (lazy :nvim-telescope/telescope-project.nvim)
+                      (lazy :nvim-telescope/telescope-file-browser.nvim
+                            {:lazy true})]})

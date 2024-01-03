@@ -2,7 +2,8 @@
 
 (fn config []
   (local rest (require :rest-nvim))
-  (rest.setup {:result_split_in_place true
+  (rest.setup {:result_split_horizontal true
+               :result_split_in_place true
                :result {:formatters {:json :jq
                                      :html (fn [body]
                                              (vim.fn.system [:tidy :-i :-q "-"]
