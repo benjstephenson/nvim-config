@@ -8,6 +8,7 @@ autocmd("LspAttach", {
         local client = vim.lsp.get_client_by_id(args.data.client_id)
 
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "code action" })
+        vim.keymap.set("n", "<leader>cR", vim.lsp.buf.rename, { desc = "rename" })
         vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { silent = true, buffer = 0, desc = "signature help" })
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { silent = true, buffer = 0, desc = "doc under cursor" })
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { silent = true, buffer = 0, desc = "go to declaration" })
