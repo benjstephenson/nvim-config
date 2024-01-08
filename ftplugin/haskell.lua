@@ -19,18 +19,22 @@
 --
 
 vim.g.haskell_tools = {
-  hls = {
-      on_attach = function(client, buf, ht)
-          local telescope_themes = require("telescope.themes")
-          vim.kemap.set("n", "<localleader>cR", vim.lsp.codelens.run, { desc = "run lens"})
-          vim.kemap.set("n", "<localleader>ch", function() ht.hoogle.hoogle_signature(telescope_themes.get_ivy()) end, { desc = "Hoogle search"})
-          vim.kemap.set("n", "<localleader>cr", function() ht.repl.toggle(vim.api.nvim_buf_get_name(0)) end, { desc = "toggle REPL"})
-          vim.kemap.set("n", "<localleader>cq", ht.repl.quit, { desc = "quit REPL"})
-      end
-  },
-  tools = {
-      hover = {
-          border = require("bste.constants").border
-      }
-  },
+    hls = {
+        on_attach = function(client, buf, ht)
+            local telescope_themes = require("telescope.themes")
+            vim.kemap.set("n", "<localleader>cR", vim.lsp.codelens.run, { desc = "run lens" })
+            vim.kemap.set("n", "<localleader>ch", function()
+                ht.hoogle.hoogle_signature(telescope_themes.get_ivy())
+            end, { desc = "Hoogle search" })
+            vim.kemap.set("n", "<localleader>cr", function()
+                ht.repl.toggle(vim.api.nvim_buf_get_name(0))
+            end, { desc = "toggle REPL" })
+            vim.kemap.set("n", "<localleader>cq", ht.repl.quit, { desc = "quit REPL" })
+        end,
+    },
+    tools = {
+        hover = {
+            border = require("bste.constants").border,
+        },
+    },
 }

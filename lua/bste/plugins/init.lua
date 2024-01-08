@@ -6,6 +6,16 @@ return {
             vim.cmd.colorscheme("oxocarbon")
         end,
     },
+    {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        config = function()
+            require("rose-pine").setup({
+                disable_background = true,
+            })
+        end,
+    },
+    { "rebelot/kanagawa.nvim" },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     { "nvim-tree/nvim-web-devicons" },
     {

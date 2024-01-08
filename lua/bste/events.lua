@@ -1,5 +1,4 @@
 local autocmd = vim.api.nvim_create_autocmd
-
 local bste_group = vim.api.nvim_create_augroup("bste_group", {})
 
 autocmd("LspAttach", {
@@ -8,6 +7,9 @@ autocmd("LspAttach", {
         local buf = args.buf
         local client = vim.lsp.get_client_by_id(args.data.client_id)
 
+        print("doing LSP event")
+
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "code action" })
         vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { silent = true, buffer = 0, desc = "signature help" })
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { silent = true, buffer = 0, desc = "doc under cursor" })
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { silent = true, buffer = 0, desc = "go to declaration" })
@@ -28,9 +30,9 @@ autocmd("LspAttach", {
             autocmd("BufWritePre", {
                 group = bste_group,
                 callback = function()
-                    if not vim.g.lsp_autoformat_disable then
-                        vim.lsp.buf.format({ bufnr = buf })
-                    end
+                    --if not vim.g.lsp_autoformat_disable then
+                    vim.lsp.buf.format({ bufnr = buf })
+                    --end
                 end,
                 buffer = buf,
             })
