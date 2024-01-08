@@ -23,6 +23,7 @@ local treesitter_filetypes = {
     "rust",
     "scala",
     "typescript",
+    "tsx",
     "toml",
     "vim",
     "vimdoc",
