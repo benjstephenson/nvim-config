@@ -29,7 +29,7 @@ return {
         event = "VeryLazy",
         config = function()
             local wk = require("which-key")
-            --wk.setup({})
+            wk.setup({ layout = { align = "center" } })
 
             wk.register({
                 b = { name = "+buffer" },
@@ -37,7 +37,11 @@ return {
                 f = { name = "+file" },
                 g = { name = "+git" },
                 h = { name = "+help" },
-            })
+            }, { mode = "n", prefix = "<leader>" })
+
+            wk.register({
+                h = { name = "+harpoon" },
+            }, { mode = "n", prefix = "<localleader>" })
         end,
     },
     {
@@ -48,9 +52,9 @@ return {
             harpoon.setup({})
             vim.keymap.set("n", "<localleader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
                 { desc = "toggle harpoon menu" })
-            vim.keymap.set("n", "<localleader>ha", function() harpoon:list():append() end)
-            vim.keymap.set("n", "<localleader>hn", function() harpoon:list():next() end)
-            vim.keymap.set("n", "<localleader>hp", function() harpoon:list():prev() end)
+            vim.keymap.set("n", "<localleader>ha", function() harpoon:list():append() end, { desc = "add to harpoon" })
+            vim.keymap.set("n", "<localleader>hn", function() harpoon:list():next() end, { desc = "next" })
+            vim.keymap.set("n", "<localleader>hp", function() harpoon:list():prev() end, { desc = "prev" })
         end,
     },
 }
