@@ -50,11 +50,14 @@ return {
         config = function()
             local harpoon = require("harpoon")
             harpoon.setup({})
-            vim.keymap.set("n", "<localleader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+            vim.keymap.set("n", "<leader>bh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
                 { desc = "toggle harpoon menu" })
             vim.keymap.set("n", "<localleader>ha", function() harpoon:list():append() end, { desc = "add to harpoon" })
             vim.keymap.set("n", "<localleader>hn", function() harpoon:list():next() end, { desc = "next" })
             vim.keymap.set("n", "<localleader>hp", function() harpoon:list():prev() end, { desc = "prev" })
+            vim.keymap.set("n", "<localleader>h1", function() harpoon:list():select(1) end, { desc = "prev" })
+            vim.keymap.set("n", "<localleader>h2", function() harpoon:list():select(2) end, { desc = "prev" })
+            vim.keymap.set("n", "<localleader>h3", function() harpoon:list():select(3) end, { desc = "prev" })
         end,
     },
 }
