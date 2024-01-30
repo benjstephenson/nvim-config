@@ -1,4 +1,5 @@
 local treesitter_filetypes = {
+    "astro",
     "bash",
     "c_sharp",
     "clojure",

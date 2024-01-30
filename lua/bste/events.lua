@@ -21,7 +21,8 @@ autocmd("LspAttach", {
         )
         vim.keymap.set("n", "fr", vim.lsp.buf.references, { silent = true, buffer = 0, desc = "go to references" })
 
-        if client and client.supports_method("textDocument/inlayHint") then
+        if vim.lsp.inlay_hints and
+            client and client.supports_method("textDocument/inlayHint") then
             vim.lsp.inlay_hint.enable(buf, true)
         end
 
