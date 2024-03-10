@@ -21,21 +21,20 @@ autocmd("LspAttach", {
         )
         vim.keymap.set("n", "fr", vim.lsp.buf.references, { silent = true, buffer = 0, desc = "go to references" })
 
-        if vim.lsp.inlay_hints and
-            client and client.supports_method("textDocument/inlayHint") then
+        if vim.lsp.inlay_hints and client and client.supports_method("textDocument/inlayHint") then
             vim.lsp.inlay_hint.enable(buf, true)
         end
 
-        if client and client.supports_method("textDocument/formatting") then
-            autocmd("BufWritePre", {
-                group = bste_group,
-                callback = function()
-                    --if not vim.g.lsp_autoformat_disable then
-                    vim.lsp.buf.format({ bufnr = buf })
-                    --end
-                end,
-                buffer = buf,
-            })
-        end
+        --if client and client.supports_method("textDocument/formatting") then
+        --    autocmd("BufWritePre", {
+        --        group = bste_group,
+        --        callback = function()
+        --            --if not vim.g.lsp_autoformat_disable then
+        --            vim.lsp.buf.format({ bufnr = buf })
+        --            --end
+        --        end,
+        --        buffer = buf,
+        --    })
+        --end
     end,
 })
