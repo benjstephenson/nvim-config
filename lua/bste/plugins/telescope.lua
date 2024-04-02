@@ -3,7 +3,7 @@ local function register_keymaps()
     local themes = require("telescope.themes")
 
     vim.keymap.set("n", "<leader>ci", builtin.lsp_implementations, { desc = "find implementations" })
-    vim.keymap.set("n", "<leader>cr", function()
+    vim.keymap.set("n", "gr", function()
         builtin.lsp_references(themes.get_ivy())
     end, { desc = "find references" })
 
