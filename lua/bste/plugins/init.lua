@@ -2,18 +2,21 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-neotest/nvim-nio",
     {
-        "liuchengxu/space-vim-theme",
-        config = function()
-            vim.cmd.colorscheme("space_vim_theme")
-        end,
-    },
-    {
         "nyoom-engineering/oxocarbon.nvim",
         --config = function()
         --    vim.cmd.colorscheme("oxocarbon")
         --    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
         --    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
         --end,
+    },
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        config = function()
+            vim.cmd.colorscheme("tokyonight-night")
+        end,
     },
     {
         "rose-pine/neovim",
@@ -82,5 +85,9 @@ return {
                 harpoon:list():select(3)
             end, { desc = "prev" })
         end,
+    },
+    {
+        "kevinhwang91/nvim-bqf",
+        ft = "qf",
     },
 }

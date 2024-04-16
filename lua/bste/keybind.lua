@@ -27,6 +27,14 @@ vim.keymap.set("n", "<leader>bn", "<cmd>bn<CR>", { desc = "next buffer" })
 vim.keymap.set("n", "<leader>bp", "<cmd>bp<CR>", { desc = "previous buffer" })
 
 --
+-- code
+--
+vim.keymap.set("n", "<leader>cm", function()
+    vim.api.nvim_command("make")
+    vim.api.nvim_command("copen")
+end, { desc = "make" })
+
+--
 -- Diagnostics
 --
 vim.keymap.set("n", "<localleader>d", vim.diagnostic.open_float, { desc = "diagnostic float" })

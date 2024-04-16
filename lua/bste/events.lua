@@ -4,7 +4,7 @@ local bste_group = vim.api.nvim_create_augroup("bste_group", {})
 autocmd("LspAttach", {
     group = bste_group,
     callback = function(args)
-        local buf = args.buf
+        local bufnr = args.buf
         local client = vim.lsp.get_client_by_id(args.data.client_id)
 
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "code action" })
@@ -23,7 +23,24 @@ autocmd("LspAttach", {
         vim.keymap.set("n", "fr", vim.lsp.buf.references, { silent = true, buffer = 0, desc = "go to references" })
 
         if vim.lsp.inlay_hints and client and client.supports_method("textDocument/inlayHint") then
-            vim.lsp.inlay_hint.enable(buf, true)
+            vim.lsp.inlay_hint.enable(bufnr, true)
+        end
+
+        if client.server_capabilities.documentHighlightProvider then
+            vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+            vim.api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
+            vim.api.nvim_create_autocmd("CursorHold", {
+                callback = vim.lsp.buf.document_highlight,
+                buffer = bufnr,
+                group = "lsp_document_highlight",
+                desc = "Document Highlight",
+            })
+            vim.api.nvim_create_autocmd("CursorMoved", {
+                callback = vim.lsp.buf.clear_references,
+                buffer = bufnr,
+                group = "lsp_document_highlight",
+                desc = "Clear All the References",
+            })
         end
 
         --if client and client.supports_method("textDocument/formatting") then

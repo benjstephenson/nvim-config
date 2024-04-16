@@ -98,7 +98,7 @@ return {
                 "bashls",
                 "fennel_language_server",
                 "hls",
-                "intelephense",
+                "jsonls",
                 "lua_ls",
                 "marksman",
                 "rust_analyzer",

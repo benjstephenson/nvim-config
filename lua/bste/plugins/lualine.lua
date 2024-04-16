@@ -36,6 +36,14 @@ return {
                 component_separators = "",
                 section_separators = { left = "", right = "" },
             },
+            tabline = {
+                lualine_a = {},
+                lualine_b = { "buffers" },
+                lualine_c = {},
+                lualine_x = {},
+                lualine_y = {},
+                lualine_z = { "tabs" },
+            },
             sections = {
                 lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
                 lualine_b = { "branch", "diff", "diagnostics", "searchcount" },
@@ -57,7 +65,6 @@ return {
                 lualine_y = {},
                 lualine_z = { "location" },
             },
-            tabline = {},
             extensions = {},
         })
         --require("lualine").setup({
