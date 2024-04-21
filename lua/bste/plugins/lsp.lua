@@ -101,6 +101,7 @@ return {
                 "jsonls",
                 "lua_ls",
                 "marksman",
+                "pyright",
                 "rust_analyzer",
                 "tsserver",
                 "yamlls",
@@ -121,6 +122,16 @@ return {
                                         "vim",
                                     },
                                 },
+                            },
+                        },
+                    })
+                end,
+                ["pyright"] = function()
+                    lspconfig.pyright.setup({
+                        capabilities = lsp_capabilities,
+                        settings = {
+                            python = {
+                                venvPath = "./.venv",
                             },
                         },
                     })
