@@ -37,7 +37,7 @@ vim.opt.listchars = { trail = "·", tab = "→ ", nbsp = "·" }
 
 -- Fold configuration
 -- Enable folding
-vim.opt.foldenable = true
+vim.opt.foldenable = false
 -- Display column for folds
 vim.opt.foldcolumn = "1"
 -- Fold column characters
@@ -48,6 +48,8 @@ vim.opt.fillchars = {
     foldsep = " ",
     foldclose = "",
 }
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- Diff-mode
 vim.opt.diffopt:append("linematch:60")
