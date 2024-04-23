@@ -15,8 +15,9 @@ return {
             "nvim-lua/plenary.nvim",
         },
         opts = {
-            graph_style = "unicode"
+            graph_style = "unicode",
         },
+        branch = "nightly",
         config = true,
         event = "VeryLazy",
     },
