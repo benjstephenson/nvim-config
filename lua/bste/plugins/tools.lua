@@ -35,36 +35,19 @@ return {
             "nvim-lua/plenary.nvim",
             "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
-            "adrigzr/neotest-mocha",
+            "marilari88/neotest-vitest",
+            "nvim-neotest/neotest-python",
         },
         event = "LspAttach",
         config = function()
             require("neotest").setup({
                 adapters = {
-                    require("neotest-mocha")({
-                        command = "npm test --",
-                        command_args = function(context)
-                            -- The context contains:
-                            --   results_path: The file that json results are written to
-                            --   test_name_pattern: The generated pattern for the test
-                            --   path: The path to the test file
-                            --
-                            -- It should return a string array of arguments
-                            --
-                            -- Not specifying 'command_args' will use the defaults below
-                            return {
-                                "--full-trace",
-                                "--reporter=json",
-                                "--reporter-options=output=" .. context.results_path,
-                                "--grep=" .. context.test_name_pattern,
-                                context.path,
-                            }
-                        end,
-                        env = { CI = true },
-                        cwd = function(_)
-                            return vim.fn.getcwd()
-                        end,
-                    }),
+                    require("neotest-python"),
+                    require("neotest-vitest") {
+                        is_test_file = function(file_path)
+                            return string.match(file_path, "test.ts$") or string.match(file_path, "micro.ts$")
+                        end
+                    }
                 },
             })
         end,

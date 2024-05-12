@@ -35,6 +35,18 @@ vim.keymap.set("n", "<leader>cm", function()
 end, { desc = "make" })
 
 --
+-- git
+--
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Neogit" })
+vim.keymap.set("n", "<leader>gv", function()
+    local sha = vim.fn.system("git rev-parse --short=8 HEAD")
+    sha = sha:gsub("\n", "")
+    vim.api.nvim_put({ sha }, "", true, true)
+end, { desc = "short SHA", noremap = true, silent = true })
+
+
+
+--
 -- Diagnostics
 --
 vim.keymap.set("n", "<localleader>d", vim.diagnostic.open_float, { desc = "diagnostic float" })
