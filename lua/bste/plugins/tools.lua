@@ -52,4 +52,45 @@ return {
             })
         end,
     },
+    {
+        "rcarriga/nvim-dap-ui",
+        dependencies = {
+            "mfussenegger/nvim-dap",
+            "nvim-neotest/nvim-nio"
+        },
+        config = function()
+            local dap = require("dap")
+
+            dap.configurations.scala = {
+                {
+                    type = "scala",
+                    request = "launch",
+                    name = "RunOrTest",
+                    metals = {
+                        runType = "runOrTestFile",
+                        --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
+                    },
+                },
+                {
+                    type = "scala",
+                    request = "launch",
+                    name = "Test Target",
+                    metals = {
+                        runType = "testTarget",
+                    },
+                },
+            }
+
+            local dapui = require("dapui")
+            dapui.setup()
+
+            vim.keymap.set("n", "<leader>dr", dap.repl.toggle, { desc = "toggle repl" })
+            vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "toggle dap ui" })
+            vim.keymap.set("n", "<leader>dl", dap.run_last, { desc = "run last" })
+            vim.keymap.set("n", "<localleader>dc", dap.continue, { desc = "continue" })
+            vim.keymap.set("n", "<localleader>db", dap.toggle_breakpoint, { desc = "toggle breakpoint" })
+            vim.keymap.set("n", "<localleader>do", dap.step_over, { desc = "step over" })
+            vim.keymap.set("n", "<localleader>di", dap.step_into, { desc = "step into" })
+        end
+    }
 }

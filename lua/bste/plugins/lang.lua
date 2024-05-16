@@ -33,15 +33,18 @@ return {
         opts = function()
             local metals_config = require("metals").bare_config()
             metals_config.on_attach = function(client, bufnr)
-                -- your on_attach function
+                require("metals").setup_dap()
             end
 
             metals_config.settings = {
                 showImplicitArguments = true,
                 excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
+                testUserInterface = "Test Explorer"
             }
             metals_config.init_options.statusBarProvider = "off"
             metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+            vim.keymap.set("n", "<localleader>m", require("telescope").extensions.metals.commands, { desc = "Metals" })
 
             return metals_config
         end,

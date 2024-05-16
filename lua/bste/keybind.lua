@@ -23,6 +23,7 @@ vim.keymap.set("n", "<leader>fl", ":grep ", { desc = "locate file (rg)" })
 --
 vim.keymap.set("n", "<leader>bb", "<cmd>Telescope buffers<CR>", { desc = "switch buffer" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>", { desc = "delete buffer" })
+vim.keymap.set("n", "<leader>bD", "<cmd>%bd|e#|bd#<CR>|'\"", { desc = "delete others" })
 vim.keymap.set("n", "<leader>bn", "<cmd>bn<CR>", { desc = "next buffer" })
 vim.keymap.set("n", "<leader>bp", "<cmd>bp<CR>", { desc = "previous buffer" })
 
@@ -49,9 +50,13 @@ end, { desc = "short SHA", noremap = true, silent = true })
 --
 -- Diagnostics
 --
-vim.keymap.set("n", "<localleader>d", vim.diagnostic.open_float, { desc = "diagnostic float" })
+vim.keymap.set("n", "<localleader>x", vim.diagnostic.open_float, { desc = "diagnostic float" })
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<leader>xa", vim.diagnostic.setqflist, { desc = "workspace diagnostics" })
+vim.keymap.set("n", "<leader>xb", vim.diagnostic.setloclist, { desc = "buffer diagnostics" })
+vim.keymap.set("n", "<leader>xe", function() vim.diagnostic.setqflist({ severity = "E" }) end,
+    { desc = "workspace errors" })
 
 --
 -- Help

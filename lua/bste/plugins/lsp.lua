@@ -3,6 +3,7 @@ local icons = require("bste.constants").kind_icons
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
+        "folke/neodev.nvim",
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "hrsh7th/cmp-nvim-lsp",
@@ -22,6 +23,12 @@ return {
     config = function()
         local mason = require("mason")
         local cmp = require("cmp")
+        local neodev = require("neodev")
+
+        neodev.setup({
+            library = { plugins = { "nvim-dap-ui" }, types = true }
+        })
+
         local lspconfig = require("lspconfig")
         local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 

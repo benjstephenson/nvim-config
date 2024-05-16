@@ -13,14 +13,11 @@ autocmd("LspAttach", {
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { silent = true, buffer = 0, desc = "doc under cursor" })
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { silent = true, buffer = 0, desc = "go to declaration" })
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, { silent = true, buffer = 0, desc = "go to definition" })
-        --vim.keymap.set("n", "gr", vim.lsp.buf.references, { silent = true, buffer = 0, desc = "references" })
-        vim.keymap.set(
-            "n",
-            "gt",
-            vim.lsp.buf.type_definition,
+        vim.keymap.set("n", "gt", vim.lsp.buf.type_definition,
             { silent = true, buffer = 0, desc = "go to type definition" }
         )
-        vim.keymap.set("n", "fr", vim.lsp.buf.references, { silent = true, buffer = 0, desc = "go to references" })
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, { silent = true, buffer = 0, desc = "go to references" })
+        vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, { silent = true, buffer = 0, desc = "run lens" })
 
         if vim.lsp.inlay_hints and client and client.supports_method("textDocument/inlayHint") then
             vim.lsp.inlay_hint.enable(bufnr, true)
