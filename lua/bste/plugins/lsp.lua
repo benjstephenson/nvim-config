@@ -7,7 +7,7 @@ return {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-nvim-lsp-signature-help",
+        -- "hrsh7th/cmp-nvim-lsp-signature-help",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
@@ -48,13 +48,13 @@ return {
                 ["<C-Space>"] = cmp.mapping.complete(),
                 ["<C-e>"] = cmp.mapping.abort(),
                 ["<CR>"] = cmp.mapping.confirm({ select = false }),
-                ["<Tab>"] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        return cmp.select_next_item()
-                    else
-                        return fallback
-                    end
-                end, { "i", "s" }),
+                -- ["<Tab>"] = cmp.mapping(function(fallback)
+                --     if cmp.visible() then
+                --         return cmp.select_next_item()
+                --     else
+                --         return fallback
+                --     end
+                -- end, { "i", "s" }),
                 ["<S-Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         return cmp.select_prev_item()
@@ -110,7 +110,6 @@ return {
                 "marksman",
                 "pyright",
                 "rust_analyzer",
-                "tsserver",
                 "yamlls",
             },
             handlers = {

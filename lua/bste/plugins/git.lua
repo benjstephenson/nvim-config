@@ -17,7 +17,6 @@ return {
         opts = {
             graph_style = "unicode",
         },
-        branch = "nightly",
         config = true,
         event = "VeryLazy",
     },

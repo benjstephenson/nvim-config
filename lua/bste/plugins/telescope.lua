@@ -21,12 +21,6 @@ local function register_keymaps()
         opts.default_text = vim.fn.expand("<cword>")
         builtin.live_grep(opts)
     end, { desc = "swoop workspace" })
-
-    --vim.keymap.set("n", "<leader>cx", function()
-    --    builtin.diagnostics({ bufnr = 0 })
-    --end, { desc = "local diagnostics" })
-
-    --vim.keymap.set("n", "<leader>cX", builtin.diagnostics, { desc = "workspace diagnostics" })
 end
 
 local function setup()
@@ -48,19 +42,19 @@ local function setup()
             oldfiles = { prompt_title = "Recent files" },
         },
         extensions = {
-            --["ui-select"] = themes.get_cursor(),
+            ["ui-select"] = themes.get_cursor(),
         },
     })
 
     telescope.load_extension("file_browser")
-    --telescope.load_extension("ui-select")
+    telescope.load_extension("ui-select")
     register_keymaps()
 end
 
 return {
-    "nvim-lua/telescope.nvim",
+    "nvim-telescope/telescope.nvim",
     dependencies = {
-        --"nvim-telescope/telescope-ui-select.nvim",
+        "nvim-telescope/telescope-ui-select.nvim",
         "nvim-telescope/telescope-file-browser.nvim",
     },
     config = setup,

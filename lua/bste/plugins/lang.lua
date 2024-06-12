@@ -10,6 +10,11 @@ return {
         ft = { "markdown", "plantuml" },
     },
     {
+        "pmizio/typescript-tools.nvim",
+        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+        opts = {},
+    },
+    {
         "simrat39/rust-tools.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -21,6 +26,7 @@ return {
     {
         "linux-cultist/venv-selector.nvim",
         dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
+        branch = "regexp",
         opts = {
             name = { "venv", ".venv" },
         },
@@ -39,7 +45,8 @@ return {
             metals_config.settings = {
                 showImplicitArguments = true,
                 excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
-                testUserInterface = "Test Explorer"
+                testUserInterface = "Test Explorer",
+                enableSemanticHighlighting = true
             }
             metals_config.init_options.statusBarProvider = "off"
             metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()

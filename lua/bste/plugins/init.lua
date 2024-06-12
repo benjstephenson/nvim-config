@@ -47,13 +47,17 @@ return {
             wk.register({
                 b = { name = "+buffer" },
                 c = { name = "+code" },
+                d = { name = "+debug" },
                 f = { name = "+file" },
                 g = { name = "+git" },
                 h = { name = "+help" },
+                x = { name = "+diagnostic" },
             }, { mode = "n", prefix = "<leader>" })
 
             wk.register({
                 h = { name = "+harpoon" },
+                n = { name = "+swap next" },
+                p = { name = "+swap prev" },
             }, { mode = "n", prefix = "<localleader>" })
         end,
     },

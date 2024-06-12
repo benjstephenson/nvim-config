@@ -56,6 +56,7 @@ return {
         "rcarriga/nvim-dap-ui",
         dependencies = {
             "mfussenegger/nvim-dap",
+            "LiadOz/nvim-dap-repl-highlights",
             "nvim-neotest/nvim-nio"
         },
         config = function()
@@ -81,16 +82,38 @@ return {
                 },
             }
 
+            require("nvim-dap-repl-highlights").setup()
             local dapui = require("dapui")
             dapui.setup()
 
             vim.keymap.set("n", "<leader>dr", dap.repl.toggle, { desc = "toggle repl" })
             vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "toggle dap ui" })
             vim.keymap.set("n", "<leader>dl", dap.run_last, { desc = "run last" })
-            vim.keymap.set("n", "<localleader>dc", dap.continue, { desc = "continue" })
-            vim.keymap.set("n", "<localleader>db", dap.toggle_breakpoint, { desc = "toggle breakpoint" })
-            vim.keymap.set("n", "<localleader>do", dap.step_over, { desc = "step over" })
-            vim.keymap.set("n", "<localleader>di", dap.step_into, { desc = "step into" })
+            -- vim.keymap.set("n", "<localleader>dc", dap.continue, { desc = "continue" })
+            vim.keymap.set("n", "<F8>", dap.continue, { desc = "continue" })
+            -- vim.keymap.set("n", "<localleader>db", dap.toggle_breakpoint, { desc = "toggle breakpoint" })
+            vim.keymap.set("n", "<F6>", dap.toggle_breakpoint, { desc = "toggle breakpoint" })
+            -- vim.keymap.set("n", "<localleader>do", dap.step_over, { desc = "step over" })
+            vim.keymap.set("n", "<F7>", dap.step_out, { desc = "step out" })
+            vim.keymap.set("n", "<F10>", dap.step_over, { desc = "step over" })
+            -- vim.keymap.set("n", "<localleader>di", dap.step_into, { desc = "step into" })
+            vim.keymap.set("n", "<F9>", dap.step_into, { desc = "step into" })
+
+            -- dap.listeners.before.attach.dapui_config = function()
+            --     dapui.open()
+            -- end
+            -- dap.listeners.before.launch.dapui_config = function()
+            --     dapui.open()
+            -- end
+            -- dap.listeners.before.event_terminated.dapui_config = function()
+            --     dapui.close()
+            -- end
+            -- dap.listeners.before.event_exited.dapui_config = function()
+            --     dapui.close()
+            -- end
+            dap.listeners.after["event_terminated"]["nvim-metals"] = function()
+                dap.repl.open()
+            end
         end
     }
 }

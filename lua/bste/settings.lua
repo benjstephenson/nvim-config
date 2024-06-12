@@ -61,6 +61,7 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "120"
 
+vim.opt.completeopt = "menu,preview,menuone,noselect"
 --
 -- Diagnostics
 --
@@ -71,6 +72,20 @@ vim.diagnostic.config({
         severity = { min = vim.diagnostic.severity.INFO },
     },
     signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = icons.error,
+            [vim.diagnostic.severity.WARN] = icons.warn,
+            [vim.diagnostic.severity.INFO] = icons.info,
+            [vim.diagnostic.severity.HINT] = icons.hint,
+        },
+        linehl = {
+            [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
+            [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
+        },
+        numhl = {
+            [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
+            [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
+        },
         severity = { min = vim.diagnostic.severity.HINT },
     },
     virtual_text = true,
@@ -79,10 +94,10 @@ vim.diagnostic.config({
     severity_sort = true,
 })
 
-vim.fn.sign_define("DiagnosticSignError", { text = icons.error, texthl = "DiagnosticSignError" })
-
-vim.fn.sign_define("DiagnosticSignWarn", { text = icons.warn, texthl = "DiagnosticSignWarn" })
-
-vim.fn.sign_define("DiagnosticSignInfo", { text = icons.info, texthl = "DiagnosticSignInfo" })
-
-vim.fn.sign_define("DiagnosticSignHint", { text = icons.hint, texthl = "DiagnosticSignHint" })
+-- vim.fn.sign_define("DiagnosticSignError", { text = icons.error, texthl = "DiagnosticSignError" })
+--
+-- vim.fn.sign_define("DiagnosticSignWarn", { text = icons.warn, texthl = "DiagnosticSignWarn" })
+--
+-- vim.fn.sign_define("DiagnosticSignInfo", { text = icons.info, texthl = "DiagnosticSignInfo" })
+--
+-- vim.fn.sign_define("DiagnosticSignHint", { text = icons.hint, texthl = "DiagnosticSignHint" })
