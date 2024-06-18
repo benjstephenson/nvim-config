@@ -51,6 +51,7 @@ return {
                 f = { name = "+file" },
                 g = { name = "+git" },
                 h = { name = "+help" },
+                t = { name = "+test" },
                 x = { name = "+diagnostic" },
             }, { mode = "n", prefix = "<leader>" })
 
@@ -58,6 +59,7 @@ return {
                 h = { name = "+harpoon" },
                 n = { name = "+swap next" },
                 p = { name = "+swap prev" },
+                t = { name = "+tests" },
             }, { mode = "n", prefix = "<localleader>" })
         end,
     },

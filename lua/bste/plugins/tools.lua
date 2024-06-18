@@ -50,6 +50,14 @@ return {
                     }
                 },
             })
+
+            vim.keymap.set("n", "<leader>ts", "<cmd>Neotest summary<CR>", { desc = "test summary" })
+            vim.keymap.set("n", "<leader>tp", "<cmd>Neotest output-panel<CR>", { desc = "output panel" })
+            vim.keymap.set("n", "<leader>to", "<cmd>Neotest output<CR>", { desc = "output" })
+            vim.keymap.set("n", "<leader>tr", "<cmd>Neotest run file<CR>", { desc = "run nearest" })
+            vim.keymap.set("n", "<leader>tR", "<cmd>Neotest run last<CR>", { desc = "run last" })
+            vim.keymap.set("n", "<localleader>tn", "<cmd>Neotest jump next<CR>", { desc = "next test" })
+            vim.keymap.set("n", "<localleader>tp", "<cmd>Neotest jump prev<CR>", { desc = "prev test" })
         end,
     },
     {
