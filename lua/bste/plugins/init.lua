@@ -18,16 +18,6 @@ return {
             vim.cmd.colorscheme("tokyonight-night")
         end,
     },
-    {
-        "rose-pine/neovim",
-        name = "rose-pine",
-        config = function()
-            --require("rose-pine").setup({
-            --    disable_background = true,
-            --})
-            --vim.cmd.colorscheme("rose-pine")
-        end,
-    },
     { "rebelot/kanagawa.nvim" },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     { "nvim-tree/nvim-web-devicons" },
@@ -40,28 +30,24 @@ return {
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
-        config = function()
-            local wk = require("which-key")
-            wk.setup({ layout = { align = "center" } })
-
-            wk.register({
-                b = { name = "+buffer" },
-                c = { name = "+code" },
-                d = { name = "+debug" },
-                f = { name = "+file" },
-                g = { name = "+git" },
-                h = { name = "+help" },
-                t = { name = "+test" },
-                x = { name = "+diagnostic" },
-            }, { mode = "n", prefix = "<leader>" })
-
-            wk.register({
-                h = { name = "+harpoon" },
-                n = { name = "+swap next" },
-                p = { name = "+swap prev" },
-                t = { name = "+tests" },
-            }, { mode = "n", prefix = "<localleader>" })
-        end,
+        config = {
+            preset = "helix",
+            layout = { align = "center" },
+            spec = {
+                { "<leader>b",      group = "buffer" },
+                { "<leader>c",      group = "code" },
+                { "<leader>d",      group = "debug" },
+                { "<leader>f",      group = "file" },
+                { "<leader>g",      group = "git" },
+                { "<leader>h",      group = "help" },
+                { "<leader>t",      group = "test" },
+                { "<leader>x",      group = "diagnostic" },
+                { "<localleader>h", group = "harpoon" },
+                { "<localleader>n", group = "swap next" },
+                { "<localleader>p", group = "swap prev" },
+                { "<localleader>t", group = "tests" },
+            },
+        },
     },
     {
         "theprimeagen/harpoon",
