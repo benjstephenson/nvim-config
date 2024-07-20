@@ -12,6 +12,12 @@ return {
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/nvim-cmp",
+        {
+            "MattiasMTS/cmp-dbee",
+            dependencies = "kndndrj/nvim-dbee",
+            ft = "sql",
+            opts = {}
+        },
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         {
@@ -79,6 +85,12 @@ return {
                 { name = "luasnip" },
             }, {
                 { name = "buffer" },
+            }),
+
+            cmp.setup.filetype("sql", {
+                sources = cmp.config.sources({
+                    name = "cmp-dbee"
+                })
             }),
 
             cmp.setup.filetype("gitcommit", {

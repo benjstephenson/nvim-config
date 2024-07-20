@@ -43,15 +43,19 @@ return {
             end
 
             metals_config.settings = {
-                showImplicitArguments = true,
                 excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
-                testUserInterface = "Test Explorer",
-                enableSemanticHighlighting = true
+                -- testUserInterface = "Test Explorer",
+                enableSemanticHighlighting = true,
+                defaultBspToBuildTool = true,
+                showImplicitArguments = true,
+                showImplicitConversionsAndClasses = true,
+                showInferredType = true,
             }
             metals_config.init_options.statusBarProvider = "off"
             metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
             vim.keymap.set("n", "<localleader>m", require("telescope").extensions.metals.commands, { desc = "Metals" })
+            vim.keymap.set("v", "K", require("metals").type_of_range, { desc = "type of range" })
 
             return metals_config
         end,

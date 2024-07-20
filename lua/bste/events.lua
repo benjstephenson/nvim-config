@@ -7,6 +7,9 @@ autocmd("LspAttach", {
         local bufnr = args.buf
         local client = vim.lsp.get_client_by_id(args.data.client_id)
 
+        -- try the built-in completion client
+        vim.lsp.completion.enable(true, args.data.client_id, bufnr, { autotrigger = true })
+
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "code action" })
         vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "rename" })
         vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help,
