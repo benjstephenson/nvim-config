@@ -34,7 +34,7 @@ return {
     },
     {
         "scalameta/nvim-metals",
-        dependencies = { "nvim-lua/plenary.nvim", },
+        dependencies = { "nvim-lua/plenary.nvim" },
         ft = { "scala", "sbt", "java" },
         opts = function()
             local metals_config = require("metals").bare_config()
@@ -44,11 +44,11 @@ return {
 
             metals_config.settings = {
                 excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
-                -- testUserInterface = "Test Explorer",
-                enableSemanticHighlighting = true,
+                testUserInterface = "Test Explorer",
+                enableSemanticHighlighting = false,
                 defaultBspToBuildTool = true,
-                showImplicitArguments = true,
-                showImplicitConversionsAndClasses = true,
+                showImplicitArguments = false,
+                showImplicitConversionsAndClasses = false,
                 showInferredType = true,
             }
             metals_config.init_options.statusBarProvider = "off"
@@ -68,6 +68,6 @@ return {
                 end,
                 group = nvim_metals_group,
             })
-        end
-    }
+        end,
+    },
 }

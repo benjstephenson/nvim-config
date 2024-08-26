@@ -51,27 +51,42 @@ return {
             "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
             "marilari88/neotest-vitest",
+            "nvim-neotest/neotest-jest",
             "nvim-neotest/neotest-python",
         },
         event = "LspAttach",
         config = function()
-            require("neotest").setup({
+            local neotest = require("neotest")
+            neotest.setup({
                 adapters = {
                     require("neotest-python"),
-                    require("neotest-vitest") {
+                    require("neotest-jest"),
+                    require("neotest-vitest")({
                         is_test_file = function(file_path)
-                            return string.match(file_path, "test.ts$") or
-                                string.match(file_path, "micro.ts$")
-                        end
-                    }
+                            return string.match(file_path, "test.ts$") or string.match(file_path, "micro.ts$")
+                        end,
+                    }),
                 },
             })
 
             vim.keymap.set("n", "<leader>ts", "<cmd>Neotest summary<CR>", { desc = "test summary" })
             vim.keymap.set("n", "<leader>tp", "<cmd>Neotest output-panel<CR>", { desc = "output panel" })
             vim.keymap.set("n", "<leader>to", "<cmd>Neotest output<CR>", { desc = "output" })
-            vim.keymap.set("n", "<leader>tr", "<cmd>Neotest run file<CR>", { desc = "run nearest" })
+
+            vim.keymap.set("n", "<leader>tr", function()
+                neotest.run.run(vim.fn.expand("%"))
+            end, { desc = "run file" })
+
+            vim.keymap.set("n", "<leader>tR", function()
+                neotest.run.run()
+            end, { desc = "run nearest" })
+
             vim.keymap.set("n", "<leader>tR", "<cmd>Neotest run last<CR>", { desc = "run last" })
+
+            vim.keymap.set("n", "<leader>tR", function()
+                neotest.run.stop()
+            end, { desc = "stop nearest" })
+
             vim.keymap.set("n", "<localleader>tn", "<cmd>Neotest jump next<CR>", { desc = "next test" })
             vim.keymap.set("n", "<localleader>tp", "<cmd>Neotest jump prev<CR>", { desc = "prev test" })
         end,
@@ -81,7 +96,7 @@ return {
         dependencies = {
             "mfussenegger/nvim-dap",
             "LiadOz/nvim-dap-repl-highlights",
-            "nvim-neotest/nvim-nio"
+            "nvim-neotest/nvim-nio",
         },
         config = function()
             local dap = require("dap")
@@ -138,6 +153,6 @@ return {
             dap.listeners.after["event_terminated"]["nvim-metals"] = function()
                 dap.repl.open()
             end
-        end
-    }
+        end,
+    },
 }

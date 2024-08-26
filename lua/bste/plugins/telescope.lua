@@ -34,7 +34,11 @@ local function setup()
             entry_prefix = "  ",
             sorting_strategy = "ascending",
             layout_strategy = "flex",
-            layout_config = { horizontal = { prompt_position = "top" } },
+            layout_config = {
+                width = 0.99,
+                horizontal = { prompt_position = "top" },
+
+            },
             set_env = { COLORTERM = "truecolor" },
             dynamic_preview_title = "layout_config",
         },

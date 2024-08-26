@@ -13,8 +13,17 @@ vim.keymap.set("n", "<leader>.", "<cmd>Telescope find_files hidden=true<CR>", { 
 vim.keymap.set("n", "<leader>fb", "<cmd>Telescope file_browser theme=get_ivy<CR>", { desc = "file browser" })
 vim.keymap.set("n", "<leader>fC", "<cmd>%y+<CR>", { desc = "copy file contents" })
 vim.keymap.set("n", "<leader>fC", "<cmd>%y+<CR>", { desc = "copy file contents" })
-vim.keymap.set("n", "<leader>ff", "<cmd>r! echo %<CR>", { desc = "current file name" })
-vim.keymap.set("n", "<leader>fF", "<cmd>r! echo %:p<CR>", { desc = "current file path" })
+vim.keymap.set("n", "<leader>ff", function()
+    local filename = vim.fn.expand("%")
+    vim.notify(filename)
+    vim.fn.setreg("", filename)
+end, { desc = "current file name" })
+
+vim.keymap.set("n", "<leader>fF", function()
+    local path = vim.api.nvim_buf_get_name(0)
+    vim.notify(path)
+    vim.fn.setreg("", path)
+end, { desc = "current file path" })
 vim.keymap.set("n", "<leader>fl", ":grep ", { desc = "locate file (rg)" })
 
 --
