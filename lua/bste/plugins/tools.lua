@@ -81,9 +81,9 @@ return {
                 neotest.run.run()
             end, { desc = "run nearest" })
 
-            vim.keymap.set("n", "<leader>tR", "<cmd>Neotest run last<CR>", { desc = "run last" })
+            vim.keymap.set("n", "<leader>tl", "<cmd>Neotest run last<CR>", { desc = "run last" })
 
-            vim.keymap.set("n", "<leader>tR", function()
+            vim.keymap.set("n", "<leader>tS", function()
                 neotest.run.stop()
             end, { desc = "stop nearest" })
 

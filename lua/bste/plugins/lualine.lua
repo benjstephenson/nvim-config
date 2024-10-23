@@ -49,7 +49,7 @@ return {
                 lualine_b = { "branch", "diff", "diagnostics", "searchcount" },
                 lualine_c = {
                     "%=",
-                    "filename" --[[ add your center compoentnts here in place of this comment ]],
+                    { "filename", path = 1} --[[ add your center compoentnts here in place of this comment ]],
                 },
                 lualine_x = {},
                 lualine_y = { "filetype", "progress" },
@@ -58,7 +58,7 @@ return {
                 },
             },
             inactive_sections = {
-                lualine_a = { "filename" },
+                lualine_a = { {"filename", path = 1 }},
                 lualine_b = {},
                 lualine_c = {},
                 lualine_x = {},
