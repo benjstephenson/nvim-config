@@ -22,7 +22,8 @@ autocmd("LspAttach", {
         )
         vim.keymap.set("n", "gr", vim.lsp.buf.references, { silent = true, buffer = 0, desc = "go to references" })
         vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, { silent = true, buffer = 0, desc = "run lens" })
-        vim.keymap.set("n", "<leader>bf", function() vim.lsp.buf.format({ async = true }) end,
+        -- vim.keymap.set("n", "<leader>bf", function() vim.lsp.buf.format({ async = true }) end,
+        vim.keymap.set("n", "<leader>bf", function() require("conform").format() end,
             { silent = true, buffer = 0, desc = "format buffer" })
 
         if vim.lsp.inlay_hint and client and client.supports_method("textDocument/inlayHint") then

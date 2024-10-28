@@ -59,7 +59,7 @@ return {
                 harpoon.ui:toggle_quick_menu(harpoon:list())
             end, { desc = "toggle harpoon menu" })
             vim.keymap.set("n", "<localleader>ha", function()
-                harpoon:list():append()
+                harpoon:list():add()
             end, { desc = "add to harpoon" })
             vim.keymap.set("n", "<localleader>hn", function()
                 harpoon:list():next()
