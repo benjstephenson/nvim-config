@@ -14,36 +14,37 @@ return {
             require("dbee").setup( --[[optional config]])
         end,
     },
-    -- {
-    --     "rest-nvim/rest.nvim",
-    --     ft = { "http" },
-    --     dependencies = { "vhyrro/luarocks.nvim", priority = 1000, config = true },
-    --     config = function()
-    --         require("rest-nvim").setup({
-    --             skip_ssl_verification = false,
-    --             highlight = {
-    --                 timeout = 150,
-    --             },
-    --             result = {
-    --                 split = {
-    --                     horizontal = true,
-    --                     in_place = false,
-    --                 },
-    --                 behavior = {
-    --                     formatters = {
-    --                         json = "jq",
-    --                         html = function(body)
-    --                             vim.fn.system("tidy", "-i", "-q", "-", body)
-    --                         end,
-    --                     },
-    --                 },
-    --             },
-    --         })
-    --
-    --         vim.keymap.set("n", "<localleader>rr", "<cmd>Rest run<cr>", { desc = "run cursor" })
-    --         --vim.keymap.set("n", "<localleader>rp", "<plug>RestNvimPreview", { desc = "preview curl command" })
-    --     end,
-    -- },
+    {
+        'MeanderingProgrammer/render-markdown.nvim',
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        ---@module 'render-markdown'
+        ---@type render.md.UserConfig
+        opts = {},
+    },
+    {
+        "rest-nvim/rest.nvim",
+        ft = { "http" },
+        config = function()
+            require("rest-nvim").setup({
+                skip_ssl_verification = false,
+                highlight = {
+                    timeout = 150,
+                },
+                result = {
+                    split = {
+                        horizontal = true,
+                        in_place = false,
+                    },
+                },
+            })
+
+            vim.keymap.set("n", "<localleader>rr", "<cmd>Rest run<cr>", { desc = "run cursor" })
+            vim.keymap.set("n", "<localleader>re", function() require("telescope").extensions.rest.select_env() end, { desc = "select env" })
+            --vim.keymap.set("n", "<localleader>rp", "<plug>RestNvimPreview", { desc = "preview curl command" })
+        end,
+    },
     {
         "nvim-neotest/neotest",
         dependencies = {

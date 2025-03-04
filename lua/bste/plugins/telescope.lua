@@ -52,6 +52,7 @@ local function setup()
 
     telescope.load_extension("file_browser")
     telescope.load_extension("ui-select")
+    telescope.load_extension("rest")
     register_keymaps()
 end
 

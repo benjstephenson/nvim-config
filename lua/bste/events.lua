@@ -12,17 +12,23 @@ autocmd("LspAttach", {
 
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "code action" })
         vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "rename" })
-        vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help,
-            { silent = true, buffer = 0, desc = "signature help" })
+        vim.keymap.set(
+            { "n", "i" },
+            "<C-k>",
+            vim.lsp.buf.signature_help,
+            { silent = true, buffer = 0, desc = "signature help" }
+        )
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { silent = true, buffer = 0, desc = "doc under cursor" })
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { silent = true, buffer = 0, desc = "go to declaration" })
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, { silent = true, buffer = 0, desc = "go to definition" })
-        vim.keymap.set("n", "gt", vim.lsp.buf.type_definition,
+        vim.keymap.set(
+            "n",
+            "gt",
+            vim.lsp.buf.type_definition,
             { silent = true, buffer = 0, desc = "go to type definition" }
         )
         vim.keymap.set("n", "gr", vim.lsp.buf.references, { silent = true, buffer = 0, desc = "go to references" })
         vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, { silent = true, buffer = 0, desc = "run lens" })
-        -- vim.keymap.set("n", "<leader>bf", function() vim.lsp.buf.format({ async = true }) end,
         vim.keymap.set("n", "<leader>bf", function() require("conform").format() end,
             { silent = true, buffer = 0, desc = "format buffer" })
 

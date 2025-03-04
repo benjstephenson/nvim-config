@@ -13,9 +13,13 @@ return {
         "TimUntersberger/neogit",
         dependencies = {
             "nvim-lua/plenary.nvim",
+            "sindrets/diffview.nvim",
         },
         opts = {
             graph_style = "unicode",
+            integrations = {
+                diffview = true
+            }
         },
         config = true,
         event = "VeryLazy",
