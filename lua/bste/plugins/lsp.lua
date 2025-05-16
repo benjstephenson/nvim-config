@@ -38,9 +38,17 @@ return {
         local lspconfig = require("lspconfig")
         local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+        vim.diagnostic.config({
+            underline = true,
+            severity_sort = true,
+            float = {
+                border = "rounded"
+            }
+        })
+
         vim.lsp.handlers["textDocument/signatureHelp"] =
-            vim.lsp.with(vim.lsp.handlers.signature_help, { border = "solid" })
-        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "solid" })
+            vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
         cmp.setup({
             snippet = {
@@ -116,7 +124,7 @@ return {
             ensure_installed = {
                 "bashls",
                 "fennel_language_server",
-                "hls",
+                -- "hls",
                 "jsonls",
                 "lua_ls",
                 "marksman",

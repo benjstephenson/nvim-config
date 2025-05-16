@@ -64,7 +64,7 @@ return {
                     require("neotest-jest"),
                     require("neotest-vitest")({
                         is_test_file = function(file_path)
-                            return string.match(file_path, "test.ts$") or string.match(file_path, "micro.ts$")
+                            return string.match(file_path, "test.ts$") or string.match(file_path, "micro.ts$") or string.match(file_path, "integration.ts$")
                         end,
                     }),
                 },

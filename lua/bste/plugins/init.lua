@@ -1,26 +1,25 @@
 return {
     "nvim-lua/plenary.nvim",
     "nvim-neotest/nvim-nio",
-    {
-        "nyoom-engineering/oxocarbon.nvim",
-        lazy = false,
-        priority = 1000,
-        config = function()
-           vim.cmd.colorscheme("oxocarbon")
-           vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-           vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-        end,
-    },
     -- {
-    --     "folke/tokyonight.nvim",
+    --     "nyoom-engineering/oxocarbon.nvim",
     --     lazy = false,
     --     priority = 1000,
-    --     opts = {},
-    --     config = function()
-    --         vim.cmd.colorscheme("tokyonight-night")
-    --     end,
+    --     -- config = function()
+    --     --    vim.cmd.colorscheme("oxocarbon")
+    --     --    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    --     --    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    --     -- end,
     -- },
-    { "rebelot/kanagawa.nvim" },
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        config = function()
+            vim.cmd.colorscheme("tokyonight")
+        end,
+    },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     { "nvim-tree/nvim-web-devicons" },
     {

@@ -16,7 +16,7 @@ return {
                 lua = { "stylua" },
                 python = { "isort", "black" },
                 scala = { "scalafmt" },
-                sql = { "sql-formatter" }
+                sql = { "sqlfmt" }
             },
             -- format_on_save = {
             --     lsp_fallback = true,

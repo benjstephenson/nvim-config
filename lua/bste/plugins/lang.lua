@@ -45,9 +45,9 @@ return {
             metals_config.settings = {
                 excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
                 testUserInterface = "Test Explorer",
-                enableSemanticHighlighting = false,
-                defaultBspToBuildTool = true,
-                showImplicitArguments = false,
+                enableSemanticHighlighting = true,
+                defaultBspToBuildTool = false,
+                showImplicitArguments = true,
                 showImplicitConversionsAndClasses = false,
                 showInferredType = true,
             }
