@@ -11,13 +11,27 @@ return {
     --     --    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
     --     -- end,
     -- },
+    -- {
+    --     "folke/tokyonight.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    --     config = function()
+    --         vim.cmd.colorscheme("tokyonight")
+    --     end,
+    -- },
+    -- { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
     {
-        "folke/tokyonight.nvim",
+        "maxmx03/solarized.nvim",
         lazy = false,
         priority = 1000,
+        ---@type solarized.config
         opts = {},
-        config = function()
-            vim.cmd.colorscheme("tokyonight")
+        config = function(_, opts)
+            vim.o.termguicolors = true
+            vim.o.background = "light"
+            require("solarized").setup(opts)
+            vim.cmd.colorscheme("solarized")
         end,
     },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
@@ -35,14 +49,14 @@ return {
             preset = "helix",
             layout = { align = "center" },
             spec = {
-                { "<leader>b",      group = "buffer" },
-                { "<leader>c",      group = "code" },
-                { "<leader>d",      group = "debug" },
-                { "<leader>f",      group = "file" },
-                { "<leader>g",      group = "git" },
-                { "<leader>h",      group = "help" },
-                { "<leader>t",      group = "test" },
-                { "<leader>x",      group = "diagnostic" },
+                { "<leader>b", group = "buffer" },
+                { "<leader>c", group = "code" },
+                { "<leader>d", group = "debug" },
+                { "<leader>f", group = "file" },
+                { "<leader>g", group = "git" },
+                { "<leader>h", group = "help" },
+                { "<leader>t", group = "test" },
+                { "<leader>x", group = "diagnostic" },
                 { "<localleader>h", group = "harpoon" },
                 { "<localleader>n", group = "swap next" },
                 { "<localleader>p", group = "swap prev" },

@@ -55,7 +55,7 @@ return {
                     }--[[ add your center compoentnts here in place of this comment ]],
                 },
                 lualine_x = {},
-                lualine_y = { "filetype", "progress" },
+                lualine_y = { "rest", "filetype", "progress" },
                 lualine_z = {
                     { "location", separator = { right = "" }, left_padding = 2 },
                 },
